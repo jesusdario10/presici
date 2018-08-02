@@ -14,6 +14,7 @@ import { IncrementadorComponent } from '../components/incrementador/incrementado
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { Graficas2Component } from './graficas2/graficas2.component';
 import { GraficoRadarComponent } from '../components/grafico-radar/grafico-radar.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
     declarations:[
@@ -24,7 +25,8 @@ import { GraficoRadarComponent } from '../components/grafico-radar/grafico-radar
         IncrementadorComponent,
         GraficoDonaComponent,
         Graficas2Component,
-        GraficoRadarComponent
+        GraficoRadarComponent,
+        AccountSettingsComponent
     ],
     exports:[
         DashboardComponent,
