@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <app-grafico-radar
+        [radarChartLabels]="radar.radar1.labels"
+        [radarChartData]="radar.radar1.data"
+        [radarChartType]="radar.radar1.type">
+        </app-grafico-radar>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <app-grafico-radar
+         [radarChartLabels]="radar.radar2.labels"
+         [radarChartData]="radar.radar2.data"
+         [radarChartType]="radar.radar2.type">
+        </app-grafico-radar>
+      </div>
+    </div>
+  </div>
+</div>
