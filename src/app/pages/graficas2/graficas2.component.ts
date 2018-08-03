@@ -53,3 +53,4 @@ export class Graficas2Component implements OnInit {
   }
 
 }
+

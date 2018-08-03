@@ -15,6 +15,8 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
 import { Graficas2Component } from './graficas2/graficas2.component';
 import { GraficoRadarComponent } from '../components/grafico-radar/grafico-radar.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
     declarations:[
@@ -26,7 +28,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
         GraficoDonaComponent,
         Graficas2Component,
         GraficoRadarComponent,
-        AccountSettingsComponent
+        AccountSettingsComponent,
+        PromesasComponent,
+        RxjsComponent
     ],
     exports:[
         DashboardComponent,
