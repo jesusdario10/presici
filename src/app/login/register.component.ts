@@ -14,7 +14,7 @@ declare function init_plugin();
 export class RegisterComponent implements OnInit {
   forma : FormGroup;
   router: any;
-  
+  //sep comentario para guardar
 
   constructor(
     public _usuarioService : UsuarioService,
