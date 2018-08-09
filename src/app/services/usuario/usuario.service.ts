@@ -34,6 +34,11 @@ export class UsuarioService {
       this.usuario = null;
     }
   }
+  guardarStoage(id :string, token: string, usuario:UsuariosModel){
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+  }
   estaLogeado(){
     console.log(this.token.length);
     return (this.token.length > 5) ? true : false;
@@ -66,5 +71,19 @@ export class UsuarioService {
     localStorage.removeItem('usuario');
     localStorage.removeItem('id');
     this.router.navigate(['/login']);
+  }
+  actualizarUsuario(usuario: UsuariosModel){
+    let url = URL_SERVICIOS+'/usuarios/'+usuario._id;
+    return this._http.put(url, usuario)
+
+    return this._http.post(url, usuario).pipe(
+      map((resp: any) =>{
+        console.log(resp);
+        var usuarioDb= resp.usuario
+          localStorage.setItem('id', usuarioDb._id);
+          localStorage.setItem('token', usuarioDb.token);
+          localStorage.setItem('usuario', JSON.stringify(usuarioDb.usuario));
+        }));
+    
   }
 }
