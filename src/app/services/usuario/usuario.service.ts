@@ -64,6 +64,7 @@ export class UsuarioService {
         }));
         //this.cargarStorage();
   }
+  // =======================Logout=========================================== //
   logout(){
     this.usuario = null;
     this.token = '';
@@ -72,12 +73,17 @@ export class UsuarioService {
     localStorage.removeItem('id');
     this.router.navigate(['/login']);
   }
-  actualizarUsuario(usuario: UsuariosModel){
+  // =======================Actualziar Datos de usuario======================= //
+  actualizarUsuario(usuario: UsuariosModel):Observable<any>{
     let url = URL_SERVICIOS+'/usuarios/'+usuario._id;
+    let params = JSON.stringify(usuario);
+    let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.put(url, usuario)
-
-    return this._http.post(url, usuario).pipe(
+    
+    console.log("paso1");
+    return this._http.post(url, params, {headers:headers}).pipe(
       map((resp: any) =>{
+        console.log("voy por aqui");
         console.log(resp);
         var usuarioDb= resp.usuario
           localStorage.setItem('id', usuarioDb._id);

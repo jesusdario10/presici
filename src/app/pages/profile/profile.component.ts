@@ -23,11 +23,10 @@ export class ProfileComponent implements OnInit {
     console.log(this.usuario);
     this._usuarioService.actualizarUsuario(this.usuario)
               .subscribe(resp =>{
-                console.log(resp);
+                localStorage.setItem('usuario', JSON.stringify(resp.usuario));
                 swal('Actualizado', 'Datos Actualizados Correctamente', 'success');
               })
-
-  }
+    }
 
   
 }
