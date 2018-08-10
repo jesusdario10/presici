@@ -4,8 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Observable, Subject, pipe } from 'rxjs';
 import { map } from "rxjs/operators"; 
-import { ViewFlags } from '../../../../node_modules/@angular/core/src/view';
 import { Router } from '@angular/router';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+
 
 
 @Injectable()
@@ -13,10 +14,12 @@ export class UsuarioService {
   usuario : UsuariosModel;
   token : string;
 
-  constructor(public _http: HttpClient, public router: Router,) { 
-    console.log("servicio de usuario listo");
-    this.cargarStorage();
-    console.log(this.cargarStorage());
+  constructor(public _http: HttpClient,
+              public router: Router,
+              public _subirArchivoService: SubirArchivoService) { 
+
+              this.cargarStorage();
+              console.log(this.cargarStorage());
   }
   crearUsuario(usuario:UsuariosModel):Observable<any>{
     let url = URL_SERVICIOS+'/usuarios';
@@ -76,20 +79,25 @@ export class UsuarioService {
   // =======================Actualziar Datos de usuario======================= //
   actualizarUsuario(usuario: UsuariosModel):Observable<any>{
     let url = URL_SERVICIOS+'/usuarios/'+usuario._id;
-    let params = JSON.stringify(usuario);
-    let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.put(url, usuario)
-    
     console.log("paso1");
-    return this._http.post(url, params, {headers:headers}).pipe(
+    return this._http.put(url, usuario).pipe(
       map((resp: any) =>{
         console.log("voy por aqui");
-        console.log(resp);
-        var usuarioDb= resp.usuario
-          localStorage.setItem('id', usuarioDb._id);
-          localStorage.setItem('token', usuarioDb.token);
-          localStorage.setItem('usuario', JSON.stringify(usuarioDb.usuario));
-        }));
-    
+        let usuarioDB : UsuariosModel = resp.usuario
+        this.guardarStoage(usuarioDB._id, this.token, usuarioDB)
+        swal('Actualizado', 'Datos Actualizados Correctamente', 'success');       
+      }));    
   }
+  // =====================Subir Archivos de usuarios ==================================//
+  cambiarImagen(archivo: File, id: string){
+    this._subirArchivoService.subirArchivo(archivo, 'usuarios', id)
+        .then((resp:any)=>{
+          this.usuario.img = resp.usuario.img;
+          swal('Imagen actualizada', this.usuario.nombre, 'success');
+          this.guardarStoage(id, this.token, this.usuario);
+        })
+        .catch(resp=>{
+          console.log(resp);
+        });
+  } 
 }

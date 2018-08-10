@@ -1,32 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/service.index';
 import { UsuariosModel } from '../../models/usuarioModel';
-import swal from 'sweetalert'; 
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {
-  public usuario : UsuariosModel
+  public usuario : UsuariosModel;
+  public imagenSubir :File
 
   constructor(
     public _usuarioService : UsuarioService
+   
   ) {
     this.usuario = this._usuarioService.usuario;
    }
-  ngOnInit(){}
+  ngOnInit(){
+    
+  }
   guardar(usuario:UsuariosModel){
     this.usuario.nombre = usuario.nombre;
     this.usuario.correo = usuario.correo;
 
     console.log(this.usuario);
     this._usuarioService.actualizarUsuario(this.usuario)
-              .subscribe(resp =>{
-                localStorage.setItem('usuario', JSON.stringify(resp.usuario));
-                swal('Actualizado', 'Datos Actualizados Correctamente', 'success');
-              })
+              .subscribe(); 
+  }
+  seleccionImagen(archivo){
+    this.imagenSubir= null;
+    if(!archivo){
+      return
     }
+    //este if es para comprobar si el archivo es una imagen
+    if(archivo.type.indexOf('image')<0){
+      swal('Solo imagenes', 'El archivo selecconado no es una imagen', 'error');
+      return;
+      this.imagenSubir = null;
+    }
+    //si si viene archivo
+    this.imagenSubir = archivo
+  }
+  cambiarImagen(){
+    this._usuarioService.cambiarImagen(this.imagenSubir, this.usuario._id);
+  }
+    
+    
 
-  
 }

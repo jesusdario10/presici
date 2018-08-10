@@ -9,14 +9,14 @@
                     <label for="exampleInputuname">User Name</label>
                     <div class="input-group">
                         <div class="input-group-addon"><i class="ti-user"></i></div>
-                        <input [ngModel]="usuario.nombre" name="nombre" type="text" required class="form-control" id="exampleInputuname" placeholder="Username">
+                        <input [(ngModel)]="usuario.nombre" name="nombre" type="text" required class="form-control" id="exampleInputuname" placeholder="Username">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <div class="input-group">
                         <div class="input-group-addon"><i class="ti-email"></i></div>
-                        <input [ngModel]="usuario.correo" name="correo" type="email" required class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        <input [(ngModel)]="usuario.correo" name="correo" type="email" required class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                     </div>
                 </div>
                 <button  type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Guardar</button>
@@ -33,11 +33,10 @@
               <img style="height: 240px;"  [src]="usuario.img | imagen" alt="">
             </div>
             <br>         
-            <input type="file">
+            <input name="achivo"  (change)="seleccionImagen($event.target.files[0])" type="file">
             <br>
-            <br>
-            
-            <button type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Actualizar foto</button>
+            <br> 
+            <button type="button" (click)="cambiarImagen()" [disabled]="!imagenSubir" class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Actualizar foto</button>
         </div>
     </div> 
   </div>   
