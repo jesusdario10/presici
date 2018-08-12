@@ -82,9 +82,12 @@ export class UsuarioService {
     console.log("paso1");
     return this._http.put(url, usuario).pipe(
       map((resp: any) =>{
-        console.log("voy por aqui");
-        let usuarioDB : UsuariosModel = resp.usuario
-        this.guardarStoage(usuarioDB._id, this.token, usuarioDB)
+        if(usuario._id===this.usuario._id){
+          console.log("voy por aqui");
+          let usuarioDB : UsuariosModel = resp.usuario
+          this.guardarStoage(usuarioDB._id, this.token, usuarioDB)
+        }
+       
         swal('Actualizado', 'Datos Actualizados Correctamente', 'success');       
       }));    
   }
@@ -100,4 +103,28 @@ export class UsuarioService {
           console.log(resp);
         });
   } 
+  // =====================Cargar Usuarios ==================================//
+  cargarUsuarios(desde: number = 0){
+    let url = URL_SERVICIOS+'/usuarios?desde='+desde;
+    return this._http.get(url);
+  }
+  // =====================Buscar Usuarios ==================================//
+  buscarUsuarios(termino: string):Observable<any>{
+    let url = URL_SERVICIOS+'/busqueda/usuarios/'+termino;
+    return this._http.get(url).pipe(
+      map((resp:any)=>{
+       return resp.usuarios;
+      })
+    );
+  }
+   // =====================Borrar Usuarios ==================================//
+   borrarUsuario(id:string):Observable<any>{
+    let url = URL_SERVICIOS+'/usuarios/'+id;
+
+    return this._http.delete(url).pipe(
+      map((resp:any)=>{
+       return resp.usuarios;
+      })
+    );
+   }
 }
