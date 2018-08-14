@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 //rutas
 import { APP_ROUTES } from './app.routes';
 
@@ -21,11 +20,13 @@ import { ServiceModule } from './services/service.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent
+    
 
   ],
   imports: [

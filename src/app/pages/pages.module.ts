@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser';
 
 //ng2-charts
@@ -22,6 +22,11 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
+import { SolicitudesComponent } from './solicitudes/solicitudes.component';
+import { ItemComponent } from './item/item/item.component';
 
 @NgModule({
     declarations:[
@@ -38,7 +43,12 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        HospitalesComponent,
+        MedicosComponent,
+        MedicoComponent,
+        SolicitudesComponent,
+        ItemComponent
     ],
     exports:[
         DashboardComponent,
@@ -51,7 +61,8 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
         FormsModule,
         ChartsModule,
         PipesModule,
-        BrowserModule
+        BrowserModule,
+        ReactiveFormsModule
     ]
 })
 export class PageModule{}

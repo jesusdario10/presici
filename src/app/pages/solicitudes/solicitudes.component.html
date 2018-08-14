@@ -1,0 +1,50 @@
+<div class="content">
+        <div class="solicitudes row">
+          <div class="col-md-12">
+            <div class="panel panel-info">
+              <div class="panel-heading solicitud-title">{{title}}</div>
+              <div class="panel-body btnCrearSol">
+                	<div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                            <form #solicitudForm="ngForm"  text-align="center"  (ngSubmit)="crearSolicitud()">
+                                <input  name="campo1" [(ngModel)]="campo1"  type="text" placeholder="campo1">
+                                <input  name="campo2" [(ngModel)]="campo2" type="text" placeholder="campo2">
+                                <input class="btn btn-success" type="submit"   name="" id="" value="Crear">
+                            </form>  
+                        </div>
+                      </div>
+                    </div>
+                  </div>                
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#Solicitud</th>
+                  <th>Resumen de la solicitud</th>
+                  <th>Cantidad</th>
+                  <th>Valor</th>
+                  <td>Editar</td>
+                  <td>Eliminar</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let solicitud of solicitudes">
+                  <td>{{solicitud._id}}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><button [routerLink]="['/item', solicitud._id]" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
+                  <td><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      

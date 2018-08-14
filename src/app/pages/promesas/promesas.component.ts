@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { resolve, reject } from '../../../../node_modules/@types/q';
+import { resolve, reject } from 'q';
 
 @Component({
   selector: 'app-promesas',

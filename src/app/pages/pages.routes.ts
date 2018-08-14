@@ -10,6 +10,11 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
+import { SolicitudesComponent } from './solicitudes/solicitudes.component';
+import { ItemComponent } from './item/item/item.component';
 
 const pageRoutes : Routes = [
     {
@@ -27,6 +32,12 @@ const pageRoutes : Routes = [
             {path: 'perfil', component: ProfileComponent, data:{titulo:'Perfil de usuario'}},
             //Mantenimientos
             {path: 'usuarios', component: UsuariosComponent, data:{titulo:'Mantenimiento de Usuario'}},
+            {path: 'hospitales', component: HospitalesComponent, data:{titulo:'Mantenimiento de Hospitales'}},
+            {path: 'medicos', component: MedicosComponent, data:{titulo:'Mantenimiento de Medicos'}},
+            {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},
+            {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
+            {path: 'item/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
+
             {path: '', redirectTo: '/dashboard', pathMatch:'full'}
         ]
     }

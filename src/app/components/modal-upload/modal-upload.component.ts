@@ -59,7 +59,7 @@ export class ModalUploadComponent implements OnInit {
 
                         })
                         .catch(err=>{
-                          console.log("srror en al carca...");
+                          console.log("error en al carca...");
                         });
   }
 

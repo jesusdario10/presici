@@ -1,0 +1,20 @@
+<div class="card card-body">
+  <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Creando el formulario de las solicitudes</font></font></h3>
+  <p class="text-muted m-b-30 font-13"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Elementos Bootstrap </font></font></p>
+  <div class="row">
+      <div class="col-sm-12 col-xs-12">
+          <form #itemSolicitudes="ngForm" (ngSubmit)="actualizar(itemSolicitudes)">
+              <div class="form-group">
+                  <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Campo1</font></font></label>
+                  <input [ngModel]=solicitud.item.campo1 name="campo1" type="text" class="form-control" id="exampleInputEmail1" placeholder="campo1">
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Campo2</font></font></label>
+                  <input [ngModel]=solicitud.item.campo2 name="campo2" type="text" class="form-control" id="exampleInputEmail1" placeholder="Campo2">
+              </div>
+              <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
+              <button type="submit" class="btn btn-inverse waves-effect waves-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cancelar</font></font></button>
+          </form>
+      </div>
+  </div>
+</div>
