@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser';
 
+
 //ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
@@ -63,6 +64,8 @@ import { ItemComponent } from './item/item/item.component';
         PipesModule,
         BrowserModule,
         ReactiveFormsModule
+        
+        
     ]
 })
 export class PageModule{}

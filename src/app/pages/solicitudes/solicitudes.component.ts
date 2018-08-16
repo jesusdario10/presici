@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SolicitudModel } from '../../models/solicitudModel';
-import { SolicitudService } from '../../services/service.index';
+import { SolicitudService, ItemService } from '../../services/service.index';
 import { FormsModule } from '@angular/forms'
+
 import { MedicoModel } from '../../models/medicoModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitudes',
@@ -12,42 +14,40 @@ import { MedicoModel } from '../../models/medicoModel';
 export class SolicitudesComponent implements OnInit {
   solicitudes : SolicitudModel[]=[];
   public solicitud :SolicitudModel;
-  public campo1 : string;
-  public campo2 : string;
-  public item : [{
-    _id:string,
-    campo1:string,
-    campo2:string
-  }]
+
+  dc:string;
   constructor(
-    public _solicitudServices : SolicitudService
+    public _solicitudServices : SolicitudService,
+    public _itemService : ItemService,
+    public _router : Router
   ) { 
-    this.solicitud = new SolicitudModel(this.item, "", "", "" );
+    this.solicitud = new SolicitudModel("", "");
 
   }
 
   ngOnInit() {
     this.cargarSolicitudes();
+    console.log("que estoy recibiendo");
+    
   }
   crearSolicitud(solicitud:SolicitudModel){
-    this.item = [{
-      _id:"",
-      campo1:this.campo1,
-      campo2:this.campo2
-    }]
-    this.solicitud.item = this.item;
+    let solicitud2 = this.solicitud
 
-    this._solicitudServices.crearSolicitud(solicitud)
+    this._solicitudServices.crearSolicitud(solicitud2)
       .subscribe((solicitud)=> console.log(solicitud));   
-      this.cargarSolicitudes() ;
- 
-      console.log(this.solicitud);
+      this.cargarSolicitudes();
+      
+      let cargar = setTimeout(()=>{
+        console.log("setTimeout");
+        this.cargarSolicitudes();
+      },10)   
   }
   cargarSolicitudes(){
 
     this._solicitudServices.cargarSolicitudes()
       .subscribe(solicitudes=>this.solicitudes=solicitudes)
   }
+
   
 
 

@@ -11,6 +11,8 @@ import { UsuarioService } from '../service.index';
   providedIn: 'root'
 })
 export class SolicitudService {
+  solicitud : SolicitudModel;
+  lt :string;
 
   constructor(
     private _http : HttpClient,
@@ -25,6 +27,7 @@ export class SolicitudService {
           map((resp:any)=>{
             console.log(resp);
              swal('Creada', 'Solicitud Creada Correctamente', 'success');  
+             localStorage.setItem('solicitud', resp.solicitudGuardada._id)
              return resp.solicitudGuardada;
           })
         );
@@ -48,7 +51,7 @@ export class SolicitudService {
          return resp.solicitd;
         })
       );
-    } 
-             
+    }
+
   
 }

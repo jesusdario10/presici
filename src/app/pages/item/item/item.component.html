@@ -1,20 +1,188 @@
 <div class="card card-body">
   <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Creando el formulario de las solicitudes</font></font></h3>
-  <p class="text-muted m-b-30 font-13"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Elementos Bootstrap </font></font></p>
+ 
   <div class="row">
       <div class="col-sm-12 col-xs-12">
-          <form #itemSolicitudes="ngForm" (ngSubmit)="actualizar(itemSolicitudes)">
-              <div class="form-group">
-                  <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Campo1</font></font></label>
-                  <input [ngModel]=solicitud.item.campo1 name="campo1" type="text" class="form-control" id="exampleInputEmail1" placeholder="campo1">
+          <form ngNativeValidate #itemSolicitudes="ngForm" (ngSubmit)="crearItem(itemSolicitudes)">
+              <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <!--<label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tipoSello</font></font></label>
+                        <input [(ngModel)]=item.tiposello name="tiposello" type="text" class="form-control" id="exampleInputEmail1" placeholder="campo1">-->
+                        <label for="">Tipo de Valvula</label>
+                        <select class="custom-select custom-select-lg mb-3"  name="tipovalvula" class="form-control" #tipovalvula="ngModel" [(ngModel)]="item.tipovalvula" required>
+                            <option value="" disabled selected>Open</option>
+                            <option value="seguridad y alivio">Seguridad y Alivio</option>
+                            <option value="manuales">Manuales</option>
+                            <option value="control">Control</option>
+                            <option value="corte on/of">Corte On/Of</option>
+                          </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <!--<label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TipoValvula</font></font></label>
+                        <input [(ngModel)]=item.tipovalvula name="tipovalvula" type="text" class="form-control" id="exampleInputEmail1" placeholder="Campo2">-->
+                        <label for="">Tipo de Sello</label>
+                        <select class="custom-select custom-select-lg mb-3"  name="tiposello" class="form-control" #tiposello="ngModel" [(ngModel)]="item.tiposello" required>
+                          <option value="" disabled selected>Open</option>
+                          <option value="compuerta">Compuerta</option>
+                          <option value="globo">Globo</option>
+                          <option value="mariposa">Mariposa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Diametro</label>
+                        <select class="custom-select custom-select-lg mb-3"  name="diametro" class="form-control" #diametro="ngModel" [(ngModel)]="item.diametro" required>
+                          <option value="" disabled selected>Selecciona</option>
+                          <option value="1/2 - 3/4">1/2" hasta 3/4"</option>
+                          <option value="1 - 1 1/2">1" hasta 1 1/2"</option>
+                          <option value="2 - 3">2" hasta 3"</option>
+                          <option value="4 - 5">4" hasta 5"</option>
+                          <option value="6">6"</option>
+                          <option value="8">8"</option>|
+                          <option value="10">10"</option>
+                          <option value="12">12"</option>
+                          <option value="16">16"</option>
+                          <option value="20">20"</option>
+                          <option value="24">24"</option>
+                          <option value="30">30"</option>
+                          <option value="36">36"</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Rating</label>
+                        <select class="custom-select custom-select-lg mb-3"  name="rating" class="form-control" #rating="ngModel" [(ngModel)]="item.rating" required>
+                            <option value="" disabled selected>Selecciona</option>
+                            <option value="Roscado">Roscado</option>
+                            <option value="150#/300#">150#/300#</option>
+                            <option value="600#">600#</option>
+                            <option value="900#">900#</option>
+                            <option value="1500#">1500#</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                      <div class="form-group">
+                          <label for="">Material</label>
+                          <select class="custom-select custom-select-lg mb-3"  name="material" class="form-control" #material="ngModel" [(ngModel)]="item.material" required>
+                              <option value="" disabled selected>Selecciona</option>
+                              <option value="Cuerpo AC">Cuerpo AC</option>
+                              <option value="Cuerpo SS">Cuerpo SS</option>
+                          </select>  
+                      </div>
+                    </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Otros Datos</label>
+                        <select class="custom-select custom-select-lg mb-3" multiple name="otrosdatos" class="form-control" #otrosdatos="ngModel" [(ngModel)]="item.otrosdatos" required>
+                            <option value="" disabled selected>Selecciona</option>
+                            <option value="Solenoide">Solenoide</option>
+                            <option value="ZSC/Z50">ZSC/Z50</option>
+                            <option value="ZT">ZT</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Tipo de Mantenimiento</label>
+                        <select class="custom-select custom-select-lg mb-3"  name="tipomtto" class="form-control" #tipomtto="ngModel" [(ngModel)]="item.tipomtto" required>
+                          <option value="" disabled selected>Selecciona</option>
+                          <option value="Basico">Basico</option>
+                          <option value="Completo">Completo</option>
+                          <option value="Especial">Especial</option>
+                       </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Grado de Prioridad</label>
+                        <select class="custom-select custom-select-lg mb-3"  name="prioridad" class="form-control" #prioridad="ngModel" [(ngModel)]="item.prioridad" required>
+                          <option value="" disabled selected>Selecciona</option>
+                          <option value="Normal">Normal(9 Horas)</option>
+                          <option value="Extendido">Extendido(24 Horas)</option>
+                       </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label for="">Grado de Dificultad</label>
+                      <select class="custom-select custom-select-lg mb-3"  name="dificultad" class="form-control" #dificultad="ngModel" [(ngModel)]="item.dificultad" required>
+                          <option value="" disabled selected>Selecciona</option>
+                          <option value="Normal">Normal</option>
+                          <option value="Altura">Altura</option>
+                          <option value="espacios Confinados">espacios Confinados</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Sitio de Trabajo</label>
+                        <select class="custom-select custom-select-lg mb-3"  name="sitio" class="form-control" #sitio="ngModel" [(ngModel)]="item.sitio" required>
+                          <option value="" disabled selected>Selecciona</option>
+                          <option value="Planta Cliente">Planta Cliente</option>
+                          <option value="Taller CDI S.A">Taller CDI S.A</option>
+                       </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="">Cantidad</label>
+                        <input type="number"  name="cantidad" class="form-control" #cantidad="ngModel" [(ngModel)]="item.cantidad" required>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                          <div class="card-body">
+                             this some text 
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                   
               </div>
-              <div class="form-group">
-                  <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Campo2</font></font></label>
-                  <input [ngModel]=solicitud.item.campo2 name="campo2" type="text" class="form-control" id="exampleInputEmail1" placeholder="Campo2">
-              </div>
+              
               <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
               <button type="submit" class="btn btn-inverse waves-effect waves-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cancelar</font></font></button>
+             
           </form>
       </div>
   </div>
+  <div class="col-md-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#Asignacion</th>
+            <th>Resumen</th>
+            <th>Cantidad</th>
+            <th>Valor</th>
+            <td>Editar</td>
+            <td>Eliminar</td>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr  *ngFor="let item of items">
+            <td>
+                   
+            </td>
+            <td>{{item.tipovalvula}}-({{item.tiposello}})-[{{item.diametro}}]-({{item.rating}})-[{{item.material}}]-({{item.otrosdatos}})--{{item.tipomtto}}--Dificultad :{{item.dificultad}}</td>
+            <td>{{item.cantidad}}</td>
+            <td></td>
+            <td><button [routerLink]="['/item']" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
+            <td><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+            
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
 </div>
