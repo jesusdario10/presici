@@ -5,7 +5,8 @@ import { URL_SERVICIOS } from '../../config/config';
 import { SolicitudModel } from '../../models/solicitudModel';
 import { map } from "rxjs/operators"; 
 import { Router } from '@angular/router';
-import { UsuarioService } from '../service.index';
+import { UsuarioService, ItemService } from '../service.index';
+
 
 @Injectable({
   providedIn: 'root'

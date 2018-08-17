@@ -141,7 +141,14 @@
                         <div class="col-12">
                           <div class="card">
                           <div class="card-body">
-                             this some text 
+                             <strong class="">
+                              <h5> Valor de la Solicitud</h5>
+                             </strong>
+                             ${{datosTotalValor}}
+                             <hr>
+                             <h5>Cantidad de items</h5>
+                             {{cantidades}}
+                             
                           </div>
                           </div>
                         </div>
@@ -176,9 +183,9 @@
             </td>
             <td>{{item.tipovalvula}}-({{item.tiposello}})-[{{item.diametro}}]-({{item.rating}})-[{{item.material}}]-({{item.otrosdatos}})--{{item.tipomtto}}--Dificultad :{{item.dificultad}}</td>
             <td>{{item.cantidad}}</td>
-            <td></td>
-            <td><button [routerLink]="['/item']" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
-            <td><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+            <td>${{item.valor}}</td>
+            <td><button [routerLink]="['/item/'+item.solicitud+'/', item._id]" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
+            <td><button (click)="borrarItem(item._id)" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
             
           </tr>
         

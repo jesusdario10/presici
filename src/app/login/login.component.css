@@ -18,10 +18,14 @@ File: scss
 /*******************
 Login register and recover password Page
 ******************/
+.centrada{
+  margin: auto;
+  height: 200px;
+}
 .login-register {
   background-size: contain;
 
-  background-position: center center;
+  background-position: left left;
   height: 100%;
   width: 100%;
   padding: 10% 0;

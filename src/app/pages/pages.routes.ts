@@ -14,7 +14,8 @@ import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
-import { ItemComponent } from './item/item/item.component';
+import { ItemComponent } from './item/item.component';
+
 
 const pageRoutes : Routes = [
     {
@@ -22,7 +23,7 @@ const pageRoutes : Routes = [
         component: PagesComponent,
         canActivate:[LoginGuardGuard],
         children:[
-            {path: 'dashboard', component: DashboardComponent, data:{titulo:'Dasboard'}},
+            {path: 'dashboard', component: DashboardComponent, data:{titulo:'Dashboard'}},
             {path: 'progress', component: ProgressComponent, data:{titulo:'Progress'}},
             {path: 'graficas1', component: Graficas1Component, data:{titulo:'GradicasTorta'}},
             {path: 'graficas2', component: Graficas2Component, data:{titulo:'GraficasAraña'}},
@@ -37,6 +38,7 @@ const pageRoutes : Routes = [
             {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'item/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
+        
 
             {path: '', redirectTo: '/dashboard', pathMatch:'full'}
         ]

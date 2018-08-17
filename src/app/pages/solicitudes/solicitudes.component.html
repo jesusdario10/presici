@@ -28,8 +28,8 @@
               <thead>
                 <tr>
                   
-                  <th>Cantidad</th>
-                  <th>Valor</th>
+                  <th>Identificador</th>
+                
                   <td>Editar</td>
                   <td>Eliminar</td>
                 </tr>
@@ -39,7 +39,7 @@
                 <tr  *ngFor="let solicitud of solicitudes">
 
                   <td>{{solicitud.nombre}}</td>
-                  <td></td>
+                 
                   <td><button [routerLink]="['/item', solicitud._id]"  type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
                   <td><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
                   

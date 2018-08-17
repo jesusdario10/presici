@@ -14,7 +14,8 @@ export class ItemModel{
         public dificultad : string,
         public sitio : string,
         public cantidad : number,
-        public solicitud :string
+        public solicitud :string,
+        public valor: number
 
     ){
     }
