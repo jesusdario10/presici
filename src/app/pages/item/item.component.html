@@ -3,16 +3,17 @@
  
   <div class="row">
       <div class="col-sm-12 col-xs-12">
-          <form ngNativeValidate #itemSolicitudes="ngForm" (ngSubmit)="crearItem(itemSolicitudes)">
+          <form [formGroup]="form" #itemSolicitudes="ngForm" (ngSubmit)="InsertarItem(form, itemSolicitudes)">
               <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <!--<label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tipoSello</font></font></label>
                         <input [(ngModel)]=item.tiposello name="tiposello" type="text" class="form-control" id="exampleInputEmail1" placeholder="campo1">-->
                         <label for="">Tipo de Valvula</label>
-                        <select class="custom-select custom-select-lg mb-3"  name="tipovalvula" class="form-control" #tipovalvula="ngModel" [(ngModel)]="item.tipovalvula" required>
+                        <select class="custom-select custom-select-lg mb-3"  name="tipovalvula" formControlName="tipovalvula" class="form-control"   required>
                             <option value="" disabled selected>Open</option>
-                            <option value="seguridad y alivio">Seguridad y Alivio</option>
+                            <option value="seguridad y alivio">Seguridad</option>
+                            <option value="seguridad y alivio">Alivio</option>
                             <option value="manuales">Manuales</option>
                             <option value="control">Control</option>
                             <option value="corte on/of">Corte On/Of</option>
@@ -24,7 +25,7 @@
                         <!--<label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">TipoValvula</font></font></label>
                         <input [(ngModel)]=item.tipovalvula name="tipovalvula" type="text" class="form-control" id="exampleInputEmail1" placeholder="Campo2">-->
                         <label for="">Tipo de Sello</label>
-                        <select class="custom-select custom-select-lg mb-3"  name="tiposello" class="form-control" #tiposello="ngModel" [(ngModel)]="item.tiposello" required>
+                        <select class="custom-select custom-select-lg mb-3"  name="tiposello" formControlName="tiposello"  class="form-control"required>
                           <option value="" disabled selected>Open</option>
                           <option value="compuerta">Compuerta</option>
                           <option value="globo">Globo</option>
@@ -35,7 +36,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Diametro</label>
-                        <select class="custom-select custom-select-lg mb-3"  name="diametro" class="form-control" #diametro="ngModel" [(ngModel)]="item.diametro" required>
+                        <select class="custom-select custom-select-lg mb-3"  name="diametro" formControlName="diametro" class="form-control"  required>
                           <option value="" disabled selected>Selecciona</option>
                           <option value="1/2 - 3/4">1/2" hasta 3/4"</option>
                           <option value="1 - 1 1/2">1" hasta 1 1/2"</option>
@@ -56,7 +57,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Rating</label>
-                        <select class="custom-select custom-select-lg mb-3"  name="rating" class="form-control" #rating="ngModel" [(ngModel)]="item.rating" required>
+                        <select class="custom-select custom-select-lg mb-3"  name="rating" formControlName="rating" class="form-control"required>
                             <option value="" disabled selected>Selecciona</option>
                             <option value="Roscado">Roscado</option>
                             <option value="150#/300#">150#/300#</option>
@@ -69,7 +70,7 @@
                   <div class="col-md-2">
                       <div class="form-group">
                           <label for="">Material</label>
-                          <select class="custom-select custom-select-lg mb-3"  name="material" class="form-control" #material="ngModel" [(ngModel)]="item.material" required>
+                          <select class="custom-select custom-select-lg mb-3"  name="material" formControlName="material" class="form-control"  required>
                               <option value="" disabled selected>Selecciona</option>
                               <option value="Cuerpo AC">Cuerpo AC</option>
                               <option value="Cuerpo SS">Cuerpo SS</option>
@@ -79,7 +80,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Otros Datos</label>
-                        <select class="custom-select custom-select-lg mb-3" multiple name="otrosdatos" class="form-control" #otrosdatos="ngModel" [(ngModel)]="item.otrosdatos" required>
+                        <select class="custom-select custom-select-lg mb-3" multiple name="otrosdatos" formControlName="otrosdatos" class="form-control"  required>
                             <option value="" disabled selected>Selecciona</option>
                             <option value="Solenoide">Solenoide</option>
                             <option value="ZSC/Z50">ZSC/Z50</option>
@@ -90,7 +91,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Tipo de Mantenimiento</label>
-                        <select class="custom-select custom-select-lg mb-3"  name="tipomtto" class="form-control" #tipomtto="ngModel" [(ngModel)]="item.tipomtto" required>
+                        <select class="custom-select custom-select-lg mb-3"  name="tipomtto" formControlName="tipomtto" class="form-control"  required>
                           <option value="" disabled selected>Selecciona</option>
                           <option value="Basico">Basico</option>
                           <option value="Completo">Completo</option>
@@ -101,7 +102,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Grado de Prioridad</label>
-                        <select class="custom-select custom-select-lg mb-3"  name="prioridad" class="form-control" #prioridad="ngModel" [(ngModel)]="item.prioridad" required>
+                        <select class="custom-select custom-select-lg mb-3"  name="prioridad" formControlName="prioridad" class="form-control"  required>
                           <option value="" disabled selected>Selecciona</option>
                           <option value="Normal">Normal(9 Horas)</option>
                           <option value="Extendido">Extendido(24 Horas)</option>
@@ -111,7 +112,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                       <label for="">Grado de Dificultad</label>
-                      <select class="custom-select custom-select-lg mb-3"  name="dificultad" class="form-control" #dificultad="ngModel" [(ngModel)]="item.dificultad" required>
+                      <select class="custom-select custom-select-lg mb-3"  name="dificultad" formControlName="dificultad" class="form-control" required>
                           <option value="" disabled selected>Selecciona</option>
                           <option value="Normal">Normal</option>
                           <option value="Altura">Altura</option>
@@ -122,7 +123,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Sitio de Trabajo</label>
-                        <select class="custom-select custom-select-lg mb-3"  name="sitio" class="form-control" #sitio="ngModel" [(ngModel)]="item.sitio" required>
+                        <select class="custom-select custom-select-lg mb-3"  name="sitio" formControlName="sitio" class="form-control"  required>
                           <option value="" disabled selected>Selecciona</option>
                           <option value="Planta Cliente">Planta Cliente</option>
                           <option value="Taller CDI S.A">Taller CDI S.A</option>
@@ -132,7 +133,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Cantidad</label>
-                        <input type="number"  name="cantidad" class="form-control" #cantidad="ngModel" [(ngModel)]="item.cantidad" required>
+                        <input type="number"  name="cantidad" formControlName="cantidad"  class="form-control" >
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -146,8 +147,8 @@
                              </strong>
                              ${{datosTotalValor}}
                              <hr>
-                             <h5>Cantidad de items</h5>
-                             {{cantidades}}
+                            
+                             
                              
                           </div>
                           </div>
@@ -164,10 +165,11 @@
       </div>
   </div>
   <div class="col-md-12">
+    <ol>
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>#Asignacion</th>
+            <th>#Consecutivo</th>
             <th>Resumen</th>
             <th>Cantidad</th>
             <th>Valor</th>
@@ -177,19 +179,21 @@
         </thead>
         <tbody>
         
-          <tr  *ngFor="let item of items">
+          <tr  *ngFor="let valvula of valvulas">
             <td>
-                   
+                 <li></li> 
             </td>
-            <td>{{item.tipovalvula}}-({{item.tiposello}})-[{{item.diametro}}]-({{item.rating}})-[{{item.material}}]-({{item.otrosdatos}})--{{item.tipomtto}}--Dificultad :{{item.dificultad}}</td>
-            <td>{{item.cantidad}}</td>
-            <td>${{item.valor}}</td>
-            <td><button [routerLink]="['/item/'+item.solicitud+'/', item._id]" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
-            <td><button (click)="borrarItem(item._id)" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+            <td>{{valvula.tipovalvula}}-{{valvula.tiposello}}-({{valvula.diametro}})
+              -{{valvula.material}}- Mto: {{valvula.tipomtto}}-Prioridad:{{valvula.prioridad}}-Deficult:({{valvula.dificultad}})  </td>
+            <td>{{valvula.cantidad}}</td>
+            <td>${{valvula.valor}}</td>
+            <td><button [routerLink]="['/valvula/'+valvula.solicitud+'/', valvula._id]" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
+            <td><button (click)="borrarvalvula(valvula._id)" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
             
           </tr>
         
         </tbody>
       </table>
+    </ol>
     </div>
 </div>

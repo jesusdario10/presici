@@ -37,7 +37,7 @@ const pageRoutes : Routes = [
             {path: 'medicos', component: MedicosComponent, data:{titulo:'Mantenimiento de Medicos'}},
             {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
-            {path: 'item/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
+            {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
         
 
             {path: '', redirectTo: '/dashboard', pathMatch:'full'}

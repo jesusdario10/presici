@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/service.index';
 import { URL_SERVICIOS } from '../../config/config';
 import { ItemModel } from '../../models/itemModel';
+import { SolicitudModel, Atributo } from '../../models/solicitudModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { forEach } from '@angular/router/src/utils/collection';
 
 declare var swal:any;
 
@@ -13,70 +16,94 @@ declare var swal:any;
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
+  valvulas : ItemModel[]=[];
   items : ItemModel[]=[];
-  items2 : ItemModel[]=[];
-  public item : ItemModel;
-  id_solicitud :string;
-  cantidades : number;
-  datosTotalValor : number;
- 
+  datos : any;
 
+
+
+  item : Atributo;
+  form: FormGroup;
+  formSubmit: boolean;
+
+  id_solicitud :string;
   
+  datosTotalValor : number;
+
 
   constructor(
     private _itemService:ItemService,
-    private _route : ActivatedRoute
+    private _route : ActivatedRoute,
+    private fb: FormBuilder
   ) { 
-    this.item = new ItemModel("","","","","","","","","","","",0,"",0);
     this._itemService.obtenerSolicitud();
     
   }
-  cargarItem(){
-    this._itemService.cargarItems()
-      .subscribe((resp:any)=>{
-        console.log("10000000000");
-        console.log(resp);
-       this.items=resp   
-      })
-  }
+
   cargarItem2(){
     this._itemService.cargarItems2()
       .subscribe((datos:any)=>{
-        this.items2 = datos;
-        this.datosTotalValor = datos.valorTotal;
-        this.cantidades = datos.sumatoria;
-        console.log(datos);
+        console.log(datos.solicitudes[0].item);
+        this.valvulas = datos.solicitudes[0].item
+        this.datos = datos
+        console.log("aqui viene el objeto manejable");
+        this.datosTotalValor = this.datos.valorTotal;
       })
   }
 
- 
-  ngOnInit() {
-    this.cargarItem(); 
-    this._route.params.subscribe((params:Params)=>{
-      this.id_solicitud = params.id;
-      this._itemService.obtenerSolicitud();   
-      this.cargarItem2();
-    })
-  }
-  crearItem(form){
 
-    let item2 = this.item;
-    this._itemService.crearItem(item2)
-      .subscribe((itemGuardado)=> console.log(itemGuardado));
-      form.reset();
-      this.cargarItem(); 
+  ngOnInit() {
+    console.log("cargando items");
+    this.cargarItem2(); 
+    this.form = this.fb.group({
+      tipovalvula: [ "", Validators.required ],
+      tiposello: [ "", Validators.required ],
+      diametro: [ "", Validators.required ],
+      rating: [ "", Validators.required ],
+      material: [ "", Validators.required ],
+      otrosdatos: [ "", Validators.required ],
+      tipomtto: [ "", Validators.required ],
+      prioridad: [ "", Validators.required ],
+      dificultad: [ "", Validators.required ],
+      sitio: [ "", Validators.required ],
+      cantidad: [ 0, Validators.required ],
+
+    });
+  }
+  InsertarItem(formData: any, formDirective: FormGroupDirective){
+   //debugger;
+   const formModel  = this.form.value;
+   let random = Math.round(Math.random()*(5000000 - 1000000)+1000000); 
+   const saveItem: SolicitudModel = {
+    item: {
+      tipovalvula :formModel.tipovalvula as string,
+      tiposello :formModel.tiposello as string,
+      diametro :formModel.diametro as string,
+      rating :formModel.rating as string,
+      material :formModel.material as string,
+      otrosdatos :formModel.otrosdatos as string,
+      tipomtto :formModel.tipomtto as string,
+      prioridad :formModel.prioridad as string,
+      dificultad :formModel.dificultad as string,
+      sitio :formModel.sitio as string,
+      cantidad :formModel.cantidad as number,
+      valor : random as number
       
-      swal('Creado', 'item Creado Correctamente', 'success'); 
-      let cargar = setTimeout(()=>{
-        console.log("setTimeout");
-        this.cargarItem();
-       
-      },300) 
-      let cargar2 = setTimeout(()=>{
-        console.log("setTimeout");
-        this.cargarItem2();
-       
-      },500) 
+    },
+    
+  };
+  this._itemService.AgregarItem(saveItem)
+    .subscribe((item)=>{
+      console.log("YYYYYYYYYYYYYYYYYYYYYYYY");
+      this.valvulas = item
+      console.log(item)
+    })
+    console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+    var intervalo = setTimeout(()=>{
+      this.cargarItem2()
+    },200)
+  
+
   }
   //borrar items
   borrarItem(id){
@@ -97,7 +124,7 @@ export class ItemComponent implements OnInit {
             });
             let cargar = setTimeout(()=>{
               console.log("setTimeout");
-              this.cargarItem();
+              this.cargarItem2();
              
             },300) 
             let cargar2 = setTimeout(()=>{

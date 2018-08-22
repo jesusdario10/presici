@@ -3,3 +3,18 @@
     width: 100vh !important;
     margin: auto
 }
+.cotizacionmodal{
+    width: 70vw !important;
+    text-align: center;
+
+    
+    
+}
+.cotiziacion{
+    font-family: 'Roboto Slab' !important;
+    width:80%;
+}
+.centro{
+    margin-top : 1vw !important;
+    margin-left : 5vw !important;
+}

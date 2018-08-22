@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SolicitudModel } from '../../models/solicitudModel';
+import { SolicitudModel, Atributo } from '../../models/solicitudModel';
 import { SolicitudService, ItemService } from '../../services/service.index';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, FormGroup, Validators, FormBuilder, FormGroupDirective } from '@angular/forms'
 
 import { MedicoModel } from '../../models/medicoModel';
 import { Router } from '@angular/router';
@@ -13,28 +13,42 @@ import { Router } from '@angular/router';
 })
 export class SolicitudesComponent implements OnInit {
   solicitudes : SolicitudModel[]=[];
-  public solicitud :SolicitudModel;
+  solicitud :SolicitudModel;
+  item : Atributo;
+  form: FormGroup;
+  formSubmit: boolean;
+
 
   dc:string;
   constructor(
     public _solicitudServices : SolicitudService,
     public _itemService : ItemService,
-    public _router : Router
-  ) { 
-    this.solicitud = new SolicitudModel("", "");
+    public _router : Router,
+    private fb: FormBuilder
+  ){ 
+    
 
   }
 
   ngOnInit() {
     this.cargarSolicitudes();
-    console.log("que estoy recibiendo");
+    this.form = this.fb.group({
+      item: [ null, Validators.required ],
+    });
+  
+    
     
   }
-  crearSolicitud(solicitud:SolicitudModel){
-    let solicitud2 = this.solicitud
+  crearSolicitud(formData: any, formDirective: FormGroupDirective){
+    let solicitud2 = this.solicitud;
+    const formModel  = this.form.value;
 
-    this._solicitudServices.crearSolicitud(solicitud2)
-      .subscribe((solicitud)=> console.log(solicitud));   
+    const saveSolicitud: SolicitudModel = {
+      
+    };
+
+    this._solicitudServices.crearSolicitud(saveSolicitud)
+      .subscribe((saveSolicitud)=> console.log(saveSolicitud));   
       this.cargarSolicitudes();
       
       let cargar = setTimeout(()=>{
@@ -45,8 +59,19 @@ export class SolicitudesComponent implements OnInit {
   cargarSolicitudes(){
 
     this._solicitudServices.cargarSolicitudes()
-      .subscribe(solicitudes=>this.solicitudes=solicitudes)
+      .subscribe(solicitudes=>{
+        this.solicitudes=solicitudes
+        console.log(this.solicitudes);
+      })
+      
   }
+  cotizacion(solicitud){
+    console.log(solicitud.item);
+
+  }
+
+
+  
 
   
 

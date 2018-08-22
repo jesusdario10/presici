@@ -43,6 +43,11 @@ export class SolicitudService {
             })
           )
         }
+      // =====================Cargar todo el item de la db ==================================//
+          cargarSolicitudes2():Observable<any>{
+            let url = URL_SERVICIOS+'/solicitud'
+              return this._http.get(url);
+          }
     // =====================Actualziar Solicitudes ==================================//
     actualizarSolicitud(solicitud:SolicitudModel){
       let url = URL_SERVICIOS+'/solicitud/'+solicitud._id;
@@ -53,6 +58,6 @@ export class SolicitudService {
         })
       );
     }
-
+    
   
 }

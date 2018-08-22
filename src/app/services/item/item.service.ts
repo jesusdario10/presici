@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { map } from "rxjs/operators"; 
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ItemModel } from '../../models/itemModel';
+import { SolicitudModel } from '../../models/solicitudModel';
 
 
 @Injectable({
@@ -22,9 +23,9 @@ export class ItemService {
   ) {
    }
       // =====================Crear solicitud ==================================//
-      crearItem(item:ItemModel):Observable<any>{
+      CrearSolicitud(solicitud:SolicitudModel, id):Observable<any>{
         let url = URL_SERVICIOS+'/item/'+this.idSolicitud;
-        return this._http.post(url, item).pipe(
+        return this._http.post(url, solicitud).pipe(
           map((resp:any)=>{
             console.log(resp);
              
@@ -36,17 +37,17 @@ export class ItemService {
        }
         // =====================Cargar solo los campos a insertar en la db ==================================//
         cargarItems():Observable<any>{
-          let url = URL_SERVICIOS+'/item/'+this.idSolicitud;
+          let url = URL_SERVICIOS+'/solicitud';
           return this._http.get(url).pipe(
             map((resp:any)=>{
-              this.valor_total = resp.items.valorTotal
-              return resp.items
+              console.log(resp.solicitudes);
+              return resp.solicitudes
             })
           )
         }
           // =====================Cargar todo el item de la db ==================================//
           cargarItems2():Observable<any>{
-            let url = URL_SERVICIOS+'/item/'+this.idSolicitud;
+            let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud
             return this._http.get(url);
           }
         //===obtener el id de la solicitud que viene por la url==//
@@ -72,6 +73,19 @@ export class ItemService {
           console.log(url);
           return this._http.get(url);
         }
+            // =====================insertar ==================================//
+    AgregarItem(solicitud:SolicitudModel){
+      let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud;
+      
+      return this._http.post(url, solicitud).pipe(
+        map((resp:any)=>{
+        swal('Actualizado', 'item insertado Correctamente', 'success');  
+        console.log("UUUUUUUUUUUUUUUUUUUU");
+        console.log(resp);
+         return resp.solicitud;
+        })
+      );
+    }
         
 
 
