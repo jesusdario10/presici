@@ -28,6 +28,8 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ItemComponent } from './item/item.component';
+import { TareaComponent } from './tarea/tarea.component';
+import { TipomttoComponent } from './tipomtto/tipomtto.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { ItemComponent } from './item/item.component';
         MedicosComponent,
         MedicoComponent,
         SolicitudesComponent,
-        ItemComponent
+        ItemComponent,
+        TareaComponent,
+        TipomttoComponent
      
     ],
     exports:[

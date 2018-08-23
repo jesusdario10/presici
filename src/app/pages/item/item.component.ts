@@ -19,6 +19,10 @@ export class ItemComponent implements OnInit {
   valvulas : ItemModel[]=[];
   items : ItemModel[]=[];
   datos : any;
+  calcantidad : number;
+  HH: number;
+  subtotal: number;
+  iva:number;
 
 
 
@@ -29,6 +33,7 @@ export class ItemComponent implements OnInit {
   id_solicitud :string;
   
   datosTotalValor : number;
+  subTotal:number;
 
 
   constructor(
@@ -43,11 +48,11 @@ export class ItemComponent implements OnInit {
   cargarItem2(){
     this._itemService.cargarItems2()
       .subscribe((datos:any)=>{
-        console.log(datos.solicitudes[0].item);
         this.valvulas = datos.solicitudes[0].item
         this.datos = datos
-        console.log("aqui viene el objeto manejable");
         this.datosTotalValor = this.datos.valorTotal;
+        this.subtotal =Math.round(this.datosTotalValor/1.19)
+        this.iva = Math.round(this.datosTotalValor-this.subtotal)
       })
   }
 
@@ -88,9 +93,8 @@ export class ItemComponent implements OnInit {
       sitio :formModel.sitio as string,
       cantidad :formModel.cantidad as number,
       valor : random as number
-      
     },
-    
+    valorTotal : this.calcantidad*random
   };
   this._itemService.AgregarItem(saveItem)
     .subscribe((item)=>{
@@ -99,6 +103,7 @@ export class ItemComponent implements OnInit {
       console.log(item)
     })
     console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+    
     var intervalo = setTimeout(()=>{
       this.cargarItem2()
     },200)

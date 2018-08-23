@@ -1,3 +1,35 @@
 .negrita{
     font-weight: 900 !important;
 }
+.tamanosolicitud{
+    height: 10%;
+    width: 100vh !important;
+    margin: auto
+}
+.cotizacionmodal{
+    width: 70vw !important;
+    text-align: center;
+
+    
+    
+}
+.cotiziacion{
+    font-family: 'Roboto Slab' !important;
+    width:80%;
+}
+.centro{
+    margin-top : 1vw !important;
+    margin-left : 5vw !important;
+}
+.elborde{
+    border: 1px solid black !important;
+}
+.margercot{
+    margin: 2%;
+}
+td{
+    text-align: center;
+}
+table thead {
+    text-align:center;
+}

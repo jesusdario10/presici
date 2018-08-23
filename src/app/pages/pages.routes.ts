@@ -15,6 +15,8 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ItemComponent } from './item/item.component';
+import { TipomttoComponent } from './tipomtto/tipomtto.component';
+import { TareaComponent } from './tarea/tarea.component';
 
 
 const pageRoutes : Routes = [
@@ -38,6 +40,9 @@ const pageRoutes : Routes = [
             {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
+            {path: 'tarea', component: TareaComponent, data:{titulo:'Administrador de Tareas'}},
+            {path: 'tipomtto', component: TipomttoComponent, data:{titulo:'Administrador de Mantenimiento'}},
+            
         
 
             {path: '', redirectTo: '/dashboard', pathMatch:'full'}

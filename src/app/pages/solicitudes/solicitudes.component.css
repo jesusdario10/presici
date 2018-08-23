@@ -18,3 +18,12 @@
     margin-top : 1vw !important;
     margin-left : 5vw !important;
 }
+.elborde{
+    border: 1px solid black !important;
+}
+.margercot{
+    margin: 2%;
+}
+td{
+    text-align: center;
+}

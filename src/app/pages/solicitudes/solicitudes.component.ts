@@ -19,6 +19,7 @@ export class SolicitudesComponent implements OnInit {
   formSubmit: boolean;
 
 
+
   dc:string;
   constructor(
     public _solicitudServices : SolicitudService,
@@ -34,17 +35,20 @@ export class SolicitudesComponent implements OnInit {
     this.cargarSolicitudes();
     this.form = this.fb.group({
       item: [ null, Validators.required ],
+      nombresolicitud: ["", Validators.required ],
+      estado: ["", Validators.required ]
     });
   
     
     
   }
   crearSolicitud(formData: any, formDirective: FormGroupDirective){
-    let solicitud2 = this.solicitud;
+    
     const formModel  = this.form.value;
 
     const saveSolicitud: SolicitudModel = {
-      
+      nombre: formModel.nombresolicitud as string,
+      estado: "CREADA"
     };
 
     this._solicitudServices.crearSolicitud(saveSolicitud)
@@ -66,7 +70,9 @@ export class SolicitudesComponent implements OnInit {
       
   }
   cotizacion(solicitud){
-    console.log(solicitud.item);
+    this.solicitudes = solicitud;
+    console.log(this.solicitudes);
+    
 
   }
 

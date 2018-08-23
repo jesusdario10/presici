@@ -8,10 +8,18 @@
                     <div class="col-12">
                       <div class="card">
                         <div class="card-body" style="text-align: center">
-                            <form #solicitudForm="ngForm"  text-align="center"  (ngSubmit)="crearSolicitud()">
-                                <div class="form-group">
-                                   
-                                </div>
+                            <form [formGroup]="form" #solicitudF="ngForm"  text-align="center"  (ngSubmit)="crearSolicitud(form, solicitudF)">
+                                
+                                    <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Creacion de solicitud</font></font></h3>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-12">
+                                          <div class="form-group">
+                                            <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre o identificacion de la solicitud</font></font></label>
+                                            <input type="text" name="nombresolicitud" formControlName="nombresolicitud" class="form-control" placeholder="Ingrese un nombre o identificacion de su solicitud">
+                                          </div>
+                                        </div>
+                                    </div>
+                                
 
                                 <input class="btn btn-success" type="submit"   name="" id="" value="Crear">
                             </form>  
@@ -26,13 +34,13 @@
             <ol>
             <table class="table table-hover">
               <thead>
-                <tr>
+                <tr style="text-align:center">
+                  <th style="text-align:center">Consecutivo</th>
+                  <th style="text-align:center">Nombre o numero</th>
+                  <th style="text-align:center">Editar</th>
+                  <th style="text-align:center">Eliminar</th>
+                  <th style="text-align:center">Estado</th>
                   
-                  <th>Consecutivo</th>
-                  <th>Nombre o numero</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                  <th>Ver</th>
                 </tr>
               </thead>
               <tbody>
@@ -40,10 +48,15 @@
                 <tr  *ngFor="let solicitud of solicitudes">
 
                   <td><li></li></td>
-                  <td>Nombre o numero de la solicitud</td>
-                  <td><button [routerLink]="['/solicitudes', solicitud._id]"  type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
-                  <td><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
-                  <td><button id="myModal" type="button" (click)="cotizacion(solicitud)" data-toggle="modal" data-target=".bd-example-modal-lg"  class="btn btn-success"><i class="fa fa-eye"></i> </button></td>
+                  <td>{{solicitud.nombre}}</td>
+                  <td>
+                    <button [routerLink]="['/solicitudes', solicitud._id]"  type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button>
+                  </td>
+                  <td>
+                      <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button>
+                  </td>
+                  <td>{{solicitud.estado}}</td>
+                  
                   
                 </tr>
               
@@ -52,18 +65,7 @@
           </ol>
           
          
-          <!-- Modal -->
-          <div class="centro modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-              <div class="centro modal-dialog modal-lg">
-                <div class="cotizacion centro  modal-content cotizacionmodal">
-                  <h2>cotizacion</h2>
-                </div>
-              </div>
-            </div>
-
-            
-           
-      <!--fin del modal-->
+         
           </div>
         </div>
       </div>

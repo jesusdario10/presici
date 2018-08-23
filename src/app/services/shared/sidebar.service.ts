@@ -26,6 +26,14 @@ export class SidebarService {
         {titulo:"Solicitudes", url:'/solicitudes'}
       ]
 
+    },
+    {
+      titulo:"Configuraciones",
+      icono:"mdi mdi-wrench",
+      submenu:[
+        {titulo:"Tipos Mtto", url:"/tipomtto"},
+        {titulo:"Tareas", url:"/tarea"}
+      ]
     }
   ];
 

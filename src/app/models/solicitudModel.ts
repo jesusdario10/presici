@@ -2,13 +2,22 @@
 
 export class SolicitudModel{
     item?:Atributo;
+    valorTotal?:number;
+    nombre?:string;
+    estado?:string;
     _id?:string
 
     constructor(
         item: Atributo,
+        valorTotal:number,
+        nombre:string,
+        estado:string,
         _id : string
     ){
         this.item = item;
+        this.valorTotal = valorTotal;
+        this.nombre = nombre;
+        this.estado = estado;
         this._id = _id;
     }
 }

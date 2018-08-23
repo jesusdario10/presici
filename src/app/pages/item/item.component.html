@@ -133,7 +133,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Cantidad</label>
-                        <input type="number"  name="cantidad" formControlName="cantidad"  class="form-control" >
+                        <input type="number" [(ngModel)]="calcantidad"  name="cantidad" formControlName="cantidad"  class="form-control" >
                     </div>
                   </div>
                   <div class="col-md-2">
@@ -161,8 +161,14 @@
               <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
               <button type="submit" class="btn btn-inverse waves-effect waves-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cancelar</font></font></button>
              
+             
           </form>
       </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" style="text-align: center"> 
+      <button id="myModal"  data-toggle="modal" data-target=".bd-example-modal-lg" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-eye"></i> </button>
+    </div>
   </div>
   <div class="col-md-12">
     <ol>
@@ -173,6 +179,7 @@
             <th>Resumen</th>
             <th>Cantidad</th>
             <th>Valor</th>
+            <th>Total</th>
             <td>Editar</td>
             <td>Eliminar</td>
           </tr>
@@ -187,13 +194,119 @@
               -{{valvula.material}}- Mto: {{valvula.tipomtto}}-Prioridad:{{valvula.prioridad}}-Deficult:({{valvula.dificultad}})  </td>
             <td>{{valvula.cantidad}}</td>
             <td>${{valvula.valor}}</td>
+            <td>${{valvula.valor*valvula.cantidad}}</td>
             <td><button [routerLink]="['/valvula/'+valvula.solicitud+'/', valvula._id]" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
             <td><button (click)="borrarvalvula(valvula._id)" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
+            
             
           </tr>
         
         </tbody>
       </table>
     </ol>
+    
+    
+     <div class="centro modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="centro modal-dialog modal-lg">
+          <div class="cotizacion centro  modal-content cotizacionmodal">
+            <div class="row">
+              <div class="col-md-4">
+                <h1>Logo</h1>
+                <h4>Nit: 800.241.849-1</h4>
+                <h5>CDI S.A</h5>
+                <h6>Bellavista Cra 56b No 7a-45</h6>
+              </div>
+              <div class="col-md-4">
+                  <h2><strong>Cotizacion</strong></h2>
+                  <h3>No: 8798999</h3>
+                 
+              </div>
+              <div class="col-md-4">
+                  <h2><strong>Cliente</strong></h2>
+                  <h3>Yara</h3>
+                  <h5>Kilometro 19 Mamomal</h5>
+                  <h6>Telefono: 665 12 45</h6>
+                 
+              </div>
+            </div>
+            
+            <br>
+            
+            <div class="row margercot">
+              <div class="col-md-11">
+                <ol>
+                <table class="table table-hover ">
+                  <thead>
+                    <th>Consecutivo</th>
+                    <th>Equipo</th>
+                    <th>Cantidad</th>
+                    <th>Valor Unitario</th>
+                    <th>Valor Totoal</th>
+                    <th>HH</th>
+                  </thead>
+                  
+                  <tbody>
+                    <tr *ngFor="let valvula of valvulas">
+                      <td><p><li></li></p></td>
+                      <td>{{valvula.tipovalvula}}-{{valvula.tiposello}}-({{valvula.diametro}})
+                          -{{valvula.material}}- Mto: {{valvula.tipomtto}}-Prioridad:{{valvula.prioridad}}-Deficult:({{valvula.dificultad}})  </td>
+                      <td>{{valvula.cantidad}}</td>
+                      <td>${{valvula.valor}}</td>  
+                      <td>${{valvula.valor*valvula.cantidad}}</td>
+                      <td>Calculando</td>
+                      
+                    </tr>
+                  </tbody>
+                </table>
+                </ol>
+              </div>
+            </div>
+            <div class="row margercot">
+              <div class="col-md-11">
+                
+                <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <table class="table">
+                      <thead>
+                        <th></th>
+                        <th></th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th><strong>Subtotal</strong></th>
+                          <td>${{subtotal}}</td>
+                        </tr>
+                        <tr>
+                          <th><strong>Iva</strong></th>
+                          <td>${{iva}}</td>
+                        </tr>
+                        <tr>
+                          <th><strong>Total</strong></th>
+                          <td>${{datosTotalValor}}</td>
+                        </tr>
+                        
+                      </tbody>
+       
+                    </table>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-11">
+                <p>Por la cual se adoptan sistemas tecnicos de control de facturacion, se modifica el numeral 1 del articulo 11 de la Resolucion 0019 de 2016 y se establecen otras disposiciones.</p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+    
+     
+<!--fin del modal-->
     </div>
 </div>
