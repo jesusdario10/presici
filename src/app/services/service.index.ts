@@ -8,6 +8,8 @@ export { HospitalService  } from './hospital/hospital.service';
 export { MedicoService } from './medico/medico.service';
 export { SolicitudService } from './solicitud/solicitud.service';
 export { ItemService } from './item/item.service'
+export { TipomttoService } from './tipomtto/tipomtto.service';
+export { TareaService } from './tarea/tarea.service';
 
 
 

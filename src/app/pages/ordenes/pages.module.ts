@@ -30,7 +30,6 @@ import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ItemComponent } from './item/item.component';
 import { TareaComponent } from './tarea/tarea.component';
 import { TipomttoComponent } from './tipomtto/tipomtto.component';
-import { OrdenesComponent } from './ordenes/ordenes.component';
 
 
 
@@ -56,8 +55,7 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
         SolicitudesComponent,
         ItemComponent,
         TareaComponent,
-        TipomttoComponent,
-        OrdenesComponent
+        TipomttoComponent
       
      
     ],

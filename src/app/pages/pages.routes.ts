@@ -17,6 +17,8 @@ import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ItemComponent } from './item/item.component';
 import { TipomttoComponent } from './tipomtto/tipomtto.component';
 import { TareaComponent } from './tarea/tarea.component';
+import { OrdenesComponent } from './ordenes/ordenes.component';
+
 
 
 const pageRoutes : Routes = [
@@ -42,6 +44,7 @@ const pageRoutes : Routes = [
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
             {path: 'tarea', component: TareaComponent, data:{titulo:'Administrador de Tareas'}},
             {path: 'tipomtto', component: TipomttoComponent, data:{titulo:'Administrador de Mantenimiento'}},
+            {path: 'ordenes', component: OrdenesComponent, data:{titulo:'Administrador de Ordenes'}},
             
         
 

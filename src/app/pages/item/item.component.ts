@@ -102,8 +102,8 @@ export class ItemComponent implements OnInit {
       this.valvulas = item
       console.log(item)
     })
-    console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
     
+    formData.reset();
     var intervalo = setTimeout(()=>{
       this.cargarItem2()
     },200)
