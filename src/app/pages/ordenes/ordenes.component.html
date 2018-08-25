@@ -1,3 +1,64 @@
-<p>
-  ordenes works!
-</p>
+	<div class="row">
+    <div class="col-12">
+      <div class="card">
+      <div class="card-body">
+          <div class="col-md-12" style="text-align:center">
+            
+              <ol>
+              <table class="table table-hover">
+                <thead>
+                  <tr style="text-align:center">
+                    <th style="text-align:center">Consecutivo</th>
+                    <th style="text-align:center">Nombre o numero</th>
+                    <th style="text-align:center">Estado</th>
+                    <th style="text-align:center">Avance</th>
+                    <th style="text-align:center">Editar</th>
+                    <th style="text-align:center">Eliminar</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr  *ngFor="let solicitud of solicitudes">
+          
+                    <td><li></li></td>
+                    <td>{{solicitud.nombre}}</td>
+                    <td>
+                        <div class="form-group">
+                            <!--<label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tipoSello</font></font></label>
+                            <input [(ngModel)]=item.tiposello name="tiposello" type="text" class="form-control" id="exampleInputEmail1" placeholder="campo1">-->
+                            
+                            <select id="estado" name="estado"    class="custom-select custom-select-lg mb-3" (change)="cambiaEstado(solicitud._id)">
+
+                                
+                                <option value="RECHAZADA">RECHAZADA</option>
+                                <option value="aceptada">aceptada</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>Aqui viene el avance</td>
+                    <td>
+                      <button [routerLink]="['/solicitudes', solicitud._id]"  type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button>
+                    </td>
+
+                    
+                    
+                    
+                  </tr>
+                
+                </tbody>
+              </table>
+              </ol>
+              
+          </div>
+          
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+

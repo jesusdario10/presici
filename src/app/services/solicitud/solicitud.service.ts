@@ -48,9 +48,14 @@ export class SolicitudService {
             let url = URL_SERVICIOS+'/solicitud'
               return this._http.get(url);
           }
+      // =====================Cargar todo el item de la db ==================================//
+        cargarSolicitud(id):Observable<any>{
+          let url = URL_SERVICIOS+'/solicitud/'+id
+            return this._http.get(url);
+        }
     // =====================Actualziar Solicitudes ==================================//
-    actualizarSolicitud(solicitud:SolicitudModel){
-      let url = URL_SERVICIOS+'/solicitud/'+solicitud._id;
+    actualizarSolicitud(solicitud:SolicitudModel, id){
+      let url = URL_SERVICIOS+'/solicitud/'+id;
       return this._http.put(url, solicitud).pipe(
         map((resp:any)=>{
         swal('Actualizado', 'Solicitud Actualzida Correctamente', 'success');  
@@ -58,6 +63,8 @@ export class SolicitudService {
         })
       );
     }
+    //listar una sola solicitud
+
     
   
 }
