@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class OrdenesComponent implements OnInit {
   solicitudes : SolicitudModel[]=[];
+
   
   item : Atributo;
   form: FormGroup;
@@ -31,28 +32,29 @@ export class OrdenesComponent implements OnInit {
     this.cargarSolicitudes();
 
   }
-  cargarSolicitudes(){
 
-    this._solicitudServices.cargarSolicitudes()
-      .subscribe(solicitudes=>{
-        this.solicitudes=solicitudes
-        console.log(this.solicitudes);
-      }) 
-  }
-  cambiaEstado(id){
-    let estado = document.getElementById("estado")
-    let campo = estado.value
-    console.log(estado);
-    console.log(campo);
-    console.log(id);
-    const actSolicitud: SolicitudModel = {
-      estado: campo
-    };
-    this._solicitudServices.actualizarSolicitud(actSolicitud, id)
-      .subscribe((actSolicitud)=>console.log(actSolicitud))
-    
+
+  cargarSolicitudes(){
+    this._solicitudServices.cargarSolicitudes2()
+      .subscribe((resp:any)=>{
+        console.log("la respuesta");
+        console.log(resp);
+   
+        this.solicitudes = resp.solicitudes;
        
+      }); 
   }
+
+  CambiarEstado(id, solicitud: SolicitudModel){
+    console.log(id);
+    console.log(this.estado);
+    solicitud.estado = this.estado;
+    
+    this._solicitudServices.actualizarSolicitud(id, solicitud)
+        .subscribe();
+  }
+
+  
   
 
 }

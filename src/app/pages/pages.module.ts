@@ -31,6 +31,8 @@ import { ItemComponent } from './item/item.component';
 import { TareaComponent } from './tarea/tarea.component';
 import { TipomttoComponent } from './tipomtto/tipomtto.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
+import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
+
 
 
 
@@ -57,7 +59,10 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
         ItemComponent,
         TareaComponent,
         TipomttoComponent,
-        OrdenesComponent
+        OrdenesComponent,
+        GestionItemComponent
+        
+        
       
      
     ],

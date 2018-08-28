@@ -6,6 +6,8 @@ import { FormsModule, FormGroup, Validators, FormBuilder, FormGroupDirective } f
 import { MedicoModel } from '../../models/medicoModel';
 import { Router } from '@angular/router';
 
+declare var swal:any;
+
 @Component({
   selector: 'app-solicitudes',
   templateUrl: './solicitudes.component.html',
@@ -17,6 +19,7 @@ export class SolicitudesComponent implements OnInit {
   item : Atributo;
   form: FormGroup;
   formSubmit: boolean;
+  estado : string;
 
 
 
@@ -54,7 +57,7 @@ export class SolicitudesComponent implements OnInit {
     this._solicitudServices.crearSolicitud(saveSolicitud)
       .subscribe((saveSolicitud)=> console.log(saveSolicitud));   
       this.cargarSolicitudes();
-      
+      formData.reset();
       let cargar = setTimeout(()=>{
         console.log("setTimeout");
         this.cargarSolicitudes();
@@ -66,14 +69,44 @@ export class SolicitudesComponent implements OnInit {
       .subscribe(solicitudes=>{
         this.solicitudes=solicitudes
         console.log(this.solicitudes);
-      })
-      
+      })   
   }
-  cotizacion(solicitud){
-    this.solicitudes = solicitud;
-    console.log(this.solicitudes);
+
+  eliminarSolicitud(id){
+
+    swal({
+      title: "Esta seguro?",
+      text: "Esta a punto de borrar un item ",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((borrar) => {
+      if (borrar) {
+        this._solicitudServices.eliminarSolicitud(id).subscribe(
+          response=>{
+            swal("Su solicitud ha sido borrada", {
+              icon: "success",
+            });
+            let cargar = setTimeout(()=>{
+              console.log("setTimeout");
+              this.cargarSolicitudes();
+            },300);
+          },
+          error=>{
+            console.log(error);
+          }
+        )
+      } else {
+        swal({
+          icon:"info",
+          text:"ESu solicitud no sera borrada"
+        });
+      }
+    }); 
     
 
+      
   }
 
 

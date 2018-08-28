@@ -137,24 +137,7 @@
                     </div>
                   </div>
                   <div class="col-md-2">
-                    <div class="form-group">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="card">
-                          <div class="card-body">
-                             <strong class="">
-                              <h5> Valor de la Solicitud</h5>
-                             </strong>
-                             ${{datosTotalValor}}
-                             <hr>
-                            
-                             
-                             
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+
                   </div>                   
               </div>
               
@@ -165,46 +148,55 @@
           </form>
       </div>
   </div>
+  <br>
   <div class="row">
-    <div class="col-md-12" style="text-align: center"> 
-      <button id="myModal"  data-toggle="modal" data-target=".bd-example-modal-lg" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-eye"></i> </button>
-    </div>
+      <div class="col-md-12" style="text-align: center"> 
+          <div class="form-group">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                  <div class="card-body">
+                     <strong class="">
+                      <h5> Valor de la Solicitud</h5>
+                     </strong>
+                     <p>{{datosTotalValor/1000 | currency:'USD':true:'1.3-3'}}</p>
+                     <button id="myModal"  data-toggle="modal" data-target=".bd-example-modal-lg" type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-eye"></i> </button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
   </div>
   <div class="col-md-12">
-    <ol>
+    
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>#Consecutivo</th>
-            <th>Resumen</th>
-            <th>Cantidad</th>
-            <th>Valor</th>
-            <th>Total</th>
-            <td>Editar</td>
-            <td>Eliminar</td>
+            <th  style="text-align: center">#Consecutivo</th>
+            <th  style="text-align: center">Resumen</th>
+            <th  style="text-align: center">Cantidad</th>
+            <th  style="text-align: center">Valor</th>
+            <th  style="text-align: center">Total</th>
+            
+            <td  style="text-align: center">Eliminar</td>
           </tr>
         </thead>
         <tbody>
         
-          <tr  *ngFor="let valvula of valvulas">
+          <tr  *ngFor="let valvula of valvulas; let i = index">
             <td>
-                 <li></li> 
+                {{i}}
             </td>
-            <td>{{valvula.tipovalvula}}-{{valvula.tiposello}}-({{valvula.diametro}})
+            <td  style="text-align: left">{{valvula.tipovalvula}}-{{valvula.tiposello}}-({{valvula.diametro}})
               -{{valvula.material}}- Mto: {{valvula.tipomtto}}-Prioridad:{{valvula.prioridad}}-Deficult:({{valvula.dificultad}})  </td>
             <td>{{valvula.cantidad}}</td>
-            <td>${{valvula.valor}}</td>
-            <td>${{valvula.valor*valvula.cantidad}}</td>
-            <td><button [routerLink]="['/valvula/'+valvula.solicitud+'/', valvula._id]" type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button></td>
-            <td><button (click)="borrarvalvula(valvula._id)" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>
-            
-            
+            <td>{{valvula.valor/1000 | currency:'USD':true:'1.3-3'}}</td>
+            <td>{{valvula.valor*valvula.cantidad/1000 | currency:'USD':true:'1.3-3'}}</td>
+            <td><button (click)="borrarvalvula(i)" type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i> </button></td>   
           </tr>
-        
         </tbody>
       </table>
-    </ol>
-    
     
      <div class="centro modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="centro modal-dialog modal-lg">
@@ -251,8 +243,8 @@
                       <td>{{valvula.tipovalvula}}-{{valvula.tiposello}}-({{valvula.diametro}})
                           -{{valvula.material}}- Mto: {{valvula.tipomtto}}-Prioridad:{{valvula.prioridad}}-Deficult:({{valvula.dificultad}})  </td>
                       <td>{{valvula.cantidad}}</td>
-                      <td>${{valvula.valor}}</td>  
-                      <td>${{valvula.valor*valvula.cantidad}}</td>
+                      <td>{{valvula.valor/1000 | currency:'USD':true:'1.3-3'}}</td>  
+                      <td>{{valvula.valor*valvula.cantidad/1000 | currency:'USD':true:'1.3-3'}}</td>
                       <td>Calculando</td>
                       
                     </tr>
@@ -263,7 +255,6 @@
             </div>
             <div class="row margercot">
               <div class="col-md-11">
-                
                 <div class="row">
                   <div class="col-md-4"></div>
                   <div class="col-md-4"></div>
@@ -276,15 +267,15 @@
                       <tbody>
                         <tr>
                           <th><strong>Subtotal</strong></th>
-                          <td>${{subtotal}}</td>
+                          <td>{{subtotal/1000 | currency:'USD':true:'1.3-3'}}</td>
                         </tr>
                         <tr>
                           <th><strong>Iva</strong></th>
-                          <td>${{iva}}</td>
+                          <td>${{iva/1000 | currency:'USD':true:'1.3-3'}}</td>
                         </tr>
                         <tr>
                           <th><strong>Total</strong></th>
-                          <td>${{datosTotalValor}}</td>
+                          <td>{{datosTotalValor/1000 | currency:'USD':true:'1.3-3'}}</td>
                         </tr>
                         
                       </tbody>

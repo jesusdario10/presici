@@ -23,15 +23,10 @@ export class ItemComponent implements OnInit {
   HH: number;
   subtotal: number;
   iva:number;
-
-
-
   item : Atributo;
   form: FormGroup;
   formSubmit: boolean;
-
   id_solicitud :string;
-  
   datosTotalValor : number;
   subTotal:number;
 
@@ -49,16 +44,27 @@ export class ItemComponent implements OnInit {
     this._itemService.cargarItems2()
       .subscribe((datos:any)=>{
         this.valvulas = datos.solicitudes[0].item
+        console.log("!!!!!!!!!!!");
+        
+        this.id_solicitud = datos.solicitudes[0]._id;
         this.datos = datos
         this.datosTotalValor = this.datos.valorTotal;
         this.subtotal =Math.round(this.datosTotalValor/1.19)
         this.iva = Math.round(this.datosTotalValor-this.subtotal)
       })
   }
+  cargarItems(id){
+    this._itemService.cargarItems(id)
+      .subscribe((resp:any)=>{
+        console.log(resp);
+      }); 
+  }
 
 
   ngOnInit() {
-    console.log("cargando items");
+
+   
+   
     this.cargarItem2(); 
     this.form = this.fb.group({
       tipovalvula: [ "", Validators.required ],
@@ -111,7 +117,8 @@ export class ItemComponent implements OnInit {
 
   }
   //borrar items
-  borrarItem(id){
+
+  borrarvalvula(index){
     swal({
       title: "Esta seguro?",
       text: "Esta a punto de borrar un item ",
@@ -121,7 +128,7 @@ export class ItemComponent implements OnInit {
     })
     .then((borrar) => {
       if (borrar) {
-        this._itemService.deleteItem(id).subscribe(
+        this._itemService.EliminarItem(index).subscribe(
           response=>{
             console.log("item borrado");
             swal("El item ha sido borrado", {
@@ -131,12 +138,7 @@ export class ItemComponent implements OnInit {
               console.log("setTimeout");
               this.cargarItem2();
              
-            },300) 
-            let cargar2 = setTimeout(()=>{
-              console.log("setTimeout");
-              this.cargarItem2();
-             
-            },200) 
+            },300);
           },
           error=>{
             console.log(error);
@@ -144,34 +146,15 @@ export class ItemComponent implements OnInit {
         )
 
       } else {
-        swal("El item no sera borado");
+        swal({
+          icon:"info",
+          text:"El item no sera borado"
+        });
       }
-    });
+    }); 
+    
   }
 
-  /*//obtener item para actualizar
-  getProject(id){
-    this._projectService.getProject(id).subscribe(
-      response =>{
-        this.project = response.project
-      },
-      error=>{
-        console.log(error);
-      }
-    )
-  }
-  //actualziar item
-  actualizarItem(id){
-    this._itemService.updateItem(this.item, id).subscribe(
-      response=>{
-        console.log("item editado");
-      },
-      error=>{
-        console.log(error);
-      }
-
-    )
-  }*/
  
 
 

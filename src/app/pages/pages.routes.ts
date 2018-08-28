@@ -18,6 +18,7 @@ import { ItemComponent } from './item/item.component';
 import { TipomttoComponent } from './tipomtto/tipomtto.component';
 import { TareaComponent } from './tarea/tarea.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
+import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
 
 
 
@@ -42,6 +43,8 @@ const pageRoutes : Routes = [
             {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
+            {path: 'gestionitem/:id/:id2', component: GestionItemComponent, data:{titulo:'Gestionar Items'}},
+            
             {path: 'tarea', component: TareaComponent, data:{titulo:'Administrador de Tareas'}},
             {path: 'tipomtto', component: TipomttoComponent, data:{titulo:'Administrador de Mantenimiento'}},
             {path: 'ordenes', component: OrdenesComponent, data:{titulo:'Administrador de Ordenes'}},

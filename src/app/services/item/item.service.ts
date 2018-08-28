@@ -35,12 +35,16 @@ export class ItemService {
           })
         );
        }
-        // =====================Cargar solo los campos a insertar en la db ==================================//
-        cargarItems():Observable<any>{
-          let url = URL_SERVICIOS+'/solicitud';
+        // =====================obteniendo id de la solicitud y guardando en localStorage
+        //==============Esto para poder enviarlo a la vista de edicion y eliminacion de items===================//
+        cargarItems(id):Observable<any>{
+          let url = URL_SERVICIOS+'/solicitud/'+id;
           return this._http.get(url).pipe(
             map((resp:any)=>{
-              console.log(resp.solicitudes);
+              
+              
+              this.idSolicitud = resp.solicitudes[0]._id;
+              localStorage.setItem('solicitud', resp.solicitudes[0]._id)
               return resp.solicitudes
             })
           )
@@ -48,6 +52,7 @@ export class ItemService {
           // =====================Cargar todo el item de la db ==================================//
           cargarItems2():Observable<any>{
             let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud
+            //localStorage.setItem('solicitud', resp.solicitudGuardada._id)
             return this._http.get(url);
           }
         //===obtener el id de la solicitud que viene por la url==//
@@ -61,19 +66,13 @@ export class ItemService {
           console.log(this.idItem);
           this.idSolicitud = solicitud;
         }
-        //borrar proyectos
-          deleteItem(id){
-            let url = URL_SERVICIOS+'/item/'+this.idSolicitud+'/'+id;
-        
-            return this._http.delete(url);
-        }
         // =====================Cargar sun solo item ==================================//
         cargItem():Observable<any>{
           let url = URL_SERVICIOS+'/item/'+this.idSolicitud+'/'+this.idItem;
           console.log(url);
           return this._http.get(url);
         }
-            // =====================insertar ==================================//
+    // =====================insertar ==================================//
     AgregarItem(solicitud:SolicitudModel){
       let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud;
       
@@ -85,6 +84,11 @@ export class ItemService {
          return resp.solicitud;
         })
       );
+    }
+    //================Eliminar Item =================================== //
+    EliminarItem(index){
+      let url = URL_SERVICIOS+'/gestionitem/'+this.idSolicitud+'?item='+index;
+      return this._http.delete(url);
     }
         
 

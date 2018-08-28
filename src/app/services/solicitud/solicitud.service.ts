@@ -43,27 +43,35 @@ export class SolicitudService {
             })
           )
         }
-      // =====================Cargar todo el item de la db ==================================//
+      // =====================buscar todas las solicitudes ==================================//
           cargarSolicitudes2():Observable<any>{
             let url = URL_SERVICIOS+'/solicitud'
               return this._http.get(url);
           }
-      // =====================Cargar todo el item de la db ==================================//
+          
+      // =====================buscar solicitud por id ==================================//
         cargarSolicitud(id):Observable<any>{
           let url = URL_SERVICIOS+'/solicitud/'+id
             return this._http.get(url);
         }
-    // =====================Actualziar Solicitudes ==================================//
-    actualizarSolicitud(solicitud:SolicitudModel, id){
-      let url = URL_SERVICIOS+'/solicitud/'+id;
+        
+    // =====================Actualizar Solicitudes ==================================//
+
+      actualizarSolicitud(id, solicitud:SolicitudModel):Observable<any>{
+      let url = URL_SERVICIOS+'/solicitud/'+id
+      console.log("paso1");
       return this._http.put(url, solicitud).pipe(
-        map((resp:any)=>{
-        swal('Actualizado', 'Solicitud Actualzida Correctamente', 'success');  
-         return resp.solicitd;
-        })
-      );
-    }
-    //listar una sola solicitud
+        map((resp: any) =>{
+          console.log("voy por aqui");
+          let SolicitudDb : SolicitudModel = resp.solicitud
+        swal('Actualizado', 'Datos Actualizados Correctamente', 'success');       
+      }));    
+  }
+  // ===========eliminar items o valvulas de la solicitud ============================= //
+    eliminarSolicitud(id){
+    let url = URL_SERVICIOS+'/solicitud/'+id;
+    return this._http.delete(url);
+  }
 
     
   
