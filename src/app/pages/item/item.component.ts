@@ -39,7 +39,6 @@ export class ItemComponent implements OnInit {
     this._itemService.obtenerSolicitud();
     
   }
-
   cargarItem2(){
     this._itemService.cargarItems2()
       .subscribe((datos:any)=>{

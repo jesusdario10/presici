@@ -10,6 +10,8 @@ export { SolicitudService } from './solicitud/solicitud.service';
 export { ItemService } from './item/item.service'
 export { TipomttoService } from './tipomtto/tipomtto.service';
 export { TareaService } from './tarea/tarea.service';
+export { ClienteService } from './cliente/cliente.service';
+
 
 
 

@@ -24,6 +24,8 @@ export class SidebarService {
         {titulo:"Tipos Mtto", url:"/tipomtto"},
         {titulo:"Tareas", url:"/tarea"},
         {titulo:"Usuarios", url:'/usuarios'},
+        {titulo:"Clientes", url:"/clientes"},
+        {titulo:"Cargos", url:"/cargos"}
       ]
     }
   ];

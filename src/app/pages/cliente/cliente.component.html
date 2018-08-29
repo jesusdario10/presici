@@ -1,0 +1,207 @@
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-8">
+                        <form  [formGroup]="form"  #crearCliente="ngForm" (ngSubmit)="crearClienteL(crearCliente)"  class="form-horizontal p-t-20">
+                                <div class="form-group row">
+                                    <label for="exampleInputuname3" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                                            <input type="text" name="nombreC" formControlName="nombreC" class="form-control" placeholder="Nombre">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputuname3" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nit</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-tablet"></i></div>
+                                            <input type="text" name="nitC" formControlName="nitC" class="form-control" id="exampleInputuname3" placeholder="Nit">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleInputEmail3" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Email*</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <input type="email" name="correoC" formControlName="correoC" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="web" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Direccion</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-world"></i></div>
+                                            <input type="text" name="direccionC" formControlName="direccionC" class="form-control" id="web" placeholder="Direccion del Cliente">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword4" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Telefono</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-deskphone"></i></div>
+                                            <input type="text" name="telefonoC" formControlName="telefonoC" class="form-control" id="exampleInputpwd4" placeholder="Telefono fijo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword5" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Celular 1</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-cellphone"></i></div>
+                                            <input type="text" name="celular1C" formControlName="celular1C" class="form-control" id="exampleInputpwd5" placeholder="Celular 1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword5" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Celular 2</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-cellphone-iphone"></i></div>
+                                            <input type="text" name="celular2C" formControlName="celular2C" class="form-control" id="exampleInputpwd5" placeholder="Celular 2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword5" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contacto</font></font></label>
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="mdi mdi-contacts"></i></div>
+                                            <input type="text" name="contactoC" formControlName="contactoC" class="form-control" id="exampleInputpwd5" placeholder="Contacto">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row m-b-0">
+                                    <div class="offset-sm-3 col-sm-12">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear</font></font></button>
+                                    </div>
+                                </div>
+                            </form>
+                </div>
+                <div class="col-lg-4">
+                       
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row animated fadeIn">
+                        <div class="col-12">
+                          <div class="card">
+                            <div class="card-body">
+                                <input #input (keyup)="buscarCliente(input.value)" type="text" class="form-control" placeholder="Buscar Cliente...">
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body" style="text-align:center">
+                       <table style="text-align:center" class="table table-hover table-responsive">
+                         <thead>
+                           <th >Nit</th>
+                           <th>Nombre</th>
+                           <th>Email</th>
+                           <th>Telefono</th>
+                           <th>Celular1</th>
+                           
+                           <th>ver</th>
+                         </thead>
+                         <tbody>
+                            <tr *ngFor="let cliente of clientes; let i = index">
+                                <td>{{cliente.nit}}</td>
+                                <td>{{cliente.nombre}}</td>
+                                <td>{{cliente.email}}</td>
+                                <td>{{cliente.telefono}}</td>
+                                <td>{{cliente.celular1}}</td>
+
+                                <td>
+                                    <button type="button" (click)="mostrarDatos(cliente._id)" data-toggle="modal" data-target=".bd-cliente-modal-lg"  class="btn btn-success"><i class="fa  fa-eye"></i> </button>
+                                </td>
+                            </tr>
+                         </tbody>
+                       </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    
+      
+    
+</div>
+
+<div class="modal fade bd-cliente-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="row contenedor">
+            <div >
+                <div class="col-lg-12" style="text-align:center">
+                    <h1 >Datos del Cliente</h1>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body">
+                                <div class="row ">
+                                        <div class="col-sm-12 col-xs-12" >
+                                            
+                                            <form  #editCliente="ngForm" (ngSubmit)="editarClienteL(editCliente)" style="text-align:center" >
+                                                <div class="form-group" style="text-align:center">
+                                                    
+                                                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></label>
+                                                    <input name="nombreCliente" #nombreCliente="ngModel" [(ngModel)]="datosCliente.nombre"  type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Username">
+                                                </div>
+                                                <div class="form-group"  style="text-align:center">
+                                                        <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nit</font></font></label>
+                                                        <input type="text"  name="nitCliente" #nitCliente="ngModel" [(ngModel)]="datosCliente.nit"  class="form-control" id="exampleInputEmail1" placeholder="Nit">
+                                                    </div>
+                                                <div class="form-group"  style="text-align:center">
+                                                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Correo</font></font></label>
+                                                    <input type="email" name="correoCliente" #correoCliente="ngModel" [(ngModel)]="datosCliente.email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
+                                                </div>
+                                                <div class="form-group"  style="text-align:center">
+                                                        <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Direccion</font></font></label>
+                                                        <input type="text"  name="direccionCliente" #direccionCliente="ngModel" [(ngModel)]="datosCliente.direccion"class="form-control" id="exampleInputEmail1" placeholder="Direccion">
+                                                </div>
+                                                <div class="form-group"  style="text-align:center">
+                                                        <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Telefono</font></font></label>
+                                                        <input type="text" name="telefonoCliente" #telefonoCliente="ngModel" [(ngModel)]="datosCliente.telefono" class="form-control" id="exampleInputEmail1" placeholder="Telefono">
+                                                </div>
+                                                <div class="form-group"  style="text-align:center">
+                                                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Celular 1</font></font></label>
+                                                    <input type="text" name="celular1Cliente" #celular1Cliente="ngModel" [(ngModel)]="datosCliente.celular1" class="form-control" id="exampleInputEmail1" placeholder="Celular 1">
+                                                </div>
+                                                <div class="form-group"  style="text-align:center">
+                                                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Celular 2</font></font></label>
+                                                    <input type="text" name="celular2Cliente" #celular2Cliente="ngModel" [(ngModel)]="datosCliente.celular2" class="form-control" id="exampleInputEmail1" placeholder="Celular 2">
+                                                </div>
+                                                <div class="form-group"  style="text-align:center">
+                                                        <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contacto</font></font></label>
+                                                        <input type="text" name="contactoCliente" #contactoCliente="ngModel" [(ngModel)]="datosCliente.contacto" class="form-control" id="exampleInputEmail1" placeholder="Contacto">
+                                                </div>
+                                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actualizar</font></font></button>
+                    
+                                            </form>     
+                                        </div>
+                                    </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                
+        </div>
+      </div>
+    </div>
+  </div>
+
+

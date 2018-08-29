@@ -19,6 +19,8 @@ import { TipomttoComponent } from './tipomtto/tipomtto.component';
 import { TareaComponent } from './tarea/tarea.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
 import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { CargosComponent } from './cargos/cargos.component';
 
 
 
@@ -29,25 +31,32 @@ const pageRoutes : Routes = [
         canActivate:[LoginGuardGuard],
         children:[
             {path: 'dashboard', component: DashboardComponent, data:{titulo:'Dashboard'}},
-            {path: 'progress', component: ProgressComponent, data:{titulo:'Progress'}},
+            /*{path: 'progress', component: ProgressComponent, data:{titulo:'Progress'}},
             {path: 'graficas1', component: Graficas1Component, data:{titulo:'GradicasTorta'}},
             {path: 'graficas2', component: Graficas2Component, data:{titulo:'GraficasAraña'}},
             {path: 'promesas', component: PromesasComponent, data:{titulo:'Promesas'}},
-            {path: 'rxjs', component: RxjsComponent, data:{titulo:'Rxjs'}},
+            {path: 'rxjs', component: RxjsComponent, data:{titulo:'Rxjs'}},*/
             {path: 'account-settings', component: AccountSettingsComponent, data:{titulo:'Ajustes del Tema'} },
             {path: 'perfil', component: ProfileComponent, data:{titulo:'Perfil de usuario'}},
-            //Mantenimientos
-            {path: 'usuarios', component: UsuariosComponent, data:{titulo:'Mantenimiento de Usuario'}},
-            {path: 'hospitales', component: HospitalesComponent, data:{titulo:'Mantenimiento de Hospitales'}},
+
+
+            /* =================Mantenimientos=====================*/
+            
+            /*{path: 'hospitales', component: HospitalesComponent, data:{titulo:'Mantenimiento de Hospitales'}},
             {path: 'medicos', component: MedicosComponent, data:{titulo:'Mantenimiento de Medicos'}},
-            {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},
+            {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},*/
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
             {path: 'gestionitem/:id/:id2', component: GestionItemComponent, data:{titulo:'Gestionar Items'}},
+            {path: 'ordenes', component: OrdenesComponent, data:{titulo:'Administrador de Ordenes'}},
             
+             /* =================Configuraciones=====================*/
+            {path: 'usuarios', component: UsuariosComponent, data:{titulo:'Mantenimiento de Usuario'}},
             {path: 'tarea', component: TareaComponent, data:{titulo:'Administrador de Tareas'}},
             {path: 'tipomtto', component: TipomttoComponent, data:{titulo:'Administrador de Mantenimiento'}},
-            {path: 'ordenes', component: OrdenesComponent, data:{titulo:'Administrador de Ordenes'}},
+            {path: 'clientes', component: ClienteComponent, data:{titulo:'Administrador de Clientes'}},
+            {path: 'cargos', component: CargosComponent, data:{titulo:'Administrador de Cargos'}},
+            
             
         
 

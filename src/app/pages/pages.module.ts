@@ -32,6 +32,8 @@ import { TareaComponent } from './tarea/tarea.component';
 import { TipomttoComponent } from './tipomtto/tipomtto.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
 import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { CargosComponent } from './cargos/cargos.component';
 
 
 
@@ -60,7 +62,9 @@ import { GestionItemComponent } from './item/gestion-item/gestion-item.component
         TareaComponent,
         TipomttoComponent,
         OrdenesComponent,
-        GestionItemComponent
+        GestionItemComponent,
+        ClienteComponent,
+        CargosComponent
         
         
       

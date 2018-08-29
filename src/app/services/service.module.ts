@@ -11,7 +11,8 @@ import { SettingsService,
          MedicoService,
          ItemService,
          TipomttoService,
-         TareaService} from './service.index';
+         TareaService,
+         ClienteService} from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
@@ -32,7 +33,8 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
               MedicoService,
               ItemService,
               TipomttoService,
-              TareaService],
+              TareaService,
+              ClienteService],
   declarations: [],
   
 })
