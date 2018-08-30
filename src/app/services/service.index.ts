@@ -11,6 +11,7 @@ export { ItemService } from './item/item.service'
 export { TipomttoService } from './tipomtto/tipomtto.service';
 export { TareaService } from './tarea/tarea.service';
 export { ClienteService } from './cliente/cliente.service';
+export { CargosService } from './cargos/cargos.service';
 
 
 

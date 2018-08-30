@@ -1,3 +1,84 @@
-<p>
-  cargos works!
-</p>
+<div class="card card-body">
+    <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ejemplos de formularios básicos</font></font></h3>
+    <p class="text-muted m-b-30 font-13"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Elementos Bootstrap </font></font></p>
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre del Cargo</font></font></label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Valor Hora Hombre</font></font></label>
+                    <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter Username">
+                </div>
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body" style="text-align:center">
+           <table style="text-align:center" class="table table-hover table-responsive">
+             <thead>
+              
+               <th>Nombre del Cargo</th>
+               <th>Valor Hora Hombre</th>
+               <th>ver</th>
+             </thead>
+             <tbody>
+                <tr *ngFor="let cargo of cargos; let i = index">
+
+                    <td style="text-align:left">{{cargo.nombre}}</td>
+                    <td>{{cargo.valorHora | currency:'USD':true:'1.0-3'}}</td>
+                    <td>
+                        <button type="button" (click)="mostrarDatos(cargo._id)" data-toggle="modal" data-target=".bd-cargo-modal-lg"  class="btn btn-success"><i class="fa  fa-eye"></i> </button>
+                    </td>
+                </tr>
+             </tbody>
+           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade bd-cargo-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="row contenedor">
+              <div >
+                  <div class="col-lg-12" style="text-align:center">
+                      <h1 >Datos del Cargo</h1>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="row ">
+                              <div class="col-sm-12 col-xs-12" >
+                                        
+                                  <form  #editCargo="ngForm" (ngSubmit)="actualizarCargo(editCargo)" style="text-align:center" >
+                                      <div class="form-group" style="text-align:center">
+                                          
+                                          <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></label>
+                                          <input name="nombreCargo" #nombreCargo="ngModel" [(ngModel)]="datosCargo.nombre"  type="text" class="form-control" id="exampleInputEmail1" placeholder="Ingrese Nombre del Cargo">
+                                      </div>
+                                      <div class="form-group"  style="text-align:center">
+                                              <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Valor Hora Hombre</font></font></label>
+                                              <input type="number"  name="valorHoraCargo" #valorHoraCargo="ngModel" [(ngModel)]="datosCargo.valorHora"  class="form-control" id="exampleInputEmail1" placeholder="Valor Hora Hombre">
+                                      </div>                                       
+                                      <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actualizar</font></font></button>
+                                  </form>     
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+              </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>  
