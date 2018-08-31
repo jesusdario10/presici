@@ -30,6 +30,7 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle(this.titulo);
   }
 
 }

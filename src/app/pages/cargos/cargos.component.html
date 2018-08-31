@@ -1,6 +1,7 @@
+
 <div class="card card-body">
-    <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ejemplos de formularios básicos</font></font></h3>
-    <p class="text-muted m-b-30 font-13"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Elementos Bootstrap </font></font></p>
+    <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Creacion de cargos</font></font></h3>
+    
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             <form>
@@ -34,7 +35,7 @@
                     <td style="text-align:left">{{cargo.nombre}}</td>
                     <td>{{cargo.valorHora | currency:'USD':true:'1.0-3'}}</td>
                     <td>
-                        <button type="button" (click)="mostrarDatos(cargo._id)" data-toggle="modal" data-target=".bd-cargo-modal-lg"  class="btn btn-success"><i class="fa  fa-eye"></i> </button>
+                        <button type="button" [routerLink]="['/cargos', cargo._id]"  data-toggle="modal" data-target=".bd-cargo-modal-lg"  class="btn btn-success"><i class="fa  fa-eye"></i> </button>
                     </td>
                 </tr>
              </tbody>
@@ -43,7 +44,7 @@
       </div>
     </div>
   </div>
-  <div class="modal fade bd-cargo-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <!--<div class="modal fade bd-cargo-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="row contenedor">
@@ -81,4 +82,4 @@
       </div>
     </div>
   
-  </div>  
+  </div>  -->

@@ -16,6 +16,7 @@ export class ClienteComponent implements OnInit {
   clientes: ClienteModel[]=[];
   datosCliente: ClienteModel[]=[];
   datosCliente2: ClienteModel;
+  idCliente : string;
   form: FormGroup;
   form2: FormGroup;
   formSubmit: boolean;
@@ -56,14 +57,18 @@ export class ClienteComponent implements OnInit {
     this._clienteService.listarUnSoloCliente(id)
       .subscribe((datos:any)=>{
         console.log("en el componente");
-        this.datosCliente = datos.cliente
-        this.datosCliente2 = datos.cliente
+        console.log(datos);
+        this.datosCliente = datos.cliente;
+        this.datosCliente2 = datos.cliente;
+        console.log("inspeccionando lo que me trae datos");
+        console.log(this.datosCliente2.nombre);
+        
       })
   }
   //*********************CREAR CLIENTE***************** */
   crearClienteL(formData: any, formDirective: FormGroupDirective){
     const formModel  = this.form.value;
-    const saveCliente: ClienteModel = {
+    let saveCliente: ClienteModel = {
       
         nombre :formModel.nombreC as string,
         nit :formModel.nitC as string,
@@ -84,8 +89,20 @@ export class ClienteComponent implements OnInit {
       }, 200);
   }
   //*********************ACTUALIZAR CLIENTE***************** */
-  editarClienteL(){
-    this._clienteService.editarCliente(this.datosCliente2, this.datosCliente2._id)
+  editarClienteL (formData: any, formDirective: FormGroupDirective){
+    const formModel  = this.form.value;
+    let updateCliente: ClienteModel = {
+      nombre :formModel.nombreC as string,
+      nit :formModel.nitC as string,
+      email :formModel.correoC as string,
+      direccion :formModel.direccionC as string,
+      telefono :formModel.telefonoC as string,
+      celular1 :formModel.celular1C as string,
+      celular2 :formModel.celular2C as string,
+      contacto :formModel.contactoC as string
+      
+  };
+    this._clienteService.editarCliente(updateCliente, this.datosCliente2[0]._id)
       .subscribe((datos:any)=>{
         console.log("cliente actualizado");
         console.log(datos);

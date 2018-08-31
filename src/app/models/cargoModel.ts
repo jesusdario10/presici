@@ -2,7 +2,7 @@
 export class CargoModel{
     nombre: string;
     valorHora : number;
-    _id:string;
+    _id?:string;
 
     constructor(nombre:string, valorHora:number, _id:string){
         this.nombre = nombre;

@@ -34,6 +34,8 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
 import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { CargosComponent } from './cargos/cargos.component';
+import { EditCargosComponent } from './cargos/edit-cargos/edit-cargos.component';
+
 
 
 
@@ -64,7 +66,9 @@ import { CargosComponent } from './cargos/cargos.component';
         OrdenesComponent,
         GestionItemComponent,
         ClienteComponent,
-        CargosComponent
+        CargosComponent,
+        EditCargosComponent
+        
         
         
       

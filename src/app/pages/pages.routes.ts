@@ -21,6 +21,7 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
 import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { CargosComponent } from './cargos/cargos.component';
+import { EditCargosComponent } from './cargos/edit-cargos/edit-cargos.component';
 
 
 
@@ -51,11 +52,12 @@ const pageRoutes : Routes = [
             {path: 'ordenes', component: OrdenesComponent, data:{titulo:'Administrador de Ordenes'}},
             
              /* =================Configuraciones=====================*/
-            {path: 'usuarios', component: UsuariosComponent, data:{titulo:'Mantenimiento de Usuario'}},
+            {path: 'usuarios', component: UsuariosComponent, data:{titulo:'Administrador de Usuarios'}},
             {path: 'tarea', component: TareaComponent, data:{titulo:'Administrador de Tareas'}},
             {path: 'tipomtto', component: TipomttoComponent, data:{titulo:'Administrador de Mantenimiento'}},
             {path: 'clientes', component: ClienteComponent, data:{titulo:'Administrador de Clientes'}},
             {path: 'cargos', component: CargosComponent, data:{titulo:'Administrador de Cargos'}},
+            {path: 'cargos/:id', component: EditCargosComponent, data:{titulo:'Modificar Cargo'}},
             
             
         

@@ -1,0 +1,20 @@
+
+<div class="card card-body">
+    <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gestion del Cargo</font></font></h3>
+    
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <form [formGroup]="form" #editCargo="ngForm" (ngSubmit)="actualizarCargo(form, editCargo)">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre del Cargo</font></font></label>
+                    <input type="text" class="form-control"  name="nombre" [(ngModel)]="datosCargo2.nombre"  formControlName="nombre"  placeholder="Enter Username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Valor Hora Hombre</font></font></label>
+                    <input type="number" class="form-control"  name="valorHora"  [(ngModel)]="datosCargo2.valorHora" formControlName="valorHora"   placeholder="Enter Username">
+                </div>
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
+            </form>
+        </div>
+    </div>
+</div>

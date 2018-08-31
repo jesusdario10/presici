@@ -1,9 +1,10 @@
+
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-8">
-                        <form  [formGroup]="form"  #crearCliente="ngForm" (ngSubmit)="crearClienteL(crearCliente)"  class="form-horizontal p-t-20">
+                        <form  [formGroup]="form"  #crearCliente="ngForm" (ngSubmit)="crearClienteL(form, crearCliente)"  class="form-horizontal p-t-20">
                                 <div class="form-group row">
                                     <label for="exampleInputuname3" class="col-sm-3 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></label>
                                     <div class="col-sm-12">
@@ -138,7 +139,7 @@
       
     
 </div>
-
+<!--
 <div class="modal fade bd-cliente-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -154,39 +155,39 @@
                                 <div class="row ">
                                         <div class="col-sm-12 col-xs-12" >
                                             
-                                            <form  #editCliente="ngForm" (ngSubmit)="editarClienteL(editCliente)" style="text-align:center" >
+                                            <form  [formGroup]="form"  #editClienteC="ngForm" (ngSubmit)="editarClienteL(form, editClienteC)" style="text-align:center" >
                                                 <div class="form-group" style="text-align:center">
                                                     
                                                     <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></label>
-                                                    <input name="nombreCliente" #nombreCliente="ngModel" [(ngModel)]="datosCliente.nombre"  type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Username">
+                                                    <input name="nombreC"  [(ngModel)]="datosCliente2.nombre"  formControlName="nombreC"  type="text" class="form-control"  placeholder="Enter Username">
                                                 </div>
                                                 <div class="form-group"  style="text-align:center">
                                                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nit</font></font></label>
-                                                        <input type="text"  name="nitCliente" #nitCliente="ngModel" [(ngModel)]="datosCliente.nit"  class="form-control" id="exampleInputEmail1" placeholder="Nit">
+                                                        <input type="text"  name="nitC" [(ngModel)]="datosCliente.nit"  formControlName="nitC"  class="form-control"  placeholder="Nit">
                                                     </div>
                                                 <div class="form-group"  style="text-align:center">
                                                     <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Correo</font></font></label>
-                                                    <input type="email" name="correoCliente" #correoCliente="ngModel" [(ngModel)]="datosCliente.email" class="form-control" id="exampleInputEmail1" placeholder="Correo">
+                                                    <input type="email"  name="correoC" [(ngModel)]="datosCliente.email"  formControlName="correoC"  class="form-control"  placeholder="Correo">
                                                 </div>
                                                 <div class="form-group"  style="text-align:center">
                                                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Direccion</font></font></label>
-                                                        <input type="text"  name="direccionCliente" #direccionCliente="ngModel" [(ngModel)]="datosCliente.direccion"class="form-control" id="exampleInputEmail1" placeholder="Direccion">
+                                                        <input type="text"  name="direccionC" [(ngModel)]="datosCliente.direccion"  formControlName="direccionC" class="form-control"  placeholder="Direccion">
                                                 </div>
                                                 <div class="form-group"  style="text-align:center">
                                                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Telefono</font></font></label>
-                                                        <input type="text" name="telefonoCliente" #telefonoCliente="ngModel" [(ngModel)]="datosCliente.telefono" class="form-control" id="exampleInputEmail1" placeholder="Telefono">
+                                                        <input type="text"  name="telefonoC"  [(ngModel)]="datosCliente.telefono"  formControlName="telefonoC"   class="form-control"  placeholder="Telefono">
                                                 </div>
                                                 <div class="form-group"  style="text-align:center">
                                                     <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Celular 1</font></font></label>
-                                                    <input type="text" name="celular1Cliente" #celular1Cliente="ngModel" [(ngModel)]="datosCliente.celular1" class="form-control" id="exampleInputEmail1" placeholder="Celular 1">
+                                                    <input type="text"  name="celular1C"  [(ngModel)]="datosCliente.celular1"  formControlName="celular1C" class="form-control"  placeholder="Celular 1">
                                                 </div>
                                                 <div class="form-group"  style="text-align:center">
                                                     <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Celular 2</font></font></label>
-                                                    <input type="text" name="celular2Cliente" #celular2Cliente="ngModel" [(ngModel)]="datosCliente.celular2" class="form-control" id="exampleInputEmail1" placeholder="Celular 2">
+                                                    <input type="text"  name="celular2C"  [(ngModel)]="datosCliente.celular2"  formControlName="celular2C"  class="form-control"  placeholder="Celular 2">
                                                 </div>
                                                 <div class="form-group"  style="text-align:center">
                                                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contacto</font></font></label>
-                                                        <input type="text" name="contactoCliente" #contactoCliente="ngModel" [(ngModel)]="datosCliente.contacto" class="form-control" id="exampleInputEmail1" placeholder="Contacto">
+                                                        <input type="text"  name="contactoC"  [(ngModel)]="datosCliente.contacto"  formControlName="contactoC" class="form-control"  placeholder="Contacto">
                                                 </div>
                                                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actualizar</font></font></button>
                     
@@ -203,5 +204,6 @@
       </div>
     </div>
   </div>
+</div>
 
-
+-->
