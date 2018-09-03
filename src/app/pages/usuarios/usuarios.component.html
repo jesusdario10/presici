@@ -1,7 +1,59 @@
 	<div class="row animated fadeIn">
     <div class="col-12">
       <div class="card">
-      <div class="card-body">
+      <div class="card-body" style="text-align:center" >  
+        <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crear Usuarios</font></font></h3>
+        <form [formGroup]="form" #crearUsuario="ngForm" (ngSubmit)="registrarUsuario(form, crearUsuario)">
+          <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre</font></font></label>
+                    <input type="text"  name="nombreC" formControlName="nombreC" class="form-control"  placeholder="Enter Username">
+                </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                  <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dirección de correo</font></font></label>
+                  <input type="email"  name="correoC" formControlName="correoC" class="form-control"  placeholder="Enter email">
+              </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contraseña</font></font></label>
+                <input type="password"  name="passwordC" formControlName="passwordC" class="form-control"  placeholder="Password">
+              </div>
+            </div>
+
+            <div class="col-3">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Role</font></font></label>
+                <select  name="roleC" formControlName="roleC" name="role"  class="form-control">
+                  <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                  <option value="USER_ROLE">USER_ROLE</option>
+                </select>
+            </div>
+            <div class="col-3">
+              <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cliente</font></font></label>
+              <select  name="clienteC" formControlName="clienteC"  class="form-control">
+                  <option *ngFor="let cliente of clientes"  [value]="cliente._id">{{cliente.nombre}}</option>
+              </select>
+            </div>
+            <div class="col-3">
+                <label for="exampleInputPassword1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cargo</font></font></label>
+                <select  name="cargoC" formControlName="cargoC"  class="form-control">
+                    <option *ngFor="let cargo of cargos"  [value]="cargo._id">{{cargo.nombre}}</option>
+                </select>
+              </div>
+
+          </div>
+           
+            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
+           
+        </form>
+                  
+              
+          
+
+
         <input #input (keyup)="buscarUsuario(input.value)" type="text" class="form-control" placeholder="Buscar Usuario...">
       </div>
       </div>

@@ -32,4 +32,10 @@ export class CargosService {
     swal('Actualizado', 'Cliente Actualizado Correctamente', 'success'); 
     return this._http.put(url, cargo);
   }
+    //******************CREAR Cargo************************* */  
+    crearCargo(cargo:CargoModel){
+      let url = URL_SERVICIOS+'/cargos';
+      swal('!Exito¡', 'Cargo Creado Correctamente', 'success'); 
+      return this._http.post(url, cargo);
+    }
 }

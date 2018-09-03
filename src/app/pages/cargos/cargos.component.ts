@@ -26,8 +26,8 @@ export class CargosComponent implements OnInit {
   ngOnInit() {
     this.listarCargos();
     this.form = this.fb.group({
-      nombre: [ "", Validators.required ],
-      valorHora: [ 0, Validators.required ]
+      nombreO: [ "", Validators.required ],
+      valorHoraO: [ 0, Validators.required ]
     });
   }
   /*******************LISTAR CARGOS******************** */
@@ -61,6 +61,22 @@ export class CargosComponent implements OnInit {
         let intervalo = setTimeout(() => {
           this.listarCargos();
         }, 200);
+    }
+    //*********************CREAR CARGO FALTA ESTA FUNCION*********************** */
+    crearCargoL(formData: any, formDirective: FormGroupDirective){
+      const formModel  = this.form.value;
+      let saveCargo: CargoModel = {
+        
+          nombre :formModel.nombreO as string,
+          valorHora :formModel.valorHoraO as number    
+      };
+      this._cargosServices.crearCargo(saveCargo)
+        .subscribe((datos)=>{
+          console.log("creado");
+        })
+        let intervalo = setTimeout(() => {
+          this.listarCargos();
+        }, 200);  
     }
 
 }

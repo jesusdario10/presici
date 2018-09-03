@@ -4,14 +4,14 @@
     
     <div class="row">
         <div class="col-sm-12 col-xs-12">
-            <form>
+            <form  [formGroup]="form"  #crearCargoC="ngForm" (ngSubmit)="crearCargoL(form, crearCargoC)"  >
                 <div class="form-group">
                     <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre del Cargo</font></font></label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Username">
+                    <input type="text"  name="nombreO" formControlName="nombreO" class="form-control" placeholder="Enter Username">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Valor Hora Hombre</font></font></label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Enter Username">
+                    <input type="number"  name="valorHoraO" formControlName="valorHoraO" class="form-control" placeholder="Enter Username">
                 </div>
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
             </form>
