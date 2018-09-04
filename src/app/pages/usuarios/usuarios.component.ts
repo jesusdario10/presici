@@ -142,7 +142,7 @@ export class UsuariosComponent implements OnInit {
         this.cargos = datos.cargos
       })
   }
-  registrarUsuario(){
+  registrarUsuario(formData: any, formDirective: FormGroupDirective){
     console.log("asdasd");
     console.log(this.form.valid);
     /*if(this.form.invalid){

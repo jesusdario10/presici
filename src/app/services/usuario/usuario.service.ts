@@ -39,8 +39,7 @@ export class UsuarioService {
     }else{
       this.token = '',
       this.usuario = null;
-      this.cliente = '';
-      this.cargo = '';
+
 
     }
   }

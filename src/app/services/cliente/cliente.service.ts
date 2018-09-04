@@ -5,6 +5,7 @@ import { Observable, Subject, pipe } from 'rxjs';
 import { map } from "rxjs/operators"; 
 import { Router } from '@angular/router';
 import { ClienteModel } from '../../models/clienteModel';
+import { UsuarioService } from '../usuario/usuario.service';
 
 
 @Injectable({
@@ -13,7 +14,8 @@ import { ClienteModel } from '../../models/clienteModel';
 export class ClienteService {
 
   constructor(
-    public _http: HttpClient
+    public _http: HttpClient,
+    private _usuarioService : UsuarioService
   ){
 
   }
@@ -30,12 +32,15 @@ export class ClienteService {
   //******************CREAR CLIENTE************************* */  
   crearCliente(cliente:ClienteModel){
     let url = URL_SERVICIOS+'/clientes';
+    url +='?token='+this._usuarioService.token;
     swal('!Exito¡', 'Cliente Creado Correctamente', 'success'); 
     return this._http.post(url, cliente);
+    
   }
   //******************EDITAR  CLIENTE*********************** */
   editarCliente(cliente:ClienteModel, id){
     let url = URL_SERVICIOS+'/clientes/'+id;
+    url +='?token='+this._usuarioService.token;
     swal('Actualizado', 'Cliente Actualizado Correctamente', 'success'); 
     return this._http.put(url, cliente);
 

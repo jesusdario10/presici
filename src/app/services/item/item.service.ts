@@ -6,6 +6,7 @@ import { map } from "rxjs/operators";
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ItemModel } from '../../models/itemModel';
 import { SolicitudModel } from '../../models/solicitudModel';
+import { UsuarioService } from '../usuario/usuario.service';
 
 
 @Injectable({
@@ -15,10 +16,12 @@ export class ItemService {
   idSolicitud :string;
   idItem :string;
   valor_total :number;
+  
 
   constructor(
     private _http : HttpClient,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _usuarioService : UsuarioService
 
   ) {
    }
@@ -75,6 +78,7 @@ export class ItemService {
     // =====================insertar ==================================//
     AgregarItem(solicitud:SolicitudModel){
       let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud;
+      url +='?token='+this._usuarioService.token
       
       return this._http.post(url, solicitud).pipe(
         map((resp:any)=>{
@@ -88,6 +92,7 @@ export class ItemService {
     //================Eliminar Item =================================== //
     EliminarItem(index){
       let url = URL_SERVICIOS+'/gestionitem/'+this.idSolicitud+'?item='+index;
+      url +='?token='+this._usuarioService.token
       return this._http.delete(url);
     }
         

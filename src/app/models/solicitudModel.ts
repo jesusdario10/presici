@@ -5,7 +5,7 @@ export class SolicitudModel{
     valorTotal?:number;
     nombre?:string;
     estado?:string;
-    cliente?:string;
+    cliente?:ClientePropiedades;
     cargo?:string;
     _id?:string
 
@@ -14,7 +14,7 @@ export class SolicitudModel{
         valorTotal:number,
         nombre:string,
         estado:string,
-        cliente:string,
+        cliente:ClientePropiedades,
         cargo:string,
         _id : string
     ){
@@ -43,4 +43,10 @@ export class Atributo{
     public cantidad : number;
     public valor : number;
    
+}
+export class ClientePropiedades{
+    public nombre? : string;
+    public nit? : string;
+    public direccion? : string;
+    public telefono? : string
 }

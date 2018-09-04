@@ -21,9 +21,8 @@ export class HospitalService {
     public _subirArchivoService: SubirArchivoService,
     public _usuarioService : UsuarioService) { 
 }
-    // =====================Cargar Hospitales ==================================//
-
-        // =====================Cargar Hospitales ==================================//
+    
+  // =====================Cargar Hospitales ==================================//
         cargarHospitales(desde: number = 0){
           let url = URL_SERVICIOS+'/hospitales?desde='+desde;
           return this._http.get(url).pipe(

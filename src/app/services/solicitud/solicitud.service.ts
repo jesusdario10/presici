@@ -17,13 +17,14 @@ export class SolicitudService {
 
   constructor(
     private _http : HttpClient,
-    private _usuarioService : UsuarioService
+    private _usuarioService : UsuarioService,
+    
   ) {
    }
       // =====================Crear solicitud ==================================//
       crearSolicitud(solicitud:SolicitudModel):Observable<any>{
         let url = URL_SERVICIOS+'/solicitud';
-        let params = JSON.stringify(solicitud);
+        url +='?token='+this._usuarioService.token
 
         return this._http.post(url, solicitud).pipe(
           map((resp:any)=>{
@@ -69,6 +70,7 @@ export class SolicitudService {
 
       actualizarSolicitud(id, solicitud:SolicitudModel):Observable<any>{
       let url = URL_SERVICIOS+'/solicitud/'+id
+      url +='?token='+this._usuarioService.token
       console.log("paso1");
       return this._http.put(url, solicitud).pipe(
         map((resp: any) =>{

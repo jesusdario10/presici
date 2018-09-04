@@ -17,6 +17,7 @@ export class SolicitudesComponent implements OnInit {
   solicitudes : SolicitudModel[]=[];
   solicitud :SolicitudModel;
   item : Atributo;
+  
   form: FormGroup;
   formSubmit: boolean;
   estado : string;

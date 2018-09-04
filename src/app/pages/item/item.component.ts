@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/service.index';
 import { URL_SERVICIOS } from '../../config/config';
 import { ItemModel } from '../../models/itemModel';
-import { SolicitudModel, Atributo } from '../../models/solicitudModel';
+import { SolicitudModel, Atributo, ClientePropiedades } from '../../models/solicitudModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -17,10 +17,11 @@ declare var swal:any;
 })
 export class ItemComponent implements OnInit {
   valvulas : ItemModel[]=[];
-  solicitud : SolicitudModel[]=[];
+  solicitud : SolicitudModel;
   items : ItemModel[]=[];
   datos : any;
   calcantidad : number;
+  cliente : ClientePropiedades;
   HH: number;
   subtotal: number;
   iva:number;
@@ -43,17 +44,19 @@ export class ItemComponent implements OnInit {
   cargarItem2(){
     this._itemService.cargarItems2()
       .subscribe((datos:any)=>{
-        this.valvulas = datos.solicitudes[0].item
-        console.log("!!!!!!!!!!!");
-        
+        this.valvulas = datos.solicitudes[0].item;
         this.solicitud = datos.solicitudes[0];
-
-        
+        this.cliente ={
+          nombre : this.solicitud.cliente.nombre,
+          nit : this.solicitud.cliente.nit,
+          direccion: this.solicitud.cliente.direccion,
+          telefono : this.solicitud.cliente.telefono
+        }
         this.id_solicitud = datos.solicitudes[0]._id;
         this.datos = datos;
         this.datosTotalValor = this.datos.valorTotal;
-        this.subtotal =Math.round(this.datosTotalValor/1.19)
-        this.iva = Math.round(this.datosTotalValor-this.subtotal)
+        this.subtotal =Math.round(this.datosTotalValor/1.19);
+        this.iva = Math.round(this.datosTotalValor-this.subtotal);
       })
   }
   cargarItems(id){
@@ -65,9 +68,6 @@ export class ItemComponent implements OnInit {
 
 
   ngOnInit() {
-
-   
-   
     this.cargarItem2(); 
     this.form = this.fb.group({
       tipovalvula: [ "", Validators.required ],
@@ -81,7 +81,6 @@ export class ItemComponent implements OnInit {
       dificultad: [ "", Validators.required ],
       sitio: [ "", Validators.required ],
       cantidad: [ 0, Validators.required ],
-
     });
   }
   InsertarItem(formData: any, formDirective: FormGroupDirective){
@@ -107,14 +106,12 @@ export class ItemComponent implements OnInit {
   };
   this._itemService.AgregarItem(saveItem)
     .subscribe((item)=>{
-      console.log("YYYYYYYYYYYYYYYYYYYYYYYY");
       this.valvulas = item
       console.log(item)
     })
-    
     formData.reset();
     var intervalo = setTimeout(()=>{
-      this.cargarItem2()
+      this.ngOnInit();
     },200)
   
 
@@ -139,8 +136,7 @@ export class ItemComponent implements OnInit {
             });
             let cargar = setTimeout(()=>{
               console.log("setTimeout");
-              this.cargarItem2();
-             
+              this.ngOnInit();
             },300);
           },
           error=>{
