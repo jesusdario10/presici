@@ -206,7 +206,8 @@
                 <h1>Logo</h1>
                 <h4>Nit: 800.241.849-1</h4>
                 <h5>CDI S.A</h5>
-                <h6>Bellavista Cra 56b No 7a-45</h6>
+                <h5>Bellavista Cra 56b No 7a-45</h5>
+                <h6>651-70-77</h6>
               </div>
               <div class="col-md-4">
                   <h2><strong>Cotizacion</strong></h2>
@@ -214,10 +215,11 @@
                  
               </div>
               <div class="col-md-4">
-                  <h2><strong>Cliente</strong></h2>
-                  <h3>Yara</h3>
-                  <h5>Kilometro 19 Mamomal</h5>
-                  <h6>Telefono: 665 12 45</h6>
+                  <h1>Cliente</h1>
+                  <h4>{{solicitud.cliente.nit}}</h4>
+                  <h5>{{solicitud.cliente.nombre}}</h5>
+                  <h5>{{solicitud.cliente.direccion}}</h5>
+                  <h6>{{solicitud.cliente.telefono}}</h6>
                  
               </div>
             </div>
@@ -271,7 +273,7 @@
                         </tr>
                         <tr>
                           <th><strong>Iva</strong></th>
-                          <td>${{iva/1000 | currency:'USD':true:'1.3-3'}}</td>
+                          <td>{{iva/1000 | currency:'USD':true:'1.3-3'}}</td>
                         </tr>
                         <tr>
                           <th><strong>Total</strong></th>

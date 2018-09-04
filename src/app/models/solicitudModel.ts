@@ -5,6 +5,8 @@ export class SolicitudModel{
     valorTotal?:number;
     nombre?:string;
     estado?:string;
+    cliente?:string;
+    cargo?:string;
     _id?:string
 
     constructor(
@@ -12,12 +14,16 @@ export class SolicitudModel{
         valorTotal:number,
         nombre:string,
         estado:string,
+        cliente:string,
+        cargo:string,
         _id : string
     ){
         this.item = item;
         this.valorTotal = valorTotal;
         this.nombre = nombre;
         this.estado = estado;
+        this.cliente = cliente;
+        this.cargo = cargo;
         this._id = _id;
     }
 }

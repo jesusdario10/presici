@@ -14,6 +14,7 @@ export class UsuarioService {
   usuario : UsuariosModel;
   token : string;
 
+
   constructor(public _http: HttpClient,
               public router: Router,
               public _subirArchivoService: SubirArchivoService) { 
@@ -32,15 +33,22 @@ export class UsuarioService {
     if(localStorage.getItem('token')){
       this.token = localStorage.getItem('token');
       this.usuario = JSON.parse(localStorage.getItem('usuario'));
+
+      
+
     }else{
       this.token = '',
       this.usuario = null;
+      this.cliente = '';
+      this.cargo = '';
+
     }
   }
   guardarStoage(id :string, token: string, usuario:UsuariosModel){
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
+
   }
   estaLogeado(){
     console.log(this.token.length);
@@ -64,6 +72,7 @@ export class UsuarioService {
           localStorage.setItem('id', resp.usuario._id);
           localStorage.setItem('token', resp.token);
           localStorage.setItem('usuario', JSON.stringify(resp.usuario));
+
         }));
         //this.cargarStorage();
   }
@@ -74,6 +83,8 @@ export class UsuarioService {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     localStorage.removeItem('id');
+    localStorage.removeItem('cliente');
+    localStorage.removeItem('cargo');
     this.router.navigate(['/login']);
   }
   // =======================Actualziar Datos de usuario======================= //

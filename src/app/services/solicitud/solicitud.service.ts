@@ -24,9 +24,10 @@ export class SolicitudService {
       crearSolicitud(solicitud:SolicitudModel):Observable<any>{
         let url = URL_SERVICIOS+'/solicitud';
         let params = JSON.stringify(solicitud);
+
         return this._http.post(url, solicitud).pipe(
           map((resp:any)=>{
-            console.log(resp);
+            
              swal('Creada', 'Solicitud Creada Correctamente', 'success');  
              localStorage.setItem('solicitud', resp.solicitudGuardada._id)
              return resp.solicitudGuardada;
@@ -43,6 +44,15 @@ export class SolicitudService {
             })
           )
         }
+      // =====================Cargar Solicitudes ==================================//
+       cargarSolicitudesCliente(cliente):Observable<any>{
+        let url = URL_SERVICIOS+'/solicitud/solicitudesclientes/'+cliente
+        return this._http.get(url).pipe(
+          map((resp:any)=>{
+            return resp.solicitudes
+          })
+        )
+      }
       // =====================buscar todas las solicitudes ==================================//
           cargarSolicitudes2():Observable<any>{
             let url = URL_SERVICIOS+'/solicitud'

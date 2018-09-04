@@ -17,6 +17,7 @@ declare var swal:any;
 })
 export class ItemComponent implements OnInit {
   valvulas : ItemModel[]=[];
+  solicitud : SolicitudModel[]=[];
   items : ItemModel[]=[];
   datos : any;
   calcantidad : number;
@@ -45,8 +46,11 @@ export class ItemComponent implements OnInit {
         this.valvulas = datos.solicitudes[0].item
         console.log("!!!!!!!!!!!");
         
+        this.solicitud = datos.solicitudes[0];
+
+        
         this.id_solicitud = datos.solicitudes[0]._id;
-        this.datos = datos
+        this.datos = datos;
         this.datosTotalValor = this.datos.valorTotal;
         this.subtotal =Math.round(this.datosTotalValor/1.19)
         this.iva = Math.round(this.datosTotalValor-this.subtotal)

@@ -23,7 +23,7 @@ export class SolicitudesComponent implements OnInit {
 
 
 
-  dc:string;
+  
   constructor(
     public _solicitudServices : SolicitudService,
     public _itemService : ItemService,
@@ -35,45 +35,83 @@ export class SolicitudesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cargarSolicitudes();
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    
+    console.log(usuario);
+    
+    if(usuario.role === "USER_ROLE"){
+      this.cargarSolicitudesCliente();
+      console.log("entre al user role");
+    }else{
+      this.cargarSolicitudes();
+    }
     this.form = this.fb.group({
       item: [ null, Validators.required ],
       nombresolicitud: ["", Validators.required ],
       estado: ["", Validators.required ]
+      
     });
-  
-    
-    
   }
   crearSolicitud(formData: any, formDirective: FormGroupDirective){
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let cliente = usuario.cliente
+    let cargo = usuario.cargo
+    
     
     const formModel  = this.form.value;
 
     const saveSolicitud: SolicitudModel = {
       nombre: formModel.nombresolicitud as string,
-      estado: "CREADA"
+      estado: "CREADA",
+      cliente : cliente,
+      cargo : cargo
     };
-
+    
+    
     this._solicitudServices.crearSolicitud(saveSolicitud)
       .subscribe((saveSolicitud)=> console.log(saveSolicitud));   
-      this.cargarSolicitudes();
+      
       formData.reset();
-      let cargar = setTimeout(()=>{
-        console.log("setTimeout");
-        this.cargarSolicitudes();
-      },10)   
+
+      if(usuario.role === "USER_ROLE"){
+        let cargar = setTimeout(()=>{
+          console.log("setTimeout");
+          this.cargarSolicitudesCliente();
+          console.log("entre al user role");
+        },10)
+
+      }else if(usuario.role === "ADMIN_ROLE"){
+        let cargar = setTimeout(()=>{
+          console.log("setTimeout");
+          this.cargarSolicitudes();
+          console.log("entre al ADMIN ROLE");
+        },10)
+        
+      }
+   
   }
   cargarSolicitudes(){
-
     this._solicitudServices.cargarSolicitudes()
       .subscribe(solicitudes=>{
         this.solicitudes=solicitudes
-        console.log(this.solicitudes);
+        
       })   
   }
-
+  
+  cargarSolicitudesCliente(){
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    let cliente = usuario.cliente;
+    
+    
+    this._solicitudServices.cargarSolicitudesCliente(cliente)
+      .subscribe(solicitudes=>{
+        this.solicitudes=solicitudes
+        
+      })   
+  }
+  
   eliminarSolicitud(id){
-
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
     swal({
       title: "Esta seguro?",
       text: "Esta a punto de borrar un item ",
@@ -88,10 +126,21 @@ export class SolicitudesComponent implements OnInit {
             swal("Su solicitud ha sido borrada", {
               icon: "success",
             });
-            let cargar = setTimeout(()=>{
-              console.log("setTimeout");
-              this.cargarSolicitudes();
-            },300);
+            if(usuario.role === "USER_ROLE"){
+              let cargar = setTimeout(()=>{
+                console.log("setTimeout");
+                this.cargarSolicitudesCliente();
+                console.log("entre al user role");
+              },10)
+      
+            }else if(usuario.role === "ADMIN_ROLE"){
+              let cargar = setTimeout(()=>{
+                console.log("setTimeout");
+                this.cargarSolicitudes();
+                console.log("entre al ADMIN ROLE");
+              },10)
+              
+            }
           },
           error=>{
             console.log(error);

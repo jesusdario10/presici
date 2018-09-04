@@ -36,6 +36,7 @@
               <thead>
                 <tr style="text-align:center">
                   <th style="text-align:center">Consecutivo</th>
+                  <th style="text-align:center">Cliente</th>
                   <th style="text-align:center">Nombre o numero</th>
                   <th>Valor</th>
                   <th>Estado</th>
@@ -50,6 +51,7 @@
                 <tr  *ngFor="let solicitud of solicitudes; let i = index">
 
                   <td style="text-align:center">{{i}}</td>
+                  <td style="text-align:center">{{solicitud.cliente.nombre}}</td>
                   <td style="text-align:left">{{solicitud.nombre}}</td>
                   <td style="text-align:left">{{solicitud.valorTotal/1000 | currency:'USD':true:'1.3-3'}}</td>
                   <td style="text-align:left">{{solicitud.estado}}</td>
