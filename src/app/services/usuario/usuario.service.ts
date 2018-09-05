@@ -3,7 +3,8 @@ import { UsuariosModel } from '../../models/usuarioModel';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Observable, Subject, pipe } from 'rxjs';
-import { map } from "rxjs/operators"; 
+import { map, catchError } from "rxjs/operators"; 
+import { throwError } from "rxjs/internal/observable/throwError"; 
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
@@ -29,7 +30,16 @@ export class UsuarioService {
     let params = JSON.stringify(usuario);
     let headers = new HttpHeaders().set('Content-Type','application/json');
     
-    return this._http.post(url, params, {headers:headers});
+    return this._http.post(url, params, {headers:headers}).pipe(
+      map((resp: any) =>{     
+        return true;
+      }),
+      catchError(err=>{
+        console.log(err.error.mensaje);
+        swal('!Ya Existe el Correo¡', err.error.mensaje, 'error');
+        return throwError(err) //nos retornra u observable
+      })
+    )
   }
   cargarStorage(){
     if(localStorage.getItem('token')){
@@ -68,14 +78,15 @@ export class UsuarioService {
       map((resp: any) =>{     
         localStorage.setItem('menu', JSON.stringify(resp.menu));
         this.menu = JSON.parse(localStorage.getItem('menu')); 
-        //return resp.usuario;
-        this.guardarStoage(resp.usuario._id, resp.token, resp.usuario, resp.menu)
-          /*localStorage.setItem('id', resp.usuario._id);
-          localStorage.setItem('token', resp.token);
-          localStorage.setItem('usuario', JSON.stringify(resp.usuario));
-          localStorage.setItem('menu', JSON.stringify(resp.menu));*/
-          
-        }));
+        this.guardarStoage(resp.usuario._id, resp.token, resp.usuario, resp.menu);
+        return true;
+      }),
+      catchError(err=>{
+        console.log(err.error.mensaje);
+        swal('Error en el login', err.error.mensaje, 'error');
+        return throwError(err) //nos retornra u observable
+      })
+    );
        
   }
   // =======================Logout=========================================== //
