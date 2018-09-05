@@ -25,6 +25,7 @@ export class UsuarioService {
   }
   crearUsuario(usuario:UsuariosModel):Observable<any>{
     let url = URL_SERVICIOS+'/usuarios';
+    url +='?token='+this.token;
     let params = JSON.stringify(usuario);
     let headers = new HttpHeaders().set('Content-Type','application/json');
     
@@ -120,12 +121,14 @@ export class UsuarioService {
   } 
   // =====================Cargar Usuarios ==================================//
   cargarUsuarios(desde: number = 0){
-    let url = URL_SERVICIOS+'/usuarios?desde='+desde;
+    let url = URL_SERVICIOS+'/usuarios';
+    url +='?token='+this.token;
     return this._http.get(url);
   }
   // =====================Buscar Usuarios ==================================//
   buscarUsuarios(termino: string):Observable<any>{
     let url = URL_SERVICIOS+'/busqueda/usuarios/'+termino;
+    url +='?token='+this.token;
     return this._http.get(url).pipe(
       map((resp:any)=>{
        return resp.usuarios;
@@ -135,6 +138,7 @@ export class UsuarioService {
    // =====================Borrar Usuarios ==================================//
    borrarUsuario(id:string):Observable<any>{
     let url = URL_SERVICIOS+'/usuarios/'+id;
+    url +='?token='+this.token;
 
     return this._http.delete(url).pipe(
       map((resp:any)=>{

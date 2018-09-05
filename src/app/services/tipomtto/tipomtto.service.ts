@@ -31,7 +31,8 @@ export class TipomttoService {
          }
         //=====================Cargar tipos mtto ==================================//
         cargarTipoMtto():Observable<any>{
-          let url = URL_SERVICIOS+'/tipomtto'
+          let url = URL_SERVICIOS+'/tipomtto';
+          url +='?token='+this._usuarioService.token;
           return this._http.get(url).pipe(
             map((resp:any)=>{
               console.log("cargando los tipos de mantenimiento");

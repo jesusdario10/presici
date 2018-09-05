@@ -21,11 +21,13 @@ export class CargosService {
   /*****************LISTAR CARGOS********************** */
   listarCargos(){
     let url =URL_SERVICIOS+'/cargos';
+    url+='?token='+this._usuarioService.token;
     return this._http.get(url);
   }
   /**************LISTAR 1 CARGO POR ID ++++++++++++++++ */
   listarUnCargo(id){
     let url =URL_SERVICIOS+'/cargos/'+id;
+    url+='?token='+this._usuarioService.token;
     return this._http.get(url);
   }
   /**************ACTUALZIAR UN CARGO ++++++++++++++++ */

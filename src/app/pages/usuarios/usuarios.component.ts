@@ -113,6 +113,9 @@ export class UsuariosComponent implements OnInit {
               icon: "success",
             });
           });
+          let intervalo = setTimeout(()=>{
+            this.cargarUsuarios()
+          },200);
 
       } else {
         swal("El usuario no sera borado");

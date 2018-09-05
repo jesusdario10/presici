@@ -38,7 +38,8 @@ export class SolicitudService {
        
         // =====================Cargar Solicitudes ==================================//
         cargarSolicitudes():Observable<any>{
-          let url = URL_SERVICIOS+'/solicitud'
+          let url = URL_SERVICIOS+'/solicitud';
+          url +='?token='+this._usuarioService.token;
           return this._http.get(url).pipe(
             map((resp:any)=>{
               return resp.solicitudes
@@ -47,7 +48,8 @@ export class SolicitudService {
         }
       // =====================Cargar Solicitudes ==================================//
        cargarSolicitudesCliente(cliente):Observable<any>{
-        let url = URL_SERVICIOS+'/solicitud/solicitudesclientes/'+cliente
+        let url = URL_SERVICIOS+'/solicitud/solicitudesclientes/'+cliente;
+        url +='?token='+this._usuarioService.token;
         return this._http.get(url).pipe(
           map((resp:any)=>{
             return resp.solicitudes

@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { TareaModel } from '../../models/tareaModel';
 import { map } from "rxjs/operators"; 
 import { Router } from '@angular/router';
+import { UsuarioService } from '../usuario/usuario.service';
 
 
 @Injectable({
@@ -14,13 +15,14 @@ export class TareaService {
   public tarea: TareaModel;
 
   constructor(
-    private _http : HttpClient
+    private _http : HttpClient,
+    private _usuarioService : UsuarioService
   ) { }
 
-    // =====================Crear Tarea ==================================//
+  // =====================Crear Tarea ==================================//
     crearTarea(tarea:TareaModel):Observable<any>{
       let url = URL_SERVICIOS+'/tarea';
-      
+      url +='?token='+this._usuarioService.token;
       return this._http.post(url, tarea).pipe(
         map((resp:any)=>{
           console.log(resp);
@@ -29,15 +31,16 @@ export class TareaService {
         })
       );
      }
-             //=====================Listar| Tareas ==================================//
-             listarTareas():Observable<any>{
-              let url = URL_SERVICIOS+'/tarea'
-              return this._http.get(url).pipe(
-                map((resp:any)=>{
-                  console.log("cargando las tareas existentes");
-                  console.log(resp);
-                  return resp.tareas
-                })
-              )
-            }    
+  //=====================Listar| Tareas ==================================//
+     listarTareas():Observable<any>{
+      let url = URL_SERVICIOS+'/tarea'
+      url +='?token='+this._usuarioService.token;
+      return this._http.get(url).pipe(
+        map((resp:any)=>{
+          console.log("cargando las tareas existentes");
+          console.log(resp);
+          return resp.tareas
+        })
+      )
+    }    
 }

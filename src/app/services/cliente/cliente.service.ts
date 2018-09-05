@@ -22,11 +22,14 @@ export class ClienteService {
   //******************LISTAR CLIENTES*********************** */
   listarClientes(){
     let url = URL_SERVICIOS+'/clientes';
+    url +='?token='+this._usuarioService.token;
+    
     return this._http.get(url);
   }
   //******************LISTAR UN SOLO CLIENTE**************** */
   listarUnSoloCliente(id){
     let url = URL_SERVICIOS+'/clientes/'+id;
+    url +='?token='+this._usuarioService.token;
     return this._http.get(url);
   }
   //******************CREAR CLIENTE************************* */  
@@ -48,6 +51,7 @@ export class ClienteService {
   //******************BUSCAR  CLIENTE*********************** */
   buscarCliente(termino: string):Observable<any>{
     let url = URL_SERVICIOS+'/busqueda/clientes/'+termino;
+    url +='?token='+this._usuarioService.token;
     return this._http.get(url).pipe(
       map((resp:any)=>{
        return resp.clientes;
