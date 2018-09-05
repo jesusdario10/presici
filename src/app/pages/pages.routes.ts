@@ -7,7 +7,11 @@ import { Graficas2Component } from './graficas2/graficas2.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component'
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
-import { LoginGuardGuard } from '../services/service.index';
+
+/** Guards **/
+import { LoginGuardGuard, AdminGuard } from '../services/service.index';
+
+
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
@@ -22,6 +26,7 @@ import { GestionItemComponent } from './item/gestion-item/gestion-item.component
 import { ClienteComponent } from './cliente/cliente.component';
 import { CargosComponent } from './cargos/cargos.component';
 import { EditCargosComponent } from './cargos/edit-cargos/edit-cargos.component';
+
 
 
 
@@ -49,20 +54,50 @@ const pageRoutes : Routes = [
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
             {path: 'gestionitem/:id/:id2', component: GestionItemComponent, data:{titulo:'Gestionar Items'}},
-            {path: 'ordenes', component: OrdenesComponent, data:{titulo:'Administrador de Ordenes'}},
-            
-             /* =================Configuraciones=====================*/
-            {path: 'usuarios', component: UsuariosComponent, data:{titulo:'Administrador de Usuarios'}},
-            {path: 'tarea', component: TareaComponent, data:{titulo:'Administrador de Tareas'}},
-            {path: 'tipomtto', component: TipomttoComponent, data:{titulo:'Administrador de Mantenimiento'}},
-            {path: 'clientes', component: ClienteComponent, data:{titulo:'Administrador de Clientes'}},
-            {path: 'cargos', component: CargosComponent, data:{titulo:'Administrador de Cargos'}},
-            {path: 'cargos/:id', component: EditCargosComponent, data:{titulo:'Modificar Cargo'}},
             
             
-        
-
-            {path: '', redirectTo: '/dashboard', pathMatch:'full'}
+             /* =================Configuraciones y Admin=====================*/
+            {
+                path: 'usuarios',
+                component: UsuariosComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Administrador de Usuarios'}
+                
+            },
+            {
+                path: 'tarea',
+                component: TareaComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Administrador de Tareas'}},
+            {
+                path: 'tipomtto',
+                component: TipomttoComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Administrador de Mantenimiento'}},
+            {
+                path: 'clientes',
+                component: ClienteComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Administrador de Clientes'}},
+            {
+                path: 'cargos',
+                component: CargosComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Administrador de Cargos'}},
+            {
+                path: 'cargos/:id',
+                component: EditCargosComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Modificar Cargo'}
+            },
+            {
+                path: 'ordenes',
+                component: OrdenesComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Administrador de Ordenes'},
+            },
+            {path: '', redirectTo: '/dashboard', pathMatch:'full'},
+            
         ]
     }
 ];

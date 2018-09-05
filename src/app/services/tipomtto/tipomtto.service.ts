@@ -13,13 +13,14 @@ import { UsuarioService, ItemService } from '../service.index';
 export class TipomttoService {
   tipomtto : TipomttoModel;
   constructor(
-    private _http : HttpClient
+    private _http : HttpClient,
+    private _usuarioService : UsuarioService
   ) { }
 
   // =====================Crear tipo mtto ==================================//
         crearTipoMtto(tipomtto:TipomttoModel):Observable<any>{
           let url = URL_SERVICIOS+'/tipomtto';
-          
+          url +='?token='+this._usuarioService.token;
           return this._http.post(url, tipomtto).pipe(
             map((resp:any)=>{
               console.log(resp);

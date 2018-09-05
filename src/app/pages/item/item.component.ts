@@ -46,12 +46,17 @@ export class ItemComponent implements OnInit {
       .subscribe((datos:any)=>{
         this.valvulas = datos.solicitudes[0].item;
         this.solicitud = datos.solicitudes[0];
+        console.log("aquiiiiii");
+        console.log(this.solicitud.cliente._id);
         this.cliente ={
+          _id : this.solicitud.cliente._id,
           nombre : this.solicitud.cliente.nombre,
           nit : this.solicitud.cliente.nit,
           direccion: this.solicitud.cliente.direccion,
           telefono : this.solicitud.cliente.telefono
         }
+        console.log("aqui viene el objeto");
+        console.log(this.cliente);
         this.id_solicitud = datos.solicitudes[0]._id;
         this.datos = datos;
         this.datosTotalValor = this.datos.valorTotal;
@@ -104,10 +109,10 @@ export class ItemComponent implements OnInit {
     },
     valorTotal : this.calcantidad*random
   };
-  this._itemService.AgregarItem(saveItem)
+  this._itemService.AgregarItem(saveItem, this.solicitud.cliente._id)
     .subscribe((item)=>{
       this.valvulas = item
-      console.log(item)
+      console.log(this.cliente.nombre)
     })
     formData.reset();
     var intervalo = setTimeout(()=>{

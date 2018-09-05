@@ -7,7 +7,6 @@ import { UsuarioService } from '../usuario/usuario.service';
 export class SidebarService {
   menu : any[]=[];
  
-
   constructor(
     private _usuarioService : UsuarioService
   ) {}

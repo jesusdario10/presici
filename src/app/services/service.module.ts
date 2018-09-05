@@ -13,7 +13,8 @@ import { SettingsService,
          TipomttoService,
          TareaService,
          ClienteService,
-         CargosService} from './service.index';
+         CargosService,
+         AdminGuard} from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
@@ -27,6 +28,7 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
               SidebarService,
               SharedService,
               LoginGuardGuard,
+              AdminGuard,
               UsuarioService,
               SubirArchivoService,
               ModalUploadService,
@@ -36,7 +38,8 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
               TipomttoService,
               TareaService,
               ClienteService,
-              CargosService],
+              CargosService
+              ],
   declarations: [],
   
 })

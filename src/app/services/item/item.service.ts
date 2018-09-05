@@ -16,6 +16,7 @@ export class ItemService {
   idSolicitud :string;
   idItem :string;
   valor_total :number;
+  idCliente : string;
   
 
   constructor(
@@ -28,6 +29,7 @@ export class ItemService {
       // =====================Crear solicitud ==================================//
       CrearSolicitud(solicitud:SolicitudModel, id):Observable<any>{
         let url = URL_SERVICIOS+'/item/'+this.idSolicitud;
+        url +='?token='+this._usuarioService.token
         return this._http.post(url, solicitud).pipe(
           map((resp:any)=>{
             console.log(resp);
@@ -42,6 +44,7 @@ export class ItemService {
         //==============Esto para poder enviarlo a la vista de edicion y eliminacion de items===================//
         cargarItems(id):Observable<any>{
           let url = URL_SERVICIOS+'/solicitud/'+id;
+          url +='?token='+this._usuarioService.token;
           return this._http.get(url).pipe(
             map((resp:any)=>{
               
@@ -54,7 +57,8 @@ export class ItemService {
         }
           // =====================Cargar todo el item de la db ==================================//
           cargarItems2():Observable<any>{
-            let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud
+            let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud;
+            url +='?token='+this._usuarioService.token;
             //localStorage.setItem('solicitud', resp.solicitudGuardada._id)
             return this._http.get(url);
           }
@@ -72,13 +76,15 @@ export class ItemService {
         // =====================Cargar sun solo item ==================================//
         cargItem():Observable<any>{
           let url = URL_SERVICIOS+'/item/'+this.idSolicitud+'/'+this.idItem;
+          url +='?token='+this._usuarioService.token;
           console.log(url);
           return this._http.get(url);
         }
     // =====================insertar ==================================//
-    AgregarItem(solicitud:SolicitudModel){
-      let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud;
-      url +='?token='+this._usuarioService.token
+    AgregarItem(solicitud:SolicitudModel, idcliente){
+      let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud+'/'+idcliente
+      url +='?token='+this._usuarioService.token;
+      
       
       return this._http.post(url, solicitud).pipe(
         map((resp:any)=>{

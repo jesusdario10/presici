@@ -45,6 +45,7 @@ export class Atributo{
    
 }
 export class ClientePropiedades{
+    public _id? :string;
     public nombre? : string;
     public nit? : string;
     public direccion? : string;

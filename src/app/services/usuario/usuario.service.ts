@@ -60,19 +60,13 @@ export class UsuarioService {
     }else{
       localStorage.removeItem('email');
     }
-
     let url = URL_SERVICIOS+'/login';
     let params = JSON.stringify(usuario);
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.post(url, params, {headers:headers}).pipe(
-      map((resp: any) =>{
-        console.log("como me llega el menu? en el servicio de login?");
-        console.log(resp.menu);
-        
+      map((resp: any) =>{     
         localStorage.setItem('menu', JSON.stringify(resp.menu));
         this.menu = JSON.parse(localStorage.getItem('menu')); 
-        console.log("esto es lo que vale this.menu");
-        console.log(this.menu);
         //return resp.usuario;
         this.guardarStoage(resp.usuario._id, resp.token, resp.usuario, resp.menu)
           /*localStorage.setItem('id', resp.usuario._id);
@@ -100,7 +94,7 @@ export class UsuarioService {
   // =======================Actualziar Datos de usuario======================= //
   actualizarUsuario(usuario: UsuariosModel):Observable<any>{
     let url = URL_SERVICIOS+'/usuarios/'+usuario._id;
-    console.log("paso1");
+    url +='?token='+this.token;
     return this._http.put(url, usuario).pipe(
       map((resp: any) =>{
         if(usuario._id===this.usuario._id){
