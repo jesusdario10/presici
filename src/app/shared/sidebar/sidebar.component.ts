@@ -9,14 +9,21 @@ import { UsuariosModel } from '../../models/usuarioModel';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  public usuario : UsuariosModel
+  public usuario : UsuariosModel;
+  public elmenu : any[]=[];
+  public elotro : any;
 
   constructor(
      public _sidebar:SidebarService,
      public _usuarioService : UsuarioService
-    ) { }
+    ) { 
+      this.elmenu = this._sidebar.menu;
+    }
 
   ngOnInit() {
+  //cargando el menu
+   this._sidebar.cargarmenu();
+  // 
    this.usuario = this._usuarioService.usuario;
   }
   logout(){

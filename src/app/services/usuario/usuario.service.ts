@@ -13,6 +13,7 @@ import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 export class UsuarioService {
   usuario : UsuariosModel;
   token : string;
+  menu : any[]=[];
 
 
   constructor(public _http: HttpClient,
@@ -20,7 +21,7 @@ export class UsuarioService {
               public _subirArchivoService: SubirArchivoService) { 
 
               this.cargarStorage();
-              console.log(this.cargarStorage());
+              
   }
   crearUsuario(usuario:UsuariosModel):Observable<any>{
     let url = URL_SERVICIOS+'/usuarios';
@@ -33,24 +34,23 @@ export class UsuarioService {
     if(localStorage.getItem('token')){
       this.token = localStorage.getItem('token');
       this.usuario = JSON.parse(localStorage.getItem('usuario'));
-
-      
-
+      this.menu = JSON.parse(localStorage.getItem('menu'));
     }else{
       this.token = '',
       this.usuario = null;
-
-
+      this.menu = null;
     }
   }
-  guardarStoage(id :string, token: string, usuario:UsuariosModel){
+  guardarStoage(id :string, token: string, usuario:UsuariosModel, menu : any){
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    //localStorage.setItem('menu', JSON.stringify(menu));
+
+    //this.menu = menu; // lo almacemo como me viene sin pasarlo por el stringify
 
   }
   estaLogeado(){
-    console.log(this.token.length);
     return (this.token.length > 5) ? true : false;
   }
   // =======================Login=========================================== //
@@ -66,25 +66,36 @@ export class UsuarioService {
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.post(url, params, {headers:headers}).pipe(
       map((resp: any) =>{
-        console.log(resp);
+        console.log("como me llega el menu? en el servicio de login?");
+        console.log(resp.menu);
+        
+        localStorage.setItem('menu', JSON.stringify(resp.menu));
+        this.menu = JSON.parse(localStorage.getItem('menu')); 
+        console.log("esto es lo que vale this.menu");
+        console.log(this.menu);
         //return resp.usuario;
-          localStorage.setItem('id', resp.usuario._id);
+        this.guardarStoage(resp.usuario._id, resp.token, resp.usuario, resp.menu)
+          /*localStorage.setItem('id', resp.usuario._id);
           localStorage.setItem('token', resp.token);
           localStorage.setItem('usuario', JSON.stringify(resp.usuario));
-
+          localStorage.setItem('menu', JSON.stringify(resp.menu));*/
+          
         }));
-        //this.cargarStorage();
+       
   }
   // =======================Logout=========================================== //
   logout(){
     this.usuario = null;
     this.token = '';
+    this.menu = [];
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     localStorage.removeItem('id');
     localStorage.removeItem('cliente');
     localStorage.removeItem('cargo');
+    localStorage.removeItem('menu');
     this.router.navigate(['/login']);
+    
   }
   // =======================Actualziar Datos de usuario======================= //
   actualizarUsuario(usuario: UsuariosModel):Observable<any>{
@@ -95,7 +106,7 @@ export class UsuarioService {
         if(usuario._id===this.usuario._id){
           console.log("voy por aqui");
           let usuarioDB : UsuariosModel = resp.usuario
-          this.guardarStoage(usuarioDB._id, this.token, usuarioDB)
+          this.guardarStoage(usuarioDB._id, this.token, usuarioDB, this.menu)
         }
        
         swal('Actualizado', 'Datos Actualizados Correctamente', 'success');       
@@ -107,7 +118,7 @@ export class UsuarioService {
         .then((resp:any)=>{
           this.usuario.img = resp.usuario.img;
           swal('Imagen actualizada', this.usuario.nombre, 'success');
-          this.guardarStoage(id, this.token, this.usuario);
+          this.guardarStoage(id, this.token, this.usuario, this.menu);
         })
         .catch(resp=>{
           console.log(resp);

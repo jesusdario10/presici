@@ -240,8 +240,8 @@
                   </thead>
                   
                   <tbody>
-                    <tr *ngFor="let valvula of valvulas">
-                      <td><p><li></li></p></td>
+                    <tr *ngFor="let valvula of valvulas; let i = index">
+                      <td><p>{{i}}</p></td>
                       <td>{{valvula.tipovalvula}}-{{valvula.tiposello}}-({{valvula.diametro}})
                           -{{valvula.material}}- Mto: {{valvula.tipomtto}}-Prioridad:{{valvula.prioridad}}-Deficult:({{valvula.dificultad}})  </td>
                       <td>{{valvula.cantidad}}</td>

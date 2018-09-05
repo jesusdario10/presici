@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   ) { }
   ngOnInit() {
     init_plugin();
+    this._usuarioService.cargarStorage();
     this.email = localStorage.getItem('email') || '';
     if(this.email.length>1){
       this.recuerdame = true;

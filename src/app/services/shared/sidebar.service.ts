@@ -1,34 +1,19 @@
 import { Injectable } from '@angular/core';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
+  menu : any[]=[];
+ 
 
-  menu : any = [
-    {
-      titulo: "Mantenimientos",
-      icono: "mdi mdi-folder-lock-open",
-      submenu:[
-        { titulo:"Dashboard", url:"/dashboard" },
-        {titulo:"Solicitudes", url:'/solicitudes'},
-        {titulo:"Ordenes", url:'/ordenes'}
+  constructor(
+    private _usuarioService : UsuarioService
+  ) {}
+   //esta funcion la llamare en el oninit de del sidebarCompnent.ts para cargar el menu
+   cargarmenu(){
+    this.menu = this._usuarioService.menu;
+   }
 
-      ]
-
-    },
-    {
-      titulo:"Configuraciones",
-      icono:"mdi mdi-wrench",
-      submenu:[
-        {titulo:"Tipos Mtto", url:"/tipomtto"},
-        {titulo:"Tareas", url:"/tarea"},
-        {titulo:"Usuarios", url:'/usuarios'},
-        {titulo:"Clientes", url:"/clientes"},
-        {titulo:"Cargos", url:"/cargos"}
-      ]
-    }
-  ];
-
-  constructor() { }
 }
