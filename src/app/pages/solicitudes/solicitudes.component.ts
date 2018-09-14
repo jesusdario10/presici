@@ -38,7 +38,7 @@ export class SolicitudesComponent implements OnInit {
   ngOnInit() {
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     
-    console.log(usuario);
+    
     
     if(usuario.role === "USER_ROLE"){
       this.cargarSolicitudesCliente();
@@ -58,38 +58,36 @@ export class SolicitudesComponent implements OnInit {
     let cliente = usuario.cliente
     let cargo = usuario.cargo
     
-    
     const formModel  = this.form.value;
-
     const saveSolicitud: SolicitudModel = {
       nombre: formModel.nombresolicitud as string,
       estado: "CREADA",
       cliente : cliente,
-      cargo : cargo
+      cargo : cargo,
+      valorTotal : 0
     };
-    
-    
+        
     this._solicitudServices.crearSolicitud(saveSolicitud)
       .subscribe((saveSolicitud)=> console.log(saveSolicitud));   
       
-      formData.reset();
+      
 
       if(usuario.role === "USER_ROLE"){
         let cargar = setTimeout(()=>{
           console.log("setTimeout");
           this.cargarSolicitudesCliente();
           console.log("entre al user role");
-        },10)
+        },300)
 
       }else if(usuario.role === "ADMIN_ROLE"){
         let cargar = setTimeout(()=>{
           console.log("setTimeout");
           this.cargarSolicitudes();
           console.log("entre al ADMIN ROLE");
-        },10)
+        },300)
         
       }
-   
+      formData.reset();
   }
   cargarSolicitudes(){
     this._solicitudServices.cargarSolicitudes()

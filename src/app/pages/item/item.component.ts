@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemService } from '../../services/service.index';
+import { ItemService, ClienteService } from '../../services/service.index';
 import { URL_SERVICIOS } from '../../config/config';
 import { ItemModel } from '../../models/itemModel';
-import { SolicitudModel, Atributo, ClientePropiedades } from '../../models/solicitudModel';
+import { SolicitudModel, Atributo } from '../../models/solicitudModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { forEach } from '@angular/router/src/utils/collection';
+import { ClienteModel } from '../../models/clienteModel';
 
 declare var swal:any;
 
@@ -16,64 +17,50 @@ declare var swal:any;
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-  valvulas : ItemModel[]=[];
-  solicitud : SolicitudModel;
+  /*MANIPULACION DE LSO DATOS*/  
   items : ItemModel[]=[];
-  datos : any;
-  calcantidad : number;
-  cliente : ClientePropiedades;
+  item : ItemModel;
+  solicitudDatosCompletos : SolicitudModel;
+ 
+  cantidad : number;
+  datosTotalValor : number;
+  
+
+  /*COTIZACION*/ 
+  nombreCliente : any;
+  nitCliente : any;
+  direccionCliente :any;
+  telefonoCliente: any;
   HH: number;
   subtotal: number;
   iva:number;
-  item : Atributo;
+  
+  
+  /*FORMULARIOS*/
   form: FormGroup;
   formSubmit: boolean;
-  id_solicitud :string;
-  datosTotalValor : number;
-  subTotal:number;
+  idCliente : any;
 
 
   constructor(
     private _itemService:ItemService,
+    private _cliente : ClienteService,
     private _route : ActivatedRoute,
     private fb: FormBuilder
   ) { 
-    this._itemService.obtenerSolicitud();
     
-  }
-  cargarItem2(){
-    this._itemService.cargarItems2()
-      .subscribe((datos:any)=>{
-        this.valvulas = datos.solicitudes[0].item;
-        this.solicitud = datos.solicitudes[0];
-        console.log("aquiiiiii");
-        console.log(this.solicitud.cliente._id);
-        this.cliente ={
-          _id : this.solicitud.cliente._id,
-          nombre : this.solicitud.cliente.nombre,
-          nit : this.solicitud.cliente.nit,
-          direccion: this.solicitud.cliente.direccion,
-          telefono : this.solicitud.cliente.telefono
-        }
-        console.log("aqui viene el objeto");
-        console.log(this.cliente);
-        this.id_solicitud = datos.solicitudes[0]._id;
-        this.datos = datos;
-        this.datosTotalValor = this.datos.valorTotal;
-        this.subtotal =Math.round(this.datosTotalValor/1.19);
-        this.iva = Math.round(this.datosTotalValor-this.subtotal);
-      })
-  }
-  cargarItems(id){
-    this._itemService.cargarItems(id)
-      .subscribe((resp:any)=>{
-        console.log(resp);
-      }); 
+    
   }
 
 
   ngOnInit() {
-    this.cargarItem2(); 
+    //obtiene el id de la solicitud desde el servicio
+    this._itemService.obtenerSolicitud();
+    //me lista la solicitud completa
+    this.listarSolicitudCompleta();
+    
+    
+
     this.form = this.fb.group({
       tipovalvula: [ "", Validators.required ],
       tiposello: [ "", Validators.required ],
@@ -88,6 +75,27 @@ export class ItemComponent implements OnInit {
       cantidad: [ 0, Validators.required ],
     });
   }
+  listarSolicitudCompleta(){
+    
+    this._itemService.listarItemssolicitudes()
+      .subscribe((datos)=>{
+        //los datos completos de la solicitud
+        this.solicitudDatosCompletos = datos.solicitud;
+        this.nitCliente = (datos.solicitud.cliente.nit).toString();
+        this.idCliente = (datos.solicitud.cliente).toString();
+        this.nombreCliente = (datos.solicitud.cliente.nombre).toString();
+        this.direccionCliente = (datos.solicitud.cliente.direccion).toString();
+        this.telefonoCliente = (datos.solicitud.cliente.telefono).toString();
+        this.datosTotalValor = this.solicitudDatosCompletos.valorTotal;
+        this.subtotal = this.datosTotalValor / 1.19;
+        this.iva = this.datosTotalValor - this.subtotal;
+        //los items de la solicitud
+        this.items = datos.solicitud.item
+        
+        
+      })
+  }
+
   InsertarItem(formData: any, formDirective: FormGroupDirective){
    //debugger;
    const formModel  = this.form.value;
@@ -107,23 +115,24 @@ export class ItemComponent implements OnInit {
       cantidad :formModel.cantidad as number,
       valor : random as number
     },
-    valorTotal : this.calcantidad*random
+    valorTotal : this.cantidad * random
   };
-  this._itemService.AgregarItem(saveItem, this.solicitud.cliente._id)
+  this._itemService.AgregarItem(saveItem, this.idCliente)
     .subscribe((item)=>{
-      this.valvulas = item
-      console.log(this.cliente.nombre)
+      this.item = item
+      this.datosTotalValor = item.valorTotal;
+      this.listarSolicitudCompleta();
+      
     })
-    formData.reset();
-    var intervalo = setTimeout(()=>{
-      this.ngOnInit();
-    },200)
+    let intervalo = setTimeout(()=>{
+      this.listarSolicitudCompleta();
+    },500);
+    
   
-
   }
   //borrar items
 
-  borrarvalvula(index){
+  borraritem(index){
     swal({
       title: "Esta seguro?",
       text: "Esta a punto de borrar un item ",
@@ -135,13 +144,13 @@ export class ItemComponent implements OnInit {
       if (borrar) {
         this._itemService.EliminarItem(index).subscribe(
           response=>{
+            this.ngOnInit();
             console.log("item borrado");
             swal("El item ha sido borrado", {
               icon: "success",
             });
             let cargar = setTimeout(()=>{
               console.log("setTimeout");
-              this.ngOnInit();
             },300);
           },
           error=>{
@@ -152,7 +161,7 @@ export class ItemComponent implements OnInit {
       } else {
         swal({
           icon:"info",
-          text:"El item no sera borado"
+          text:"El item no sera borrado"
         });
       }
     }); 
@@ -160,7 +169,7 @@ export class ItemComponent implements OnInit {
   }
 
  
-
+  
 
 
 

@@ -1,31 +1,24 @@
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProgressComponent } from './progress/progress.component';
-import { Graficas1Component } from './graficas1/graficas1.component';
-import { Graficas2Component } from './graficas2/graficas2.component';
+
+
 import { AccountSettingsComponent } from './account-settings/account-settings.component'
-import { PromesasComponent } from './promesas/promesas.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
+
 
 /** Guards **/
 import { LoginGuardGuard, AdminGuard } from '../services/service.index';
-
-
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { HospitalesComponent } from './hospitales/hospitales.component';
-import { MedicosComponent } from './medicos/medicos.component';
-import { MedicoComponent } from './medicos/medico.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ItemComponent } from './item/item.component';
-import { TipomttoComponent } from './tipomtto/tipomtto.component';
-import { TareaComponent } from './tarea/tarea.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
 import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { CargosComponent } from './cargos/cargos.component';
 import { EditCargosComponent } from './cargos/edit-cargos/edit-cargos.component';
+import { ValvulasComponent } from './valvulas/valvulas.component';
+import { ActividadesComponent } from './actividades/actividades.component';
 
 
 
@@ -46,7 +39,7 @@ const pageRoutes : Routes = [
             {path: 'perfil', component: ProfileComponent, data:{titulo:'Perfil de usuario'}},
 
 
-            /* =================Mantenimientos=====================*/
+            /* =================Creacion de solicitudes=====================*/
             
             /*{path: 'hospitales', component: HospitalesComponent, data:{titulo:'Mantenimiento de Hospitales'}},
             {path: 'medicos', component: MedicosComponent, data:{titulo:'Mantenimiento de Medicos'}},
@@ -54,6 +47,14 @@ const pageRoutes : Routes = [
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
             {path: 'gestionitem/:id/:id2', component: GestionItemComponent, data:{titulo:'Gestionar Items'}},
+
+            /* =================Gestion de Ordenes===========================*/
+            {
+                path: 'ordenes',
+                component: OrdenesComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Administrador de Ordenes'},
+            },
             
             
              /* =================Configuraciones y Admin=====================*/
@@ -64,16 +65,6 @@ const pageRoutes : Routes = [
                 data:{titulo:'Administrador de Usuarios'}
                 
             },
-            {
-                path: 'tarea',
-                component: TareaComponent,
-                canActivate:[AdminGuard],
-                data:{titulo:'Administrador de Tareas'}},
-            {
-                path: 'tipomtto',
-                component: TipomttoComponent,
-                canActivate:[AdminGuard],
-                data:{titulo:'Administrador de Mantenimiento'}},
             {
                 path: 'clientes',
                 component: ClienteComponent,
@@ -91,11 +82,19 @@ const pageRoutes : Routes = [
                 data:{titulo:'Modificar Cargo'}
             },
             {
-                path: 'ordenes',
-                component: OrdenesComponent,
+                path: 'valvulas',
+                component: ValvulasComponent,
                 canActivate:[AdminGuard],
-                data:{titulo:'Administrador de Ordenes'},
+                data:{titulo:'Valvulas'}
             },
+            {
+                path: 'valvulas/:id',
+                component: ActividadesComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Agregar Actividades'}
+            },
+            
+
             {path: '', redirectTo: '/dashboard', pathMatch:'full'},
             
         ]

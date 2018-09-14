@@ -40,60 +40,42 @@ export class ItemService {
           })
         );
        }
-        // =====================obteniendo id de la solicitud y guardando en localStorage
-        //==============Esto para poder enviarlo a la vista de edicion y eliminacion de items===================//
-        cargarItems(id):Observable<any>{
-          let url = URL_SERVICIOS+'/solicitud/'+id;
-          url +='?token='+this._usuarioService.token;
-          return this._http.get(url).pipe(
-            map((resp:any)=>{
-              
-              
-              this.idSolicitud = resp.solicitudes[0]._id;
-              localStorage.setItem('solicitud', resp.solicitudes[0]._id)
-              return resp.solicitudes
-            })
-          )
-        }
           // =====================Cargar todo el item de la db ==================================//
-          cargarItems2():Observable<any>{
+          listarItemssolicitudes():Observable<any>{
             let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud;
             url +='?token='+this._usuarioService.token;
-            //localStorage.setItem('solicitud', resp.solicitudGuardada._id)
+            
             return this._http.get(url);
           }
         //===obtener el id de la solicitud que viene por la url==//
         obtenerSolicitud(){
-          let urlActual = window.location.href
+          let urlActual = window.location.href;
           let extraer = urlActual.split('/');
           let solicitud = extraer[5];
-          let itemid =extraer[6];
-          this.idItem =itemid;
-          console.log("clave del item"); 
-          console.log(this.idItem);
           this.idSolicitud = solicitud;
+          
         }
         // =====================Cargar sun solo item ==================================//
         cargItem():Observable<any>{
           let url = URL_SERVICIOS+'/item/'+this.idSolicitud+'/'+this.idItem;
           url +='?token='+this._usuarioService.token;
-          console.log(url);
+          
           return this._http.get(url);
         }
     // =====================insertar ==================================//
-    AgregarItem(solicitud:SolicitudModel, idcliente){
-      let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud+'/'+idcliente
+    AgregarItem(solicitud:SolicitudModel, idCliente){
+      let url = URL_SERVICIOS+'/solicitud/'+this.idSolicitud+'/'+idCliente;
       url +='?token='+this._usuarioService.token;
       
       
       return this._http.post(url, solicitud).pipe(
         map((resp:any)=>{
-        swal('Actualizado', 'item insertado Correctamente', 'success');  
-        console.log("UUUUUUUUUUUUUUUUUUUU");
-        console.log(resp);
+         swal('Creado', 'Item Creado Correctamente', 'success');
          return resp.solicitud;
-        })
+         
+        })  
       );
+      
     }
     //================Eliminar Item =================================== //
     EliminarItem(index){

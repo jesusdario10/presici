@@ -7,14 +7,12 @@ export { UsuarioService } from './usuario/usuario.service';
 /**/export { AdminGuard } from './guards/admin.guard';/********/
 /****************************************************************** */
 export { SubirArchivoService } from './subir-archivo/subir-archivo.service';
-export { HospitalService  } from './hospital/hospital.service';
-export { MedicoService } from './medico/medico.service';
 export { SolicitudService } from './solicitud/solicitud.service';
 export { ItemService } from './item/item.service'
-export { TipomttoService } from './tipomtto/tipomtto.service';
-export { TareaService } from './tarea/tarea.service';
 export { ClienteService } from './cliente/cliente.service';
 export { CargosService } from './cargos/cargos.service';
+export { ValvulasService } from './valvulas/valvulas.service';
+export { ActividadesService } from './actividades/actividades.service';
 
 
 

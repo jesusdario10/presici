@@ -39,8 +39,10 @@ export class OrdenesComponent implements OnInit {
       .subscribe((resp:any)=>{
         console.log("la respuesta");
         console.log(resp);
-   
-        this.solicitudes = resp.solicitudes;
+        this.solicitudes = resp;
+        
+        
+        
        
       }); 
   }

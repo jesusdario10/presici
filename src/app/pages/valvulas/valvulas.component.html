@@ -1,0 +1,61 @@
+<div class="content">
+    <div class="solicitudes row">
+      <div class="col-md-12">
+        <div class="panel panel-info">
+          <div class="panel-heading solicitud-title"></div>
+          <div class="panel-body btnCrearSol">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body" style="text-align: center">
+                        <form [formGroup]="form" #valvulaf="ngForm"  text-align="center"  (ngSubmit)="crearTipoValvula(form, valvulaf)">
+                            
+                                <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Creacion Tipos de Valvulas</font></font></h3>
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-12">
+                                      <div class="form-group">
+                                        
+                                        <input type="text" name="nombre" formControlName="nombre" class="form-control" placeholder="Ingrese el Nombre del Tipo de Valvula">
+                                      </div>
+                                    </div>
+                                </div>
+                            <input class="btn btn-success" type="submit"   name="" id="" value="Crear">
+                        </form>  
+                    </div>
+                  </div>
+                </div>
+              </div>                
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" style="text-align:center">
+        
+        <table class="table table-hover table-responsive">
+          <thead>
+            <tr style="text-align:center">
+              <th style="text-align:center">#</th>    
+              <th style="text-align:center">Nombre Tipo Valvula</th>
+              <th style="text-align:center">Actividades</th>
+              
+              
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr *ngFor="let valvula of valvulas; let i = index">
+                
+
+              <td style="text-align:center">{{i}}</td>
+              <td style="text-align:left">{{valvula.nombre}}</td>
+              <td style="text-align:center">
+                <button  type="button" [routerLink]="['/valvulas', valvula._id]" class="btn btn-warning"><i class="fa fa-edit "></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  

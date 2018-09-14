@@ -7,14 +7,12 @@ import { SettingsService,
          UsuarioService,
          LoginGuardGuard,
          SubirArchivoService,
-         HospitalService,
-         MedicoService,
          ItemService,
-         TipomttoService,
-         TareaService,
          ClienteService,
          CargosService,
-         AdminGuard} from './service.index';
+         AdminGuard,
+         ValvulasService,
+         ActividadesService } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
@@ -32,13 +30,11 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
               UsuarioService,
               SubirArchivoService,
               ModalUploadService,
-              HospitalService,
-              MedicoService,
               ItemService,
-              TipomttoService,
-              TareaService,
               ClienteService,
-              CargosService
+              CargosService,
+              ValvulasService,
+              ActividadesService
               ],
   declarations: [],
   

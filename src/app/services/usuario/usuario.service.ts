@@ -37,7 +37,7 @@ export class UsuarioService {
       catchError(err=>{
         console.log(err.error.mensaje);
         swal('!Ya Existe el Correo¡', err.error.mensaje, 'error');
-        return throwError(err) //nos retornra u observable
+        return throwError(err) //nos retornra un observable
       })
     )
   }

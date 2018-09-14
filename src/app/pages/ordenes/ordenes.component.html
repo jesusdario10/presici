@@ -4,10 +4,11 @@
     <div class="col-12">
       <div class="card">
       <div class="card-body">
-         <table class="table table-hover">
+         <table class="table table-hover table-responsive">
            <thead>
              <tr>
-               <th>Consecutivo</th>
+               <th>#</th>
+               <th>Cliente</th>
                <th>Nombre</th>
                <th>estado</th>
                <th>Valor</th>
@@ -20,14 +21,16 @@
                <td>
                   {{i}}
                </td>
+               <td>{{solicitud.cliente.nombre}}</td>
                <td >{{solicitud.nombre}}</td>
                <td >
                   <div class="row">
                     <div class="col-sm-4">
-                        <p>{{solicitud.estado}}</p>
+                        <p class="fuente">{{solicitud.estado}}</p>
                     </div>
                     <div class="col-sm-8">
                         <select name="role"  id="estado" [(ngModel)]="estado" class="form-control" (change)="CambiarEstado(solicitud._id, solicitud)">
+                            <option selected [value]="solicitud.estado">{{solicitud.estado}}</option>
                             <option value="CREADA">CREADA</option>
                             <option value="ACEPTADA">ACEPTADA</option>
                             <option value="RECHAZADA">RECHAZADA</option>
