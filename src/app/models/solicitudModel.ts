@@ -29,7 +29,7 @@ export class SolicitudModel{
 }
 
 export class Atributo{
-    
+    /*public tareas: Tareas;*/
     public tipovalvula : string;
     public tiposello : string;
     public diametro : string;
@@ -44,3 +44,8 @@ export class Atributo{
     public valor : number;
    
 }
+/*export class Tareas{
+    nombre:string;
+    estado : string;
+    fecha : string;
+}*/

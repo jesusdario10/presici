@@ -8,16 +8,29 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body" style="text-align: center">
-                        <form [formGroup]="form" #actividadesf="ngForm"  text-align="center"  (ngSubmit)="agregarActividades(form, actividadesf)">
+                        <form ngNativeValidate [formGroup]="form" #actividadesf="ngForm"  text-align="center"  (ngSubmit)="insertarActividades(form, actividadesf)">
                             
-                                <h3 class="box-title m-b-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Agregar Actividades</font></font></h3>
+                                
+                                <h2 class="tipovalvulacolor">{{tipoValvula}}</h2>
                                 <div class="row">
-                                    <div class="col-sm-12 col-xs-12">
+                                    <div class="col-sm-8 col-xs-8">
                                       <div class="form-group">
-                                        
-                                        <input type="text" name="nombre" formControlName="nombre" class="form-control" placeholder="Ingrese el Nombre la actividad">
+                                        <label for="">Nombre de la Actividad</label>
+                                        <input type="text" name="nombre" formControlName="nombre" class="form-control" required>
                                       </div>
                                     </div>
+                                    <div class="col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                            <label for="">Tipo de Actividad</label>
+                                            <select class="custom-select custom-select-lg mb-3"  name="tipo" formControlName="tipo" class="form-control"   required>
+                                                <option value="" disabled selected>Open</option>
+                                                <option value="Basico">Basica</option>
+                                                <option value="General">General</option>
+
+                                              </select>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             <input class="btn btn-success" type="submit"   name="" id="" value="Crear">
                         </form>  
@@ -28,9 +41,11 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12" style="text-align:center">
-        
+      <div class="col-md-6" style="text-align:center">
+        <br>
+        <h2>Actividades Basicas</h2>
         <table class="table table-hover table-responsive">
+            
           <thead>
             <tr style="text-align:center">
               <th style="text-align:center">#</th>    
@@ -40,19 +55,70 @@
           </thead>
           <tbody>
             
-            <tr >
+            <tr *ngFor="let basica of actividadesBasicas; let i = index">
                 
 
-              <td style="text-align:center">indice</td>
-              <td style="text-align:left">nombre</td>
+              <td style="text-align:center">{{i}}</td>
+              <td style="text-align:left">{{basica.nombre}}</td>
               <td style="text-align:center">
-                <button  type="button"  class="btn btn-warning"><i class="fa fa-edit "></i></button>
+                <button  type="button"  class="btn btn-warning" (click)="capturaDatos(basica)" data-toggle="modal" data-target=".bd-edit-modal-lg"><i class="fa fa-edit "></i></button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <div class="col-md-6" style="text-align:center">
+          <br>
+          <h2 class="generaltitle">Actividades Generales</h2>
+          <table class="table table-hover table-responsive">
+              
+            <thead>
+              <tr style="text-align:center">
+                <th class="generaltitle" style="text-align:center">#</th>    
+                <th class="generaltitle" style="text-align:center">Nombre de la Actividad</th> 
+                <th class="generaltitle" style="text-align:center">Editar</th>  
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr *ngFor="let general of actividadesGenerales; let i = index">
+                  
+  
+                <td class="generalcontent" style="text-align:center"><strong>{{i}}</strong></td>
+                <td class="generalcontent" style="text-align:left">{{general.nombre}}</td>
+                <td class="generalcontent" style="text-align:center">
+                  <button  type="button"  class="btn btn-primary" (click)="capturaDatos(general)" data-toggle="modal" data-target=".bd-edit-modal-lg"><i class="fa fa-edit "></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
     </div>
   </div>
+  <div class="modal fade bd-edit-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <h2 class="tipovalvulacolor">Editor de Actividades</h2>
 
+        <div>
+          	<div class="row espaciado">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body espaciado centro">
+                    <label  >Nombre de la Actividad</label>
+                    <input type="text" name="nombre" [(ngModel)]="nombreEditar" class="form-control" >
+                    <br>
+                    <br>
+                    <br>
+                    <div class="centro">
+                        <button  type="button"  class="btn btn-success centro"  data-toggle="modal" data-target=".bd-edit-modal-lg">Editar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
