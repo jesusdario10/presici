@@ -5,11 +5,12 @@ import { FormsModule, FormGroup, Validators, FormBuilder, FormGroupDirective } f
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-ordenes',
-  templateUrl: './ordenes.component.html',
-  styleUrls: ['./ordenes.component.css']
+  selector: 'app-ordenes-aceptacion',
+  templateUrl: './ordenes-aceptacion.component.html',
+  styleUrls: ['./ordenes-aceptacion.component.css']
 })
-export class OrdenesComponent implements OnInit {
+export class OrdenesAceptacionComponent implements OnInit {
+
   solicitudes : SolicitudModel[]=[];
   
 
@@ -63,4 +64,5 @@ export class OrdenesComponent implements OnInit {
 
 
   }
+
 }

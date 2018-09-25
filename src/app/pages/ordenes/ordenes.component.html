@@ -1,57 +1,56 @@
-
-
-  <div class="row animated">
-    <div class="col-12">
-      <div class="card">
-      <div class="card-body">
-         <table class="table table-hover table-responsive">
-           <thead>
-             <tr>
-               <th>#</th>
-               <th>Cliente</th>
-               <th>Nombre</th>
-               <th>estado</th>
-               <th>Valor</th>
-               <th>%</th>
-               <th>Gestionar</th>
-             </tr>
-           </thead>
-           <tbody>
-             <tr *ngFor="let solicitud of solicitudes; let i = index">
-               <td>
-                  {{i}}
-               </td>
-               <td>{{solicitud.cliente.nombre}}</td>
-               <td >{{solicitud.nombre}}</td>
-               <td >
-                  <div class="row">
-                    <div class="col-sm-4">
-                        <p class="fuente">{{solicitud.estado}}</p>
+<div class="row animated">
+    <div class="card-body">
+      
+      <h6 class="card-subtitle">Acepta o Rechaza Solicitudes</h6>
+      <table class="tablesaw table-bordered table-hover table " data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
+          <thead>
+              <tr class="centrado">
+                <th  class="centrado">#</th>
+                <th class="centrado">Fecha</th>
+                <th  class="centrado">Cliente</th>
+                <th  class="centrado">Nombre</th>
+                <th  class="centrado">estado</th>
+                <th  class="centrado">Valor</th>
+                <th  class="centrado">%</th>
+                <th  class="centrado">Gestionar</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr  *ngFor="let solicitud of solicitudes; let i = index">
+                  <td>{{i}}</td>
+                  <td>{{solicitud.date}}</td>
+                  <td>{{solicitud.cliente.nombre}}</td>
+                  <td>{{solicitud.nombre}}</td>
+                  <td >
+                    <div class="row">
+                      <div class="col-sm-4 centrado">
+                        <span *ngIf="solicitud.estado=='CREADA'" class="fa fa-circle text-warning m-r-10"></span>
+                        <span *ngIf="solicitud.estado=='ACEPTADA'" class="fa fa-circle text-info m-r-10"></span>
+                        <span *ngIf="solicitud.estado=='RECHAZADA'" class="fa fa-circle text-danger m-r-10"></span>
+                        <span *ngIf="solicitud.estado=='COMPLETADA'" class="fa fa-circle text-success m-r-10"></span>
+                      </div>
+                      <div class="col-sm-8">
+                          <select name="role"  id="estado" [(ngModel)]="estado" class="form-control" >
+                              <option selected [value]="solicitud.estado">{{solicitud.estado}}</option>
+                              <option value="CREADA">CREADA</option>
+                              <option value="ACEPTADA">ACEPTADA</option>
+                              <option value="RECHAZADA">RECHAZADA</option>
+                            </select>
+                      </div>
                     </div>
-                    <div class="col-sm-8">
-                        <select name="role"  id="estado" [(ngModel)]="estado" class="form-control" (change)="CambiarEstado(solicitud._id, solicitud)">
-                            <option selected [value]="solicitud.estado">{{solicitud.estado}}</option>
-                            <option value="CREADA">CREADA</option>
-                            <option value="ACEPTADA">ACEPTADA</option>
-                            <option value="RECHAZADA">RECHAZADA</option>
-                          </select>
-                    </div>
-                  </div>
-               </td>
-               <td>
-                {{solicitud.valorTotal/1000 | currency:'USD':true:'1.3-3'}}
-               </td>
-               <td>56%</td>
-               <td>
-                 <button  class="btn btn-primary"> <i class="fa fa-save"></i></button>
-                 <button  class="btn btn-danger"> <i class="fa fa-trash-o"></i></button>
-               </td>
-             </tr>
-           </tbody>
-         </table>
-        
-
-      </div>
-      </div>
-    </div>
+                 </td>
+                 <td>
+                  {{solicitud.valorTotal/1000 | currency:'USD':true:'1.3-3'}}
+                 </td>
+                 <td>56%</td>
+                 <td class="centrado">
+                   <button (click)="CambiarEstado(solicitud._id, solicitud)"  class="btn btn-primary"> <i class="fa fa-save"></i></button>&nbsp;
+                   <button  [routerLink]="['/gestionsolicitud', solicitud._id]" class="btn btn-info"> <i class="fa fa-cogs"></i></button>
+                 </td>
+              </tr>
+  
+          </tbody>
+      </table>
+   </div>
   </div>
+  

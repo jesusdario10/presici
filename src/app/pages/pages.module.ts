@@ -20,12 +20,14 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ItemComponent } from './item/item.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
-import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { CargosComponent } from './cargos/cargos.component';
 import { EditCargosComponent } from './cargos/edit-cargos/edit-cargos.component';
 import { ValvulasComponent } from './valvulas/valvulas.component';
 import { ActividadesComponent } from './actividades/actividades.component';
+import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptacion.component';
+import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
+
 
 
 
@@ -47,12 +49,14 @@ import { ActividadesComponent } from './actividades/actividades.component';
         
         
         OrdenesComponent,
-        GestionItemComponent,
         ClienteComponent,
         CargosComponent,
         EditCargosComponent,
         ValvulasComponent,
-        ActividadesComponent
+        ActividadesComponent,
+        OrdenesAceptacionComponent,
+        OrdenesGestionComponent
+        
         
         
         

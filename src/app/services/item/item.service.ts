@@ -53,6 +53,7 @@ export class ItemService {
           let extraer = urlActual.split('/');
           let solicitud = extraer[5];
           this.idSolicitud = solicitud;
+          return this.idSolicitud;
           
         }
         // =====================Cargar sun solo item ==================================//

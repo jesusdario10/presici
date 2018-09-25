@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemService, ClienteService } from '../../services/service.index';
+import { ItemService, ClienteService, ValvulasService } from '../../services/service.index';
 import { URL_SERVICIOS } from '../../config/config';
 import { ItemModel } from '../../models/itemModel';
-import { SolicitudModel, Atributo } from '../../models/solicitudModel';
+import { SolicitudModel, Atributo, Tarea } from '../../models/solicitudModel';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ClienteModel } from '../../models/clienteModel';
+import { ValvulaModel} from '../../models/ValvulaModel';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { stringify } from '@angular/core/src/render3/util';
+
+
 
 declare var swal:any;
 
@@ -17,7 +22,7 @@ declare var swal:any;
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-  /*MANIPULACION DE LSO DATOS*/  
+  /*MANIPULACION DE LOS DATOS*/  
   items : ItemModel[]=[];
   item : ItemModel;
   solicitudDatosCompletos : SolicitudModel;
@@ -40,11 +45,18 @@ export class ItemComponent implements OnInit {
   form: FormGroup;
   formSubmit: boolean;
   idCliente : any;
+  tiposValvula : any;
+
+  /*PROPIEDADES PARA INCRUSTAR TAREAS*/
+  tvalvula : string;
+  tmantenimiento : string;
+  tareas : any[]=[];
 
 
   constructor(
     private _itemService:ItemService,
     private _cliente : ClienteService,
+    private _ValvulasService : ValvulasService,
     private _route : ActivatedRoute,
     private fb: FormBuilder
   ) { 
@@ -58,9 +70,9 @@ export class ItemComponent implements OnInit {
     this._itemService.obtenerSolicitud();
     //me lista la solicitud completa
     this.listarSolicitudCompleta();
+    //ejecuto el cargar tipos de valvulas para llevar el select
+    this.listarTiposdeValvulas();
     
-    
-
     this.form = this.fb.group({
       tipovalvula: [ "", Validators.required ],
       tiposello: [ "", Validators.required ],
@@ -98,38 +110,76 @@ export class ItemComponent implements OnInit {
 
   InsertarItem(formData: any, formDirective: FormGroupDirective){
    //debugger;
-   const formModel  = this.form.value;
-   let random = Math.round(Math.random()*(5000000 - 1000000)+1000000); 
-   const saveItem: SolicitudModel = {
-    item: {
-      tipovalvula :formModel.tipovalvula as string,
-      tiposello :formModel.tiposello as string,
-      diametro :formModel.diametro as string,
-      rating :formModel.rating as string,
-      material :formModel.material as string,
-      otrosdatos :formModel.otrosdatos as string,
-      tipomtto :formModel.tipomtto as string,
-      prioridad :formModel.prioridad as string,
-      dificultad :formModel.dificultad as string,
-      sitio :formModel.sitio as string,
-      cantidad :formModel.cantidad as number,
-      valor : random as number
-    },
-    valorTotal : this.cantidad * random
-  };
-  this._itemService.AgregarItem(saveItem, this.idCliente)
-    .subscribe((item)=>{
-      this.item = item
-      this.datosTotalValor = item.valorTotal;
-      this.listarSolicitudCompleta();
-      
-    })
-    let intervalo = setTimeout(()=>{
-      this.listarSolicitudCompleta();
-    },500);
-    
+   //
+
+
+   var formModel  = this.form.value;
+   var random = Math.round(Math.random()*(5000000 - 1000000)+1000000); 
+   var saveItem: SolicitudModel = {
+      item: {
+        tipovalvula :formModel.tipovalvula as string,
+        tiposello :formModel.tiposello as string,
+        diametro :formModel.diametro as string,
+        rating :formModel.rating as string,
+        material :formModel.material as string,
+        otrosdatos :formModel.otrosdatos as string,
+        tipomtto :formModel.tipomtto as string,
+        prioridad :formModel.prioridad as string,
+        dificultad :formModel.dificultad as string,
+        sitio :formModel.sitio as string,
+        cantidad :formModel.cantidad as number,
+        valor : random as number
+      },
+      valorTotal : this.cantidad * random
+    };
+
+    this.tvalvula = saveItem.item.tipovalvula;
+    this.tmantenimiento = saveItem.item.tipomtto;
+
+    /*===========SI EL MANTENIMIENTO ES BASICO==================*/
+        /*1-*Traemos las actividades para agregarlas a las tareas**/
+    if(this.tmantenimiento ==="Basico"){
+      this._ValvulasService.listarActividadesBasicas(this.tvalvula)
+      .subscribe((datos:any)=>{
+        this.tareas = datos.basicas;
+        saveItem.item.tareas = this.tareas
+        /*2-*Guardamos el item**/
+        this._itemService.AgregarItem(saveItem, this.idCliente)
+          .subscribe((item)=>{
+            this.item = item
+            this.datosTotalValor = item.valorTotal;
+            this.listarSolicitudCompleta();
+            
+          })
+          let intervalo = setTimeout(()=>{
+            this.listarSolicitudCompleta();
+          },500);
+        
+      });
+    }
+    /*=============SI EL MANTENIMIENTO ES GENERAL=============*/
+    if(this.tmantenimiento ==="General"){
+      /*1-*Traemos las actividades para agregarlas a las tareas**/
+      this._ValvulasService.listarActividadesGenerales(this.tvalvula)
+        .subscribe((datos:any)=>{
+          console.log(datos.generales);
+          this.tareas = datos.generales;
+          saveItem.item.tareas = this.tareas
+          /*2-*Guardamos el item**/
+          this._itemService.AgregarItem(saveItem, this.idCliente)
+            .subscribe((item)=>{
+              this.item = item
+              this.datosTotalValor = item.valorTotal;
+              this.listarSolicitudCompleta();
+              
+            })
+            let intervalo = setTimeout(()=>{
+              this.listarSolicitudCompleta();
+            },500);
+        });
+    }
+ }
   
-  }
   //borrar items
 
   borraritem(index){
@@ -166,6 +216,39 @@ export class ItemComponent implements OnInit {
       }
     }); 
     
+  }
+
+  /*========CARGAR LOS TIPOS DE VALVULAS EN EL SELECT==========*/
+  listarTiposdeValvulas(){
+    this._ValvulasService.cargarValvulas()
+      .subscribe((datos)=>{
+        
+        this.tiposValvula = datos;
+      })
+  }
+  /*=============CAPTURAR EL TIPO DE VALVULA ESCOGIDO===========
+  capturaTipoValvula(tipovalvula){
+    console.log(tipovalvula);
+    this.tvalvula = tipovalvula;
+  }*/
+  /*=======TRAER ACTIVIDADES SEGUN MANTENIMIENTO ESCOGIDO======*/
+  capturaMantenimiento(){
+    this._ValvulasService.listarActividadesBasicas(this.tvalvula)
+      .subscribe((datos)=>{
+        console.log(datos);
+      })
+  }
+  /*============TRAER LAS TAREAS DEL TIPO DE VALVULA============*/
+  traerLasTareas(){
+    
+    this._ValvulasService.listarActividadesBasicas(this.tvalvula)
+    .subscribe((datos:any)=>{
+      console.log(datos.basicas);
+      this.tareas=datos.basicas;
+      console.log(this.tareas);
+      return datos.basicas;
+      
+    });
   }
 
  

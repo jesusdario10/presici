@@ -71,4 +71,20 @@ export class ValvulasService {
       })
     )
   }
+  //LISTAR ACTIVIDADES DEL TIPO DE VALVULA
+  listarActividadesBasicas(tvalvula){
+    let url = URL_SERVICIOS+'/tipovalvula/'+tvalvula+'/basica'
+    return this._http.get(url);
+      
+  }
+  //LISTAR ACTIVIDADES DEL TIPO DE VALVULA
+  listarActividadesGenerales(tvalvula){
+    let url = URL_SERVICIOS+'/tipovalvula/'+tvalvula+'/generales';
+    return this._http.get(url).pipe(
+      map((resp:any)=>{
+        
+         return resp;
+      })
+    );
+  }
 }

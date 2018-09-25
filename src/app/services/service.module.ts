@@ -12,7 +12,8 @@ import { SettingsService,
          CargosService,
          AdminGuard,
          ValvulasService,
-         ActividadesService } from './service.index';
+         ActividadesService,
+         MantenimientoService } from './service.index';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
@@ -34,7 +35,8 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
               ClienteService,
               CargosService,
               ValvulasService,
-              ActividadesService
+              ActividadesService,
+              MantenimientoService
               ],
   declarations: [],
   

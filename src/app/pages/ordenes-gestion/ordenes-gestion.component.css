@@ -1,0 +1,22 @@
+.centrado{
+    text-align: center !important;
+    padding: 0.5px;
+    color:#0d47a1;
+    font-weight: 600;
+}
+.centrado2{
+    text-align: center !important;
+    margin: 0 auto !important;
+
+}
+.centrado3{
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+.alerta{
+    color:#f44336;
+}
+.tamano{
+    font-size: 0.8em;
+}
+

@@ -13,12 +13,14 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ItemComponent } from './item/item.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
-import { GestionItemComponent } from './item/gestion-item/gestion-item.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { CargosComponent } from './cargos/cargos.component';
 import { EditCargosComponent } from './cargos/edit-cargos/edit-cargos.component';
 import { ValvulasComponent } from './valvulas/valvulas.component';
 import { ActividadesComponent } from './actividades/actividades.component';
+import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptacion.component';
+import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
+
 
 
 
@@ -46,14 +48,26 @@ const pageRoutes : Routes = [
             {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},*/
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
-            {path: 'gestionitem/:id/:id2', component: GestionItemComponent, data:{titulo:'Gestionar Items'}},
+            
 
             /* =================Gestion de Ordenes===========================*/
+            {
+                path: 'aceptacion',
+                component: OrdenesAceptacionComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Aceptacion o Rechazo'},
+            },
             {
                 path: 'ordenes',
                 component: OrdenesComponent,
                 canActivate:[AdminGuard],
                 data:{titulo:'Administrador de Ordenes'},
+            },
+            {
+                path: 'gestionsolicitud/:id',
+                component: OrdenesGestionComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Equipos para Mantenimiento'},
             },
             
             

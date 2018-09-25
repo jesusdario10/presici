@@ -1,33 +1,34 @@
 
 
-export class SolicitudModel{
-    item?:Atributo;
-    valorTotal?:number;
-    nombre?:string;
-    estado?:string;
+export class OrdenModel{
+    solicitud?:string;
     cliente?:string;
-    cargo?:string;
-    _id?:string
+    ejecutado?:number;
+    cantidad?:number;
+    valvulas?:Caracteristicas;
+    estado?:string;
+    _id?:string;
 
     constructor(
-        item: Atributo,
-        valorTotal:number,
-        nombre:string,
-        estado:string,
+        solicitud:string,
         cliente:string,
-        cargo:string,
-        _id : string
+        ejecutado:number,
+        cantidad:number,
+        valvulas:Caracteristicas,
+        estado:string,
+        _id?:string
     ){
-        this.item = item;
-        this.valorTotal = valorTotal;
-        this.nombre = nombre;
-        this.estado = estado;
+        this.solicitud = solicitud;
         this.cliente = cliente;
-        this.cargo = cargo;
+        this.ejecutado = ejecutado;
+        this.cantidad = cantidad;
+        this.valvulas = valvulas;
+        this.estado = estado;
         this._id = _id;
     }
 }
-export class Atributo{
+
+export class Caracteristicas{
     /*public tareas: Tareas;*/
     public tipovalvula : string;
     public tiposello : string;
@@ -41,11 +42,11 @@ export class Atributo{
     public sitio : string;
     public cantidad : number;
     public valor : number;
-    public tareas? : any[];
+    public tareas? : Tarea;
 }
+
 export class Tarea{
     estado:string;
     nombre : string;
-    tipo: string
+    tipo: string;
 }
-
