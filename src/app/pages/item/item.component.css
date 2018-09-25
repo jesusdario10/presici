@@ -33,3 +33,7 @@ td{
 table thead {
     text-align:center;
 }
+.cerrarSolicitud{
+    position: absolute !important;
+    right: 1px !important;
+}

@@ -77,7 +77,7 @@ export class SolicitudService {
           })
         )
       }
-      // =====================buscar todas las solicitudes ==================================//
+      // =====================buscar todas las solicitudes en vista solicitudes ==================================//
           cargarSolicitudes2():Observable<any>{
             let url = URL_SERVICIOS+'/solicitud';
             url +='?token='+this._usuarioService.token;
@@ -91,6 +91,34 @@ export class SolicitudService {
                 })
               )
           }
+      // =====================buscar todas las solicitudes CREADAS ==================================//
+      cargarSolicitudesCreadasOCerradas():Observable<any>{
+        let url = URL_SERVICIOS+'/solicitud/creadasoCerradas/solicitudes';
+        url +='?token='+this._usuarioService.token;
+          return this._http.get(url).pipe(
+            map((resp:any)=>{
+              return resp.solicitudes
+            }),
+            catchError(err=>{              
+              swal('Error ', err.error.mensaje, 'error');
+              return throwError(err) //nos retornra u observable
+            })
+          )
+      }
+      // =====================buscar todas las solicitudes ACEPTADAS ==================================//
+      cargarSolicitudesAceptadas():Observable<any>{
+        let url = URL_SERVICIOS+'/solicitud/aceptadas/solicitudes';
+        url +='?token='+this._usuarioService.token;
+          return this._http.get(url).pipe(
+            map((resp:any)=>{
+              return resp.solicitudes
+            }),
+            catchError(err=>{              
+              swal('Error ', err.error.mensaje, 'error');
+              return throwError(err) //nos retornra u observable
+            })
+          )
+      }        
           
       // =====================buscar solicitud por id ==================================//
         cargarSolicitud(id):Observable<any>{

@@ -35,15 +35,11 @@ export class OrdenesComponent implements OnInit {
 
 
   cargarSolicitudes(){
-    this._solicitudServices.cargarSolicitudes2()
+    this._solicitudServices.cargarSolicitudesAceptadas()
       .subscribe((resp:any)=>{
         console.log("la respuesta");
         console.log(resp);
         this.solicitudes = resp;
-        
-        
-        
-       
       }); 
   }
 

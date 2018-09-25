@@ -12,6 +12,7 @@
                 <th  class="centrado">estado</th>
                 <th  class="centrado">Valor</th>
                 <th  class="centrado">%</th>
+                <th  class="centrado">Editar</th>
                 <th  class="centrado">Gestionar</th>
               </tr>
           </thead>
@@ -44,8 +45,12 @@
                  </td>
                  <td>56%</td>
                  <td class="centrado">
-                   <button (click)="CambiarEstado(solicitud._id, solicitud)"  class="btn btn-primary"> <i class="fa fa-save"></i></button>&nbsp;
-                   <button  [routerLink]="['/gestionsolicitud', solicitud._id]" class="btn btn-info"> <i class="fa fa-cogs"></i></button>
+                   <button (click)="CambiarEstado(solicitud._id, solicitud)"  class="btn btn-primary"> <i class="mdi mdi-content-save"></i></button>
+                   <button [routerLink]="['/solicitudes', solicitud._id]"  type="button" class="btn btn-warning"><i class=" mdi mdi-table-edit"></i></button>
+                   
+                 </td>
+                 <td class="centrado"> 
+                  <button  [routerLink]="['/gestionsolicitud', solicitud._id]" class="btn btn-info"> <i class="fa fa-cogs"></i></button>
                  </td>
               </tr>
   

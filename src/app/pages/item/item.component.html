@@ -137,10 +137,11 @@
                   </div>                   
               </div>
               
-              <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
-              <button type="submit" class="btn btn-inverse waves-effect waves-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cancelar</font></font></button>
-             
-             
+              <button *ngIf="cerrada =='' || cerrada == null || cerrada == 'CREADA'" type="submit" class="btn btn-success waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
+              <button *ngIf="cerrada =='' || cerrada == null || cerrada == 'CREADA'" type="submit" class="btn btn-inverse waves-effect waves-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cancelar</font></font></button>
+
+              <button *ngIf="cerrada =='CERRADA' || cerrada =='ACEPTADA'"  data-toggle="tooltip" data-placement="top" title="Solicitud Cerrada o Aceptada"  type="button" class="btn btn-inverse waves-effect waves-light m-r-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar</font></font></button>
+              <button *ngIf="cerrada =='CERRADA' || cerrada =='ACEPTADA'"  data-toggle="tooltip" data-placement="top" title="Solicitud Cerrada o Aceptada"  type="button" class="btn btn-inverse waves-effect waves-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cancelar</font></font></button>
           </form>
       </div>
   </div>
@@ -181,23 +182,29 @@
           </tr>
         </thead>
         <tbody>
-           
-        
-                <tr  *ngFor="let item of items; let i = index">
-                  <td>
-                      {{i}}
-                  </td>
-                  <td  style="text-align: left">Valvula de {{item.tipovalvula.nombre}}-{{item.tiposello}}-({{item.diametro}})
-                    -{{item.material}}- Mto: {{item.tipomtto}}-Prioridad:{{item.prioridad}}-Deficult:({{item.dificultad}})  </td>
-                  <td>{{item.cantidad}}</td>
-                  <td>{{item.valor/1000 | currency:'USD':true:'1.3-3'}}</td>
-                  <td>{{item.valor*item.cantidad/1000 | currency:'USD':true:'1.3-3'}}</td>
-                  <td><button (click)="borraritem(i)" type="button" class="btn btn-danger"><i class=" ti-trash"></i></button></td>  
-                </tr>
-              
-            </table>
+            <tr  *ngFor="let item of items; let i = index">
+              <td>
+                  {{i}}
+              </td>
+              <td  style="text-align: left">Valvula de {{item.tipovalvula.nombre}}-{{item.tiposello}}-({{item.diametro}})
+                -{{item.material}}- Mto: {{item.tipomtto}}-Prioridad:{{item.prioridad}}-Deficult:({{item.dificultad}})  </td>
+              <td>{{item.cantidad}}</td>
+              <td>{{item.valor/1000 | currency:'USD':true:'1.3-3'}}</td>
+              <td>{{item.valor*item.cantidad/1000 | currency:'USD':true:'1.3-3'}}</td>
+              <td>
+                <button *ngIf="cerrada =='CERRADA' || cerrada =='ACEPTADA'" type="button" data-toggle="tooltip" data-placement="top" title="Solicitud Cerrada o Aceptada" class="btn btn-dark"><i class=" ti-trash"></i></button>
+                <button *ngIf="solicitudDatosCompletos.estado=='CREADA'" (click)="borraritem(i)" type="button" class="btn btn-danger"><i class=" ti-trash"></i></button>
+
+              </td>  
+            </tr>
+        <tbody>     
+      </table>
     </div>
   </div>
+  
+  <button type="button" *ngIf="cerrada =='' || cerrada == null || cerrada == 'CREADA' " (click)="cerrarSolicitud()" class="btn btn-warning waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Al Cerrar la Solicitud Nuestros Especialistas la Recibiran y no Podra Editarla"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cerrar Solicitud</font></font></button>
+  <button type="button" *ngIf="cerrada =='CERRADA' || cerrada =='ACEPTADA'"  disabled class="btn btn-dark waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Solicitud Cerrada o Aceptada"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cerrar Solicitud</font></font></button>
+  
   <div class="col-md-12">
     
      <div class="centro modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -221,13 +228,10 @@
                   <h4>{{nitCliente}}</h4>
                   <h5>{{nombreCliente}}</h5>
                   <h5>{{direccionCliente}}</h5>
-                  <h6>{{telefonoCliente}}</h6>
-                 
+                  <h6>{{telefonoCliente}}</h6>              
               </div>
-            </div>
-            
+            </div>          
             <br>
-            
             <div class="row margercot">
               <div class="col-md-11">
                
@@ -250,12 +254,11 @@
                       <td>{{item.valor/1000 | currency:'USD':true:'1.2-3'}}</td>  
                       <td>{{item.valor*item.cantidad/1000 | currency:'USD':true:'1.2-3'}}</td>
                       <td>Calculando</td>
-                      
                     </tr>
                   </tbody>
                 </table>
-                
               </div>
+              
             </div>
             <div class="row margercot">
               <div class="col-md-11">

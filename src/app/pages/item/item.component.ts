@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemService, ClienteService, ValvulasService } from '../../services/service.index';
+import { ItemService, ClienteService, ValvulasService, SolicitudService } from '../../services/service.index';
 import { URL_SERVICIOS } from '../../config/config';
 import { ItemModel } from '../../models/itemModel';
 import { SolicitudModel, Atributo, Tarea } from '../../models/solicitudModel';
@@ -26,6 +26,7 @@ export class ItemComponent implements OnInit {
   items : ItemModel[]=[];
   item : ItemModel;
   solicitudDatosCompletos : SolicitudModel;
+  cerrada : string ;
  
   cantidad : number;
   datosTotalValor : number;
@@ -55,6 +56,7 @@ export class ItemComponent implements OnInit {
 
   constructor(
     private _itemService:ItemService,
+    private _solicitudServices: SolicitudService,
     private _cliente : ClienteService,
     private _ValvulasService : ValvulasService,
     private _route : ActivatedRoute,
@@ -87,8 +89,8 @@ export class ItemComponent implements OnInit {
       cantidad: [ 0, Validators.required ],
     });
   }
-  listarSolicitudCompleta(){
-    
+  //======================LISTAR SOLICITUD COMPLETA===============================//
+  listarSolicitudCompleta(){ 
     this._itemService.listarItemssolicitudes()
       .subscribe((datos)=>{
         //los datos completos de la solicitud
@@ -102,17 +104,13 @@ export class ItemComponent implements OnInit {
         this.subtotal = this.datosTotalValor / 1.19;
         this.iva = this.datosTotalValor - this.subtotal;
         //los items de la solicitud
-        this.items = datos.solicitud.item
-        
-        
+        this.items = datos.solicitud.item;
+        this.cerrada = this.solicitudDatosCompletos.estado;
       })
   }
-
+  //=========================INSERTAR ITEMS EN LA SOLICITUD========================//
   InsertarItem(formData: any, formDirective: FormGroupDirective){
    //debugger;
-   //
-
-
    var formModel  = this.form.value;
    var random = Math.round(Math.random()*(5000000 - 1000000)+1000000); 
    var saveItem: SolicitudModel = {
@@ -179,9 +177,7 @@ export class ItemComponent implements OnInit {
         });
     }
  }
-  
-  //borrar items
-
+//========================BORRAR ITEMS DE LA SOLICITUD==========================//
   borraritem(index){
     swal({
       title: "Esta seguro?",
@@ -217,7 +213,6 @@ export class ItemComponent implements OnInit {
     }); 
     
   }
-
   /*========CARGAR LOS TIPOS DE VALVULAS EN EL SELECT==========*/
   listarTiposdeValvulas(){
     this._ValvulasService.cargarValvulas()
@@ -226,12 +221,7 @@ export class ItemComponent implements OnInit {
         this.tiposValvula = datos;
       })
   }
-  /*=============CAPTURAR EL TIPO DE VALVULA ESCOGIDO===========
-  capturaTipoValvula(tipovalvula){
-    console.log(tipovalvula);
-    this.tvalvula = tipovalvula;
-  }*/
-  /*=======TRAER ACTIVIDADES SEGUN MANTENIMIENTO ESCOGIDO======*/
+  //==================CAPTURAR EL TIPO DE MANTENIMIENTO==========//
   capturaMantenimiento(){
     this._ValvulasService.listarActividadesBasicas(this.tvalvula)
       .subscribe((datos)=>{
@@ -240,13 +230,22 @@ export class ItemComponent implements OnInit {
   }
   /*============TRAER LAS TAREAS DEL TIPO DE VALVULA============*/
   traerLasTareas(){
-    
     this._ValvulasService.listarActividadesBasicas(this.tvalvula)
     .subscribe((datos:any)=>{
       console.log(datos.basicas);
       this.tareas=datos.basicas;
       console.log(this.tareas);
       return datos.basicas;
+      
+    });
+  }
+  //===========================CERRAR LA SOLICITUD=====================//
+  cerrarSolicitud(){
+    this.solicitudDatosCompletos.estado = 'CERRADA'
+    this.cerrada = this.solicitudDatosCompletos.estado
+  
+    this._solicitudServices.actualizarSolicitud(this.solicitudDatosCompletos._id, this.solicitudDatosCompletos)
+    .subscribe((datos:any)=>{
       
     });
   }

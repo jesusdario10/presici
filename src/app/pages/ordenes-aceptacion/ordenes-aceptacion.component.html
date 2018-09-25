@@ -24,13 +24,14 @@
                 <td >
                   <div class="row">
                     <div class="col-sm-4 centrado">
-                      <span *ngIf="solicitud.estado=='CREADA'" class="fa fa-circle text-warning m-r-10"></span>
-                      <span *ngIf="solicitud.estado=='ACEPTADA'" class="fa fa-circle text-info m-r-10"></span>
+                      <span *ngIf="solicitud.estado=='CREADA'" class="fa fa-circle text-warning m-r-10"></span> 
+                      <span *ngIf="solicitud.estado=='ACEPTADA'" class="fa fa-circle text-info m-r-10"></span> 
                       <span *ngIf="solicitud.estado=='RECHAZADA'" class="fa fa-circle text-danger m-r-10"></span>
+                      <span *ngIf="solicitud.estado=='CERRADA'" class="fa fa-circle text-purple m-r-10"></span>
                       <span *ngIf="solicitud.estado=='COMPLETADA'" class="fa fa-circle text-success m-r-10"></span>
                     </div>
                     <div class="col-sm-8">
-                        <select name="role"  id="estado" [(ngModel)]="estado" class="form-control" >
+                        <select name="role"  id="estado" [(ngModel)]="solicitud.estado" class="form-control" >
                             <option selected [value]="solicitud.estado">{{solicitud.estado}}</option>
                             <option value="CREADA">CREADA</option>
                             <option value="ACEPTADA">ACEPTADA</option>
@@ -44,7 +45,8 @@
                </td>
                <td>56%</td>
                <td>
-                 <button (click)="CambiarEstado(solicitud._id, solicitud)"  class="btn btn-primary"> <i class="fa fa-save"></i></button>
+                 <button (click)="CambiarEstado(solicitud._id, solicitud)"  class="btn btn-primary"><i class="mdi mdi-content-save"></i></button>
+                 <button [routerLink]="['/solicitudes', solicitud._id]"  type="button" class="btn btn-warning"><i class=" mdi mdi-table-edit"></i></button>
                </td>
             </tr>
 

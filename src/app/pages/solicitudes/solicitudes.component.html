@@ -42,8 +42,6 @@
                   <th>Estado</th>
                   <th style="text-align:center">Editar</th>
                   <th style="text-align:center">Eliminar</th>
-                  
-                  
                 </tr>
               </thead>
               <tbody>
@@ -59,7 +57,8 @@
                     <button [routerLink]="['/solicitudes', solicitud._id]"  type="button" class="btn btn-warning"><i class="fa fa-edit "></i></button>
                   </td>
                   <td style="text-align:center">
-                      <button type="button" (click)="eliminarSolicitud(solicitud._id)" class="btn btn-danger"><i class=" ti-trash"></i></button>
+                    <button *ngIf="solicitud.estado=='CREADA'" type="button" (click)="eliminarSolicitud(solicitud._id)" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    <button  *ngIf="solicitud.estado=='CERRADA' || solicitud.estado=='ACEPTADA'" type="button" data-toggle="tooltip" data-placement="top" title="Se Encuentra Cerrada o Aceptada" (click)="mensajeSolicitudCerradaoAceptada()" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                   </td>
                 </tr>
               </tbody>

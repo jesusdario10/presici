@@ -37,9 +37,6 @@ export class SolicitudesComponent implements OnInit {
 
   ngOnInit() {
     let usuario = JSON.parse(localStorage.getItem('usuario'));
-    
-    
-    
     if(usuario.role === "USER_ROLE"){
       this.cargarSolicitudesCliente();
       console.log("entre al user role");
@@ -53,6 +50,7 @@ export class SolicitudesComponent implements OnInit {
       
     });
   }
+  //==============================CREAR SOLICITUD======================//
   crearSolicitud(formData: any, formDirective: FormGroupDirective){
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     let cliente = usuario.cliente
@@ -70,8 +68,6 @@ export class SolicitudesComponent implements OnInit {
     this._solicitudServices.crearSolicitud(saveSolicitud)
       .subscribe((saveSolicitud)=> console.log(saveSolicitud));   
       
-      
-
       if(usuario.role === "USER_ROLE"){
         let cargar = setTimeout(()=>{
           console.log("setTimeout");
@@ -108,7 +104,7 @@ export class SolicitudesComponent implements OnInit {
         
       })   
   }
-  
+  //=======================ELIMINAR SOLICITUD==================//
   eliminarSolicitud(id){
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     swal({
@@ -151,14 +147,12 @@ export class SolicitudesComponent implements OnInit {
           text:"ESu solicitud no sera borrada"
         });
       }
-    }); 
-    
-
-      
+    });    
   }
-
-
-  
+ //=====================MENSAJE DE SOLICITUD CERRADA O ACEPTADA===================//
+ mensajeSolicitudCerradaoAceptada(){
+  swal('Error ', "Esta solicitud Esta Cerrada o Aceptada", 'error');
+ }
 
   
 

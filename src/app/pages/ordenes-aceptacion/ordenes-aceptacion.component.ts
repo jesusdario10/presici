@@ -31,38 +31,28 @@ export class OrdenesAceptacionComponent implements OnInit {
 
   ngOnInit() {
     this.cargarSolicitudes();
-
   }
-
-
   cargarSolicitudes(){
-    this._solicitudServices.cargarSolicitudes2()
+    this._solicitudServices.cargarSolicitudesCreadasOCerradas()
       .subscribe((resp:any)=>{
         console.log("la respuesta");
         console.log(resp);
         this.solicitudes = resp;
-        
-        
-        
-       
-      }); 
+    }); 
   }
-
+  //========================CAMBIAR DE ESTADO=======================//
   CambiarEstado(id, solicitud: SolicitudModel){
-    console.log(id);
-    console.log(this.estado);
     solicitud.estado = this.estado;
     
     this._solicitudServices.actualizarSolicitud(id, solicitud)
-        .subscribe();
-  }
-  capturarSolicitud(solicitud){
-     console.log(solicitud.item);
-    let idsolicitud = solicitud._id;
-
+        .subscribe((datos:any)=>{
+          this.cargarSolicitudes();
+        });
     
-
-
+  }
+  //=====================CAPTURAR ID DE LA SOLICITUD================//
+  capturarSolicitud(solicitud){
+    let idsolicitud = solicitud._id;
   }
 
 }
