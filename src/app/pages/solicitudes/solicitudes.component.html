@@ -58,7 +58,7 @@
                   </td>
                   <td style="text-align:center">
                     <button *ngIf="solicitud.estado=='CREADA'" type="button" (click)="eliminarSolicitud(solicitud._id)" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                    <button  *ngIf="solicitud.estado=='CERRADA' || solicitud.estado=='ACEPTADA'" type="button" data-toggle="tooltip" data-placement="top" title="Se Encuentra Cerrada o Aceptada" (click)="mensajeSolicitudCerradaoAceptada()" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    <button  *ngIf="solicitud.estado=='CERRADA' || solicitud.estado=='ACEPTADA' || solicitud.estado=='RECHAZADA'" type="button" data-toggle="tooltip" data-placement="top" title="Se Encuentra Cerrada, Aceptada o Rechazada"  class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                   </td>
                 </tr>
               </tbody>

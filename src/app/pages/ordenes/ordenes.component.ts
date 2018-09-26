@@ -44,12 +44,11 @@ export class OrdenesComponent implements OnInit {
   }
 
   CambiarEstado(id, solicitud: SolicitudModel){
-    console.log(id);
-    console.log(this.estado);
-    solicitud.estado = this.estado;
-    
+
     this._solicitudServices.actualizarSolicitud(id, solicitud)
-        .subscribe();
+        .subscribe((datos:any)=>{
+          this.cargarSolicitudes();
+        });
   }
   capturarSolicitud(solicitud){
      console.log(solicitud.item);

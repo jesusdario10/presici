@@ -33,6 +33,7 @@ import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.compo
 
 
 
+
 @NgModule({
     declarations:[
         DashboardComponent,
@@ -55,7 +56,8 @@ import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.compo
         ValvulasComponent,
         ActividadesComponent,
         OrdenesAceptacionComponent,
-        OrdenesGestionComponent
+        OrdenesGestionComponent,
+     
         
         
         

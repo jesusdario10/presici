@@ -1,0 +1,8 @@
+.espacios{
+    margin: 1vh;
+}
+.tamanoBotones{
+    height: 20vh !important;
+    width: 20vw !important;
+    padding: 5px;
+}
