@@ -49,8 +49,21 @@
     <!--Custom JavaScript -->
     <script src="assets/js/custom.js"></script>
     <!-- ============================================================== -->
-    <!-- Style switcher -->
+    <!-- Print Area impresion de factura y cotizacion -->
     <!-- ============================================================== -->
-    
+    <script src="assets/js/jquery.PrintArea.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#print").click(function() {
+                var mode = 'iframe'; //popup
+                var close = mode == "popup";
+                var options = {
+                    mode: mode,
+                    popClose: close
+                };
+                $("div.printableArea").printArea(options);
+            });
+        });
+  </script>
 </body>
 </html>

@@ -52,6 +52,8 @@ export class ItemComponent implements OnInit {
   tvalvula : string;
   tmantenimiento : string;
   tareas : any[]=[];
+  //=========IMPRESION================//
+  idSolicitud:any;
 
 
   constructor(
@@ -106,6 +108,7 @@ export class ItemComponent implements OnInit {
         //los items de la solicitud
         this.items = datos.solicitud.item;
         this.cerrada = this.solicitudDatosCompletos.estado;
+        this.idSolicitud = this.idSolicitud = datos.solicitud._id;
       })
   }
   //=========================INSERTAR ITEMS EN LA SOLICITUD========================//

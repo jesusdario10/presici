@@ -27,6 +27,7 @@ import { ValvulasComponent } from './valvulas/valvulas.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptacion.component';
 import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
 
 
 
@@ -57,6 +58,7 @@ import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.compo
         ActividadesComponent,
         OrdenesAceptacionComponent,
         OrdenesGestionComponent,
+        CotizacionComponent,
      
         
         

@@ -20,6 +20,7 @@ import { ValvulasComponent } from './valvulas/valvulas.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptacion.component';
 import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
 
 
 
@@ -48,6 +49,7 @@ const pageRoutes : Routes = [
             {path: 'medico/:id', component: MedicoComponent, data:{titulo:'Mantenimiento de Medicos'}},*/
             {path: 'solicitudes', component: SolicitudesComponent, data:{titulo:'Creacion de Solicitudes'}},
             {path: 'solicitudes/:id', component: ItemComponent, data:{titulo:'Agregar Item'}},
+            {path: 'cotizacion/:id', component: CotizacionComponent, data:{titulo:'Cotizacion'}},
             
 
             /* =================Gestion de Ordenes===========================*/
