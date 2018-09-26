@@ -59,6 +59,7 @@ export class CotizacionComponent implements OnInit {
       this._itemService.obtenerSolicitud();
     //me lista la solicitud completa
       this.listarSolicitudCompleta();
+      
   }
 
     //======================LISTAR SOLICITUD COMPLETA===============================//

@@ -21,6 +21,7 @@ import { ActividadesComponent } from './actividades/actividades.component';
 import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptacion.component';
 import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
 
 
 
@@ -71,6 +72,14 @@ const pageRoutes : Routes = [
                 canActivate:[AdminGuard],
                 data:{titulo:'Equipos para Mantenimiento'},
             },
+            {
+                path: 'mantenimientos/:id',
+                component: MantenimientosComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Equipos para Mantenimiento'},
+            },
+            
+            
             
             
              /* =================Configuraciones y Admin=====================*/

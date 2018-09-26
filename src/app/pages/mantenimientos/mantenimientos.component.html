@@ -1,0 +1,105 @@
+	<div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-body centrado">
+            <h1>Aqui vendran los Datos del Cuerpo</h1>
+            <br>
+            <br>
+          <div class="row">
+            <div class="col-lg-3 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Valvula</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones para el Tipo de Valvula</font></font></label>
+                   <input type="text" class="form-control" placeholder="Ingrese Observaciones Para el Tipo de Valvula">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Serial</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones del Cuerpo</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Componentes</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de Otros Datos</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Componentes</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mtto, Prioridad y Ubicacion</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dificultad</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                <div class="form-group">
+                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de la Dificultad</font></font></label>
+                   <input type="text" class="form-control">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-body centrado">
+          <h2>Actividades</h2>
+          <div class="row" >
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <table class="tablesaw table-bordered table-hover table tablesaw-swipe">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre Actividad</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Fotografia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tarea of tareas; let i = index"> 
+                    <td>{{i}}</td>
+                    <td>{{tarea.nombre}}</td>
+                    <td>Hora inicio</td>
+                    <td>Hora fin</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

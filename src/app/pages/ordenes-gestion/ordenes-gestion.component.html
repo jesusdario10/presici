@@ -35,7 +35,7 @@
                   <td class="tamano" style="text-align: left">Valvula de {{mtto.tipovalvula.nombre}}-{{mtto.tiposello}}-({{mtto.diametro}})
                     -{{mtto.material}}- Mto: {{mtto.tipomtto}}-Prioridad:{{mtto.prioridad}}-Deficult:({{mtto.dificultad}})</td>
                   <td class="tamano centrado2">{{mtto.valor/1000 | currency:'':true:'1.3-3'}}</td>
-                  <td class="centrado3"><button (click)="borraritem(i)" type="button" class="btn btn-primary"><i class="fa fa-save"></i></button></td>  
+                  <td class="centrado3"><button [routerLink]="['/mantenimientos', mtto._id]"  type="button" class="btn btn-primary"><i class="fa fa-save"></i></button></td>  
                 </tr>
             </table>
     </div>
