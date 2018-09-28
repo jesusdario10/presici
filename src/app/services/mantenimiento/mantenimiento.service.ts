@@ -41,7 +41,7 @@ export class MantenimientoService {
     }
   //=================ACTUALIZAR ESTADO DE LAS TAREAS DE LOS MANTENIMIENTOS DE LS VALVULAS ==================//
   actualizarEstadodeTareasdeValvulas(mantenimiento:MantenimientoModel, id, index):Observable<any>{
-    let url = URL_SERVICIOS+'/mantenimientos/manten/estado/'+id+'?index='+index;
+    let url = URL_SERVICIOS+'/mantenimientos/manten/estadoactividades/'+id+'?index='+index;
 
     return this._http.put(url, mantenimiento).pipe(
       map((resp:any)=>{
@@ -60,5 +60,24 @@ export class MantenimientoService {
         return resp;
       })
     )
-  }      
-}
+  }
+  //=================ACTUALIZAR EL ESTADO DE LOS MANTENIMIENTOS ==================//
+  actualizarEstadoMtto(mantenimiento:MantenimientoModel, id):Observable<any>{
+    let url = URL_SERVICIOS+'/mantenimientos/manten/estado/'+id
+
+    return this._http.put(url, mantenimiento).pipe(
+      map((resp:any)=>{
+        swal('Exito', 'Estado Actualizado ', 'success');
+        return resp;
+      })
+    )
+  } 
+  
+  
+
+
+
+}        
+
+
+

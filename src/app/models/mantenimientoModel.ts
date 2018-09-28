@@ -21,6 +21,11 @@ export class MantenimientoModel{
     obsComponentes ? : string;
     obsTmttoPrioUbi ? : string;
     obsDificultad ? : string;
+    estado?: string;
+    obsEstado?: string;
+    fechaInicio? : Date;
+    fechaDetenido? : Date;
+    fechaFin?: Date;
     _id ?: string;
 
     constructor(
@@ -44,6 +49,11 @@ export class MantenimientoModel{
       obsComponentes ? : string,
       obsTmttoPrioUbi ? : string,
       obsDificultad ? : string,
+      estado?: string,
+      obsEstado ? : string,
+      fechaInicio ?: Date,
+      fechaDetenido ?: Date,
+      fechaFin ?: Date,
       _id ?: string,
     ){
       this.solicitud = solicitud;
@@ -61,6 +71,11 @@ export class MantenimientoModel{
       this.cantidad = cantidad;
       this.valor = valor;
       this.tareas = tareas;
+      this.estado =estado;
+      this.obsEstado = obsEstado;
+      this.fechaInicio =fechaInicio;
+      this.fechaDetenido =fechaDetenido;
+      this.fechaFin =fechaFin;
     }
 }
 

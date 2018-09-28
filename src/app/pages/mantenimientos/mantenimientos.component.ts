@@ -11,6 +11,7 @@ import { FormsModule, FormGroup, Validators, FormBuilder, FormGroupDirective } f
 })
 export class MantenimientosComponent implements OnInit {
   mantenimiento : MantenimientoModel;
+  mantEstado : MantenimientoModel[]=[];
   idMtto : string;
   tareas : any[]=[];
 
@@ -32,7 +33,11 @@ export class MantenimientosComponent implements OnInit {
   obsComponentes :string;
   obsTmttoPrioUbi :string;
   obsDificultad :string;
-
+  estadomtto : string;
+  obsEstado : string;
+  fechaInicio: Date;
+  fechaDetenido: Date;
+  fechaFin: Date;
   //====PROPIEDADES DE LAS OBSERVACIONES DEL MANTENIMIENTO==========================//
   form: FormGroup;
   formSubmit: boolean;
@@ -46,6 +51,8 @@ export class MantenimientosComponent implements OnInit {
   ngOnInit() {
     this.obtenerIdMtto();
     this.listarUnMantenimiento();
+    
+
     //------------inicializar el formulario de observaciones--------------------------//
     this.form = this.fb.group({
       obsTipovalvula: ["", Validators.required ],
@@ -65,12 +72,15 @@ export class MantenimientosComponent implements OnInit {
   }
   //===========OBTENER UN MANTENIMIENTO===============================================//
   listarUnMantenimiento(){
-    console.log(this.idMtto);
+    
     this._mantenimientoService.encontrarUnMantenimiento(this.idMtto)
       .subscribe((datos:any)=>{
-        console.log(datos.mantenimiento);
         this.tareas = datos.mantenimiento.tareas;
         this.mantenimiento = datos.mantenimiento;
+        this.mantEstado = datos.mantenimiento.estado;
+        console.log(datos);
+        
+
         //---------------Mostrando Datos----------------------//
         this.serie = datos.mantenimiento.serie;
         this.tipovalvula = datos.mantenimiento.tipovalvula.nombre;
@@ -87,7 +97,12 @@ export class MantenimientosComponent implements OnInit {
         this.obsCuerpo =  datos.mantenimiento.obsCuerpo;
         this.obsComponentes = datos.mantenimiento.obsComponentes;
         this.obsTmttoPrioUbi = datos.mantenimiento.obsTmttoPrioUbi;
-        this.obsDificultad = datos.mantenimiento.obsDificultad;   
+        this.obsDificultad = datos.mantenimiento.obsDificultad;
+        this.estadomtto = datos.mantenimiento.estado;
+        this.obsEstado = datos.mantenimiento.obsEstado;
+        this.fechaInicio = datos.mantenimiento.fechaInicio;
+        this.fechaDetenido = datos.mantenimiento.fechaDetenido;
+        this.fechaFin = datos.mantenimiento.fechaFin;   
     })
   }
   //=============ACTUALIZAR LAS OBSERVACIONES DEL MANTENIMIENTO ==========================//
@@ -102,12 +117,8 @@ export class MantenimientosComponent implements OnInit {
       obsDificultad :   formModel.obsDificultad as string,
     }
     this._mantenimientoService.actualizarObsMtto(saveObsMtto, this.idMtto)
-      .subscribe((datos:any)=>{
-        
+      .subscribe((datos:any)=>{  
       })
-
-
-
   }
   //=============COMPLETAR ACTIVIDAD / TAREA =============================================//
   actualizarEstadoyDatosdelaTarea(tarea, index){
@@ -115,9 +126,21 @@ export class MantenimientosComponent implements OnInit {
       .subscribe((datos:any)=>{
         console.log(datos);
     })
-    
-      
+  }
+  //capturavalor
+  ActualizarEstadoMtto(){
+    const saveEstadoMtto : MantenimientoModel ={
+      estado : this.mantEstado.toString(),
+      obsEstado :this.obsEstado.toString()
+    }
+    console.log(saveEstadoMtto);
 
+    this._mantenimientoService.actualizarEstadoMtto(saveEstadoMtto, this.idMtto)
+      .subscribe((datos:any)=>{
+        console.log(datos);
+        this.listarUnMantenimiento();
+    })
+    
   }
 
 }

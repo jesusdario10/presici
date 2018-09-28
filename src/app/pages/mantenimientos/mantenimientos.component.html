@@ -10,62 +10,68 @@
               <div class="row">
                   <div class="col-lg-3 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Valvula</font></font></label>
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Valvula</font></font></label>
                          <input disabled type="text" value='{{tipovalvula}}'  class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-9 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones para el Tipo de Valvula</font></font></label>
-                         <input type="text" name="obsTipovalvula" formControlName="obsTipovalvula" [(ngModel)]="obsTipovalvula" class="form-control" >
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones para el Tipo de Valvula</font></font></label>
+                         <input *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' " type="text" name="obsTipovalvula" formControlName="obsTipovalvula" [(ngModel)]="obsTipovalvula" class="form-control" >
+                         <!--Si ya esta Completado el mtto-->
+                         <input *ngIf="estadomtto == 'COMPLETADO'" disabled  type="text" name="obsTipovalvula" formControlName="obsTipovalvula" [(ngModel)]="obsTipovalvula" class="form-control" >
                       </div>
                   </div>
                   <div class="col-lg-3 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Serial</font></font></label>
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Serial</font></font></label>
                          <input disabled type="text" value='{{serie}}'  class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-9 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones del Cuerpo</font></font></label>
-                         <input type="text" name="obsCuerpo" formControlName="obsCuerpo" [(ngModel)]="obsCuerpo"  class="form-control">
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones del Cuerpo</font></font></label>
+                         <input *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' " type="text" name="obsCuerpo" formControlName="obsCuerpo" [(ngModel)]="obsCuerpo"  class="form-control" >
+                         <input type="text" *ngIf="estadomtto == 'COMPLETADO'" disabled  name="obsCuerpo" formControlName="obsCuerpo" [(ngModel)]="obsCuerpo"  class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-3 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Componentes</font></font></label>
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Componentes</font></font></label>
                          <input disabled type="text"  value='{{otrosDatos}}' class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-9 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de Componentes</font></font></label>
-                         <input type="text" name="obsComponentes" formControlName="obsComponentes" [(ngModel)]="obsComponentes" class="form-control">
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de Componentes</font></font></label>
+                         <input type="text"  *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' " name="obsComponentes" formControlName="obsComponentes" [(ngModel)]="obsComponentes" class="form-control">
+                         <input type="text"  *ngIf="estadomtto == 'COMPLETADO'" disabled name="obsComponentes" formControlName="obsComponentes" [(ngModel)]="obsComponentes" class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-3 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Mantenimiento</font></font></label>
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Mantenimiento</font></font></label>
                          <input disabled type="text" value='{{tipoMtto}}'  class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-9 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de TipoMtto, Prioridad y Ubicacion</font></font></label>
-                         <input type="text" name="obsTmttoPrioUbi" formControlName="obsTmttoPrioUbi"  [(ngModel)]="obsTmttoPrioUbi" class="form-control">
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de TipoMtto, Prioridad y Ubicacion</font></font></label>
+                         <input type="text"  *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' " name="obsTmttoPrioUbi" formControlName="obsTmttoPrioUbi"  [(ngModel)]="obsTmttoPrioUbi" class="form-control">
+                         <input type="text"  *ngIf="estadomtto == 'COMPLETADO'" disabled name="obsTmttoPrioUbi" formControlName="obsTmttoPrioUbi"  [(ngModel)]="obsTmttoPrioUbi" class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-3 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dificultad</font></font></label>
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dificultad</font></font></label>
                          <input disabled type="text" value='{{dificultad}}'  class="form-control">
                       </div>
                   </div>
                   <div class="col-lg-9 col-sm-12">
                       <div class="form-group">
-                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de la Dificultad</font></font></label>
-                         <input type="text"  name="obsDificultad" formControlName="obsDificultad"  [(ngModel)]="obsDificultad" class="form-control">
+                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de la Dificultad</font></font></label>
+                         <input type="text"  *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' " name="obsDificultad" formControlName="obsDificultad"  [(ngModel)]="obsDificultad" class="form-control">
+                         <input type="text"  *ngIf="estadomtto == 'COMPLETADO'" disabled name="obsDificultad" formControlName="obsDificultad"  [(ngModel)]="obsDificultad" class="form-control">
                       </div>
                   </div>
               </div>
@@ -99,28 +105,48 @@
                     <td>{{i}}</td>
                     <td>{{tarea.nombre}}</td>
                     <td>
-                      <input type="number" class="form-control" [(ngModel)]="tarea.tiempo"> 
+                      <input type="number"  *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' " class="form-control" [(ngModel)]="tarea.tiempo">
+                      <input type="number"  *ngIf="estadomtto == 'COMPLETADO'" disabled class="form-control" [(ngModel)]="tarea.tiempo">  
                     </td>
                     <td>
-                      <div class="switch">
+                      <div class="switch"  *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' ">
                         <label>
-                          <input #valor type="checkbox" [(ngModel)]="tarea.estado" checked=tarea.estado ><span class="lever switch-col-red"></span>
+                          <input  type="checkbox"  [(ngModel)]="tarea.estado" checked=tarea.estado ><span class="lever switch-col-red"></span>
                         </label>
-                        {{tarea.estado}}
                       </div>
-                      <!--<div class="switch">
+                      <div class="switch" *ngIf="estadomtto == 'COMPLETADO'">
                         <label>
-                          <input #valor type="checkbox" ><span class="lever switch-col-red"></span>
+                          <input  type="checkbox" disabled  [(ngModel)]="tarea.estado" checked=tarea.estado ><span class="lever switch-col-red"></span>
                         </label>
-                      </div>-->
-                      
-
+                      </div>
                     </td>
                     <td></td>
                     <td class="centrado3"><button (click)="actualizarEstadoyDatosdelaTarea(tarea, i)" type="button" class="btn btn-primary"><i class="fa fa-save"></i></button></td>
                   </tr>
                 </tbody>
               </table>
+              <br>
+              <br>
+              <div class="form-group">
+                  <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tipoSello</font></font></label>
+                  <input [(ngModel)]=item.tiposello name="tiposello" type="text" class="form-control" id="exampleInputEmail1" placeholder="campo1">-->
+                  <h4 style="font-weight: bold">Estado del Mantenimiento</h4>
+                  <select #estado  class="custom-select custom-select-lg mb-3" [(ngModel)]="mantEstado"  class="form-control"   required>
+                    <option value="COMPLETADO">COMPLETADO</option>
+                    <option value="DETENIDO">DETENIDO</option>
+                    <option value="EJECUCION">EJECUCION</option>
+                  </select>
+                  <br>
+                  <br>
+                  <div *ngIf="mantEstado =='DETENIDO'" class="detenido">
+                      <div class="form-group">
+                          <h4 class="titleDetenido">Razon por la Cual el mantenimiento esta Detenido</h4>
+                          <textarea type="text" name="obsEstado"  [(ngModel)]="obsEstado" class="form-control"></textarea>
+                        </div>
+                  </div>
+                  <br>
+                  <button type="button" (click)="ActualizarEstadoMtto()" class="btn btn-danger btn-block centrado">Guardar Mantenimiento</button>
+              </div>
             </div>
           </div>
         </div>
