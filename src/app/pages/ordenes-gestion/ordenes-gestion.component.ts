@@ -97,9 +97,6 @@ export class OrdenesGestionComponent implements OnInit {
         this.obtenerMantenimientos(); 
       })
       formData.reset();
-
-
-    
   }
 
 

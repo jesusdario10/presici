@@ -33,7 +33,9 @@ export class ActividadesComponent implements OnInit {
     this.listarActividades();
     this.form = this.fb.group({
       nombre :["", Validators.required],
-      tipo :["", Validators.required]
+      tipo :["", Validators.required],
+      estado :[false, Validators.required],
+      tiempo :[0, Validators.required]
 
     });
   }
@@ -44,7 +46,9 @@ export class ActividadesComponent implements OnInit {
     const saveActividades : ValvulaModel = {
       actividades : {
         nombre: formModel.nombre as string,
-        tipo: formModel.tipo as string
+        tipo: formModel.tipo as string,
+        estado : false,
+        tiempo : 0
       }
     }
     console.log(saveActividades);
@@ -61,6 +65,7 @@ export class ActividadesComponent implements OnInit {
   listarActividades(){
     this._valvulaService.listarActividades()
       .subscribe((datos:any)=>{
+        
         this.actividadesBasicas = datos.basicas;
         this.actividadesGenerales = datos.generales;
         this.tipoValvula = datos.tipovalvula.nombre;

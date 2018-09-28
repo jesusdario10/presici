@@ -43,7 +43,7 @@ export class SolicitudService {
         );
        }
        
-        // =====================Cargar Solicitudes ==================================//
+        // =====================Cargar Solicitudes Administrador ==================================//
         cargarSolicitudes():Observable<any>{
           let url = URL_SERVICIOS+'/solicitud';
           url +='?token='+this._usuarioService.token;

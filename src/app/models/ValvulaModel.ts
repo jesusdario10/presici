@@ -18,4 +18,6 @@ export class ValvulaModel{
 export class Actividades{
     nombre?:string;
     tipo?: string;
+    tiempo? : number;
+    estado? : boolean;
 }

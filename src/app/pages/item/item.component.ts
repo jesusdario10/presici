@@ -95,6 +95,8 @@ export class ItemComponent implements OnInit {
   listarSolicitudCompleta(){ 
     this._itemService.listarItemssolicitudes()
       .subscribe((datos)=>{
+        console.log(datos);
+        
         //los datos completos de la solicitud
         this.solicitudDatosCompletos = datos.solicitud;
         this.nitCliente = (datos.solicitud.cliente.nit).toString();
@@ -142,6 +144,7 @@ export class ItemComponent implements OnInit {
     if(this.tmantenimiento ==="Basico"){
       this._ValvulasService.listarActividadesBasicas(this.tvalvula)
       .subscribe((datos:any)=>{
+        console.log(datos);
         this.tareas = datos.basicas;
         saveItem.item.tareas = this.tareas
         /*2-*Guardamos el item**/

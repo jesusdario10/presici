@@ -2,70 +2,75 @@
     <div class="col-lg-12 col-md-12">
       <div class="card">
         <div class="card-body centrado">
-            <h1>Aqui vendran los Datos del Cuerpo</h1>
+            <h2>Valvula {{tipovalvula}} - Sello {{tiposello}} | Diametro ({{diametro}})" - Rating {{rating}} | Material {{material}} Otros {{otrosDatos}}</h2>
             <br>
             <br>
           <div class="row">
-            <div class="col-lg-3 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Valvula</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-9 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones para el Tipo de Valvula</font></font></label>
-                   <input type="text" class="form-control" placeholder="Ingrese Observaciones Para el Tipo de Valvula">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Serial</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-9 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones del Cuerpo</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Componentes</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-9 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de Otros Datos</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Componentes</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-9 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mtto, Prioridad y Ubicacion</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dificultad</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-lg-9 col-sm-12">
-                <div class="form-group">
-                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de la Dificultad</font></font></label>
-                   <input type="text" class="form-control">
-                </div>
-            </div>
+            <form class="col-lg-12 col-md-12" [formGroup]="form" #obsMtto="ngForm"  text-align="center"  (ngSubmit)="actualizarObservaciones(form, obsMtto)">
+              <div class="row">
+                  <div class="col-lg-3 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Valvula</font></font></label>
+                         <input disabled type="text" value='{{tipovalvula}}'  class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-9 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones para el Tipo de Valvula</font></font></label>
+                         <input type="text" name="obsTipovalvula" formControlName="obsTipovalvula" [(ngModel)]="obsTipovalvula" class="form-control" >
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Serial</font></font></label>
+                         <input disabled type="text" value='{{serie}}'  class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-9 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones del Cuerpo</font></font></label>
+                         <input type="text" name="obsCuerpo" formControlName="obsCuerpo" [(ngModel)]="obsCuerpo"  class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otros Componentes</font></font></label>
+                         <input disabled type="text"  value='{{otrosDatos}}' class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-9 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de Componentes</font></font></label>
+                         <input type="text" name="obsComponentes" formControlName="obsComponentes" [(ngModel)]="obsComponentes" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo Mantenimiento</font></font></label>
+                         <input disabled type="text" value='{{tipoMtto}}'  class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-9 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de TipoMtto, Prioridad y Ubicacion</font></font></label>
+                         <input type="text" name="obsTmttoPrioUbi" formControlName="obsTmttoPrioUbi"  [(ngModel)]="obsTmttoPrioUbi" class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dificultad</font></font></label>
+                         <input disabled type="text" value='{{dificultad}}'  class="form-control">
+                      </div>
+                  </div>
+                  <div class="col-lg-9 col-sm-12">
+                      <div class="form-group">
+                         <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Observaciones de la Dificultad</font></font></label>
+                         <input type="text"  name="obsDificultad" formControlName="obsDificultad"  [(ngModel)]="obsDificultad" class="form-control">
+                      </div>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-primary  btn-block centrado">Guardar Observaciones</button>
+            </form>
           </div>
         </div>
       </div>
@@ -78,22 +83,41 @@
           <h2>Actividades</h2>
           <div class="row" >
             <div class="col-lg-12 col-md-12 col-sm-12">
-              <table class="tablesaw table-bordered table-hover table tablesaw-swipe">
+              <table class="tablesaw table-bordered table-hover table tablesaw-swipe table-responsive">
                 <thead>
                   <tr>
                     <th>#</th>
                     <th>Nombre Actividad</th>
-                    <th>Inicio</th>
-                    <th>Fin</th>
+                    <th>Minutos</th>
+                    <th>Estado</th>
                     <th>Fotografia</th>
+                    <th>Guardar</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let tarea of tareas; let i = index"> 
                     <td>{{i}}</td>
                     <td>{{tarea.nombre}}</td>
-                    <td>Hora inicio</td>
-                    <td>Hora fin</td>
+                    <td>
+                      <input type="number" class="form-control" [(ngModel)]="tarea.tiempo"> 
+                    </td>
+                    <td>
+                      <div class="switch">
+                        <label>
+                          <input #valor type="checkbox" [(ngModel)]="tarea.estado" checked=tarea.estado ><span class="lever switch-col-red"></span>
+                        </label>
+                        {{tarea.estado}}
+                      </div>
+                      <!--<div class="switch">
+                        <label>
+                          <input #valor type="checkbox" ><span class="lever switch-col-red"></span>
+                        </label>
+                      </div>-->
+                      
+
+                    </td>
+                    <td></td>
+                    <td class="centrado3"><button (click)="actualizarEstadoyDatosdelaTarea(tarea, i)" type="button" class="btn btn-primary"><i class="fa fa-save"></i></button></td>
                   </tr>
                 </tbody>
               </table>

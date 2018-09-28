@@ -16,6 +16,11 @@ export class MantenimientoModel{
     cantidad ?: number;
     valor ?: number;
     tareas ? : any[];
+    obsTipovalvula ? : string;
+    obsCuerpo ? : string;
+    obsComponentes ? : string;
+    obsTmttoPrioUbi ? : string;
+    obsDificultad ? : string;
     _id ?: string;
 
     constructor(
@@ -34,6 +39,11 @@ export class MantenimientoModel{
       cantidad ?: number,
       valor ?: number,
       tareas ? : any[],
+      obsTipovalvula ? : string,
+      obsCuerpo ? : string,
+      obsComponentes ? : string,
+      obsTmttoPrioUbi ? : string,
+      obsDificultad ? : string,
       _id ?: string,
     ){
       this.solicitud = solicitud;
@@ -51,7 +61,6 @@ export class MantenimientoModel{
       this.cantidad = cantidad;
       this.valor = valor;
       this.tareas = tareas;
-
     }
 }
 
