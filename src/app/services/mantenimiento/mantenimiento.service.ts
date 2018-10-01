@@ -5,8 +5,8 @@ import { URL_SERVICIOS } from '../../config/config';
 import { map, catchError } from "rxjs/operators"; 
 import { throwError } from "rxjs/internal/observable/throwError"; 
 import { Router } from '@angular/router';
-
 import { MantenimientoModel } from '../../models/mantenimientoModel';
+import { UsuarioService } from '../service.index';
 
 
 @Injectable({
@@ -16,7 +16,8 @@ export class MantenimientoService {
   mantenimiento : MantenimientoModel
 
   constructor(
-    private _http : HttpClient
+    private _http : HttpClient, 
+    private _usuarioService : UsuarioService
   ) { }
   //=======================BUSCAR MANTENIMIENTO POR ID====================//
   encontrarUnMantenimiento(id):Observable<any>{
@@ -71,10 +72,26 @@ export class MantenimientoService {
         return resp;
       })
     )
-  } 
+  }
+  //========================TRAER UNA SOLICITUD==========================================// 
+  traelaSolicituddelMantenimiento(id){
+    let url = URL_SERVICIOS+'/solicitud/'+id;
+    url +='?token='+this._usuarioService.token;
+    return this._http.get(url);
+  }
+  //=======================SE COMPLETARON TODOS LOS MANTENIMIENTOS DE LA SOLICITUD?======//
+    mttosCompletos(id){
+      let url = URL_SERVICIOS+'/mantenimientos/completos/'+id;
+      return this._http.get(url).pipe(
+        map((resp:any)=>{
+          
+          return resp;
+        })
+      )
+    }
+  //====ACTUALIZAR EL ESTADO DE LA SOLICITUD DONDE SUS MANTENIMIENTOS SE COMPLETARON======//
   
   
-
 
 
 }        

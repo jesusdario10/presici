@@ -141,7 +141,8 @@ export class SolicitudService {
         map((resp: any) =>{
           console.log("voy por aqui");
           let SolicitudDb : SolicitudModel = resp.solicitud
-        swal('Actualizado', 'Datos Actualizados Correctamente', 'success');       
+        swal('Actualizado', 'Datos Actualizados Correctamente', 'success');     
+        return resp;  
       }),
       catchError(err=>{
        console.log(err);

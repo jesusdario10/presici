@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MantenimientoModel } from '../../models/mantenimientoModel';
-import { MantenimientoService } from '../../services/service.index';
+import { MantenimientoService, SolicitudService } from '../../services/service.index';
 import { FormsModule, FormGroup, Validators, FormBuilder, FormGroupDirective } from '@angular/forms'
 
 
@@ -11,7 +11,7 @@ import { FormsModule, FormGroup, Validators, FormBuilder, FormGroupDirective } f
 })
 export class MantenimientosComponent implements OnInit {
   mantenimiento : MantenimientoModel;
-  mantEstado : MantenimientoModel[]=[];
+  mantEstado : string;
   idMtto : string;
   tareas : any[]=[];
 
@@ -33,8 +33,8 @@ export class MantenimientosComponent implements OnInit {
   obsComponentes :string;
   obsTmttoPrioUbi :string;
   obsDificultad :string;
-  estadomtto : string;
-  obsEstado : string;
+  estadomtto : string = 'INICIAL';
+  obsEstado : string = '';
   fechaInicio: Date;
   fechaDetenido: Date;
   fechaFin: Date;
@@ -45,6 +45,7 @@ export class MantenimientosComponent implements OnInit {
 
   constructor(
     private _mantenimientoService : MantenimientoService,
+    private _solicitudService : SolicitudService,
     private fb: FormBuilder
   ) { }
 
@@ -75,10 +76,11 @@ export class MantenimientosComponent implements OnInit {
     
     this._mantenimientoService.encontrarUnMantenimiento(this.idMtto)
       .subscribe((datos:any)=>{
+        console.log(datos);
         this.tareas = datos.mantenimiento.tareas;
         this.mantenimiento = datos.mantenimiento;
         this.mantEstado = datos.mantenimiento.estado;
-        console.log(datos);
+        
         
 
         //---------------Mostrando Datos----------------------//
@@ -120,27 +122,50 @@ export class MantenimientosComponent implements OnInit {
       .subscribe((datos:any)=>{  
       })
   }
-  //=============COMPLETAR ACTIVIDAD / TAREA =============================================//
+  //==============================COMPLETAR ACTIVIDAD / TAREA =============================================//
   actualizarEstadoyDatosdelaTarea(tarea, index){
     this._mantenimientoService.actualizarEstadodeTareasdeValvulas(tarea, this.idMtto, index)
       .subscribe((datos:any)=>{
         console.log(datos);
     })
-  }
-  //capturavalor
-  ActualizarEstadoMtto(){
-    const saveEstadoMtto : MantenimientoModel ={
-      estado : this.mantEstado.toString(),
-      obsEstado :this.obsEstado.toString()
-    }
-    console.log(saveEstadoMtto);
 
-    this._mantenimientoService.actualizarEstadoMtto(saveEstadoMtto, this.idMtto)
+  }
+  //======ACTUALIZAR EL ESTADO DEL MANTENIMIENTO Y SI ESTA CERRADA ACTUALIZAR EL ESTADO DE LA SOLICITUD=====//
+  ActualizarEstadoMtto(){
+    let elestadosi = this.mantEstado.toString();
+
+    this.mantenimiento.estado = elestadosi;
+
+    this.mantenimiento.obsEstado = this.obsEstado;
+    
+
+    this._mantenimientoService.actualizarEstadoMtto(this.mantenimiento, this.idMtto)
       .subscribe((datos:any)=>{
         console.log(datos);
-        this.listarUnMantenimiento();
-    })
-    
+        var idSolicitud = datos.mttoActualizado.solicitud;
+        //=======SI EL MTTO SE COMPLETA CONSULTO SI OTROS MTTOS ESTAN EN ESTADO COMPLETADO==============//
+        if(datos.mttoActualizado.estado == "COMPLETADO"){
+          
+          this._mantenimientoService.mttosCompletos(datos.mttoActualizado.solicitud)
+            .subscribe((datos:any)=>{
+              console.log(datos);
+              //si todos estan completos
+              if(datos.completo==true){
+                console.log("dddddddddddddddddddddddddddd");
+                this._mantenimientoService.traelaSolicituddelMantenimiento(idSolicitud)
+                  .subscribe((datos:any)=>{
+                    datos.solicitud.estado = 'COMPLETADA'
+                    //actualizando el estado de la solicitud
+                    this._solicitudService.actualizarSolicitud(datos.solicitud._id, datos.solicitud)
+                      .subscribe((datos:any)=>{
+                        console.log(datos);
+                      })
+                  })
+              }
+            });
+
+        }
+    });
   }
 
 }
