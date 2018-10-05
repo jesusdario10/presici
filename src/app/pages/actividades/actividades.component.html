@@ -8,32 +8,27 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body" style="text-align: center">
-                        <form ngNativeValidate [formGroup]="form" #actividadesf="ngForm"  text-align="center"  (ngSubmit)="insertarActividades(form, actividadesf)">
-                            
-                                
-                                <h2 class="tipovalvulacolor">{{tipoValvula}}</h2>
-                                <div class="row">
-                                    <div class="col-sm-8 col-xs-8">
-                                      <div class="form-group">
-                                        <label for="">Nombre de la Actividad</label>
-                                        <input type="text" name="nombre" formControlName="nombre" class="form-control" required>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-4 col-xs-4">
-                                        <div class="form-group">
-                                            <label for="">Tipo de Actividad</label>
-                                            <select class="custom-select custom-select-lg mb-3"  name="tipo" formControlName="tipo" class="form-control"   required>
-                                                <option value="" disabled selected>Open</option>
-                                                <option value="Basico">Basica</option>
-                                                <option value="General">General</option>
-
-                                              </select>
-                                        </div>
-                                    </div>
-                                    
+                      <form ngNativeValidate [formGroup]="form" #actividadesf="ngForm"  text-align="center"  (ngSubmit)="insertarActividades(form, actividadesf)">           
+                          <h2 class="tipovalvulacolor">{{tipoValvula}}</h2>
+                          <div class="row">
+                              <div class="col-sm-8 col-xs-8">
+                                <div class="form-group">
+                                  <label for="">Nombre de la Actividad</label>
+                                  <input type="text" name="nombre" formControlName="nombre" class="form-control" required>
                                 </div>
-                            <input class="btn btn-success" type="submit"   name="" id="" value="Crear">
-                        </form>  
+                              </div>
+                              <div class="col-sm-4 col-xs-4">
+                                <div class="form-group">
+                                  <label for="">Tipo de Actividad</label>
+                                  <select class="custom-select custom-select-lg mb-3"  name="tipo" formControlName="tipo" class="form-control"   required>                                                
+                                    <option value="Basico">Basica</option>
+                                    <option value="General">General</option>
+                                  </select>
+                                </div>
+                              </div>
+                          </div>
+                          <input class="btn btn-success" type="submit"   name="" id="" value="Crear">
+                      </form>  
                     </div>
                   </div>
                 </div>
@@ -44,8 +39,7 @@
       <div class="col-md-6" style="text-align:center">
         <br>
         <h2>Actividades Basicas</h2>
-        <table class="table table-hover table-responsive">
-            
+        <table class="table table-hover table-responsive">      
           <thead>
             <tr style="text-align:center">
               <th style="text-align:center">#</th>    
@@ -53,11 +47,8 @@
               <th style="text-align:center">Editar</th>  
             </tr>
           </thead>
-          <tbody>
-            
+          <tbody>     
             <tr *ngFor="let basica of actividadesBasicas; let i = index">
-                
-
               <td style="text-align:center">{{i}}</td>
               <td style="text-align:left">{{basica.nombre}}</td>
               <td style="text-align:center">
@@ -71,7 +62,6 @@
           <br>
           <h2 class="generaltitle">Actividades Generales</h2>
           <table class="table table-hover table-responsive">
-              
             <thead>
               <tr style="text-align:center">
                 <th class="generaltitle" style="text-align:center">#</th>    
@@ -80,10 +70,7 @@
               </tr>
             </thead>
             <tbody>
-              
               <tr *ngFor="let general of actividadesGenerales; let i = index">
-                  
-  
                 <td class="generalcontent" style="text-align:center"><strong>{{i}}</strong></td>
                 <td class="generalcontent" style="text-align:left">{{general.nombre}}</td>
                 <td class="generalcontent" style="text-align:center">
@@ -99,7 +86,6 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <h2 class="tipovalvulacolor">Editor de Actividades</h2>
-
         <div>
           	<div class="row espaciado">
               <div class="col-12">
@@ -111,7 +97,7 @@
                     <br>
                     <br>
                     <div class="centro">
-                        <button  type="button"  class="btn btn-success centro"  data-toggle="modal" data-target=".bd-edit-modal-lg">Editar</button>
+                      <button  type="button"  class="btn btn-success centro"  data-toggle="modal" data-target=".bd-edit-modal-lg">Editar</button>
                     </div>
                   </div>
                 </div>

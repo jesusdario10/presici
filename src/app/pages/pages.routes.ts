@@ -22,6 +22,7 @@ import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptac
 import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
+import { InformesClienteComponent } from './informes-cliente/informes-cliente.component';
 
 
 
@@ -121,6 +122,9 @@ const pageRoutes : Routes = [
             
 
             {path: '', redirectTo: '/dashboard', pathMatch:'full'},
+
+          /*=========================Informes==============================*/
+            {path: 'informes', component: InformesClienteComponent, data:{titulo:'Informes'}},
             
         ]
     }

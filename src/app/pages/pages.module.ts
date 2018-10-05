@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 //ng2-charts
 import { ChartsModule } from 'ng2-charts';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
@@ -29,6 +30,7 @@ import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptac
 import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
+import { InformesClienteComponent } from './informes-cliente/informes-cliente.component';
 
 
 
@@ -61,6 +63,7 @@ import { MantenimientosComponent } from './mantenimientos/mantenimientos.compone
         OrdenesGestionComponent,
         CotizacionComponent,
         MantenimientosComponent,
+        InformesClienteComponent,
      
         
         
