@@ -65,7 +65,7 @@ export class OrdenesGestionComponent implements OnInit {
     
   }
   //======================Generar los mantenimientos=========================================================//
-  enviandosolicitud(){
+  generandoMantenimientos(){
     this._ordenesServices.enviandosolicitud(this.solicitud, this.idSolicitud)
       .subscribe((datos:any)=>{
         this.obtenerMantenimientos(); 

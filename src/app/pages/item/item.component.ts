@@ -89,6 +89,7 @@ export class ItemComponent implements OnInit {
       dificultad: [ "", Validators.required ],
       sitio: [ "", Validators.required ],
       cantidad: [ 0, Validators.required ],
+      fechareq :["", Validators.required]
     });
   }
   //======================LISTAR SOLICITUD COMPLETA===============================//
@@ -131,7 +132,8 @@ export class ItemComponent implements OnInit {
         dificultad :formModel.dificultad as string,
         sitio :formModel.sitio as string,
         cantidad :formModel.cantidad as number,
-        valor : random as number
+        valor : random as number,
+        fechaRequerida : formModel.fechareq as string
       },
       valorTotal : this.cantidad * random
     };

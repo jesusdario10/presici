@@ -16,6 +16,7 @@ export class SolicitudModel{
         estado:string,
         cliente:string,
         cargo:string,
+        fechaRequerida : string,
         _id : string
     ){
         this.item = item;
@@ -40,6 +41,7 @@ export class Atributo{
     public dificultad : string;
     public sitio : string;
     public cantidad : number;
+    public fechaRequerida : string;
     public valor : number;
     public tareas? : any[];
 }
