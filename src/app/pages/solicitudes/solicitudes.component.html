@@ -35,7 +35,8 @@
             <table class="table table-hover table-responsive">
               <thead>
                 <tr style="text-align:center">
-                  <th style="text-align:center">Consecutivo</th>
+                  <th style="text-align:center">Consecutivo</th>  
+                  <th style="text-align:center">Fecha Inicio</th>
                   <th style="text-align:center">Cliente</th>
                   <th style="text-align:center">Nombre o numero</th>
                   <th>Valor</th>
@@ -49,6 +50,7 @@
                 <tr  *ngFor="let solicitud of solicitudes; let i = index">
 
                   <td style="text-align:center">{{i}}</td>
+                  <td style="text-align:center">{{solicitud.fechaInicial | date}}</td>
                   <td style="text-align:center">{{solicitud.cliente.nombre}}</td>
                   <td style="text-align:left">{{solicitud.nombre}}</td>
                   <td style="text-align:left">{{solicitud.valorTotal/1000 | currency:'USD':true:'1.3-3'}}</td>

@@ -25,6 +25,7 @@ export class ItemComponent implements OnInit {
   /*MANIPULACION DE LOS DATOS*/  
   items : ItemModel[]=[];
   item : ItemModel;
+  actividades : any[]=[];
   solicitudDatosCompletos : SolicitudModel;
   cerrada : string ;
  
@@ -256,6 +257,12 @@ export class ItemComponent implements OnInit {
     .subscribe((datos:any)=>{
       
     });
+  }
+  //===========================MOSTRAR LAS ACTIVDIADES==================//
+  actividadesr(valor){
+    console.log(valor);
+    this.actividades = valor.tareas;
+    console.log(this.actividades);
   }
 
  

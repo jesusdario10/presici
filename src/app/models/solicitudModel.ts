@@ -7,6 +7,8 @@ export class SolicitudModel{
     estado?:string;
     cliente?:string;
     cargo?:string;
+    fechaInicial?:string;
+    fechaFinal?:string;
     _id?:string
 
     constructor(
@@ -16,7 +18,8 @@ export class SolicitudModel{
         estado:string,
         cliente:string,
         cargo:string,
-        fechaRequerida : string,
+        fechaInicial:string,
+        fechaFinal:string,
         _id : string
     ){
         this.item = item;
@@ -25,6 +28,8 @@ export class SolicitudModel{
         this.estado = estado;
         this.cliente = cliente;
         this.cargo = cargo;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
         this._id = _id;
     }
 }

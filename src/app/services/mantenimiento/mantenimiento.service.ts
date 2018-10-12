@@ -89,7 +89,16 @@ export class MantenimientoService {
         })
       )
     }
-  //====ACTUALIZAR EL ESTADO DE LA SOLICITUD DONDE SUS MANTENIMIENTOS SE COMPLETARON======//
+  //====CONSULTADO LOS MANTENIMIENTOS ENTRE FECHAS======//
+  mttosEntreFechas(mantenimiento: MantenimientoModel){
+    let url = URL_SERVICIOS+'/mantenimientos/manten/entre/fechas';
+    return this._http.post(url, mantenimiento).pipe(
+      map((resp:any)=>{
+        console.log(resp);
+        return resp;
+      })
+    )
+  }
   
   
 

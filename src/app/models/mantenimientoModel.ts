@@ -23,9 +23,9 @@ export class MantenimientoModel{
     obsDificultad ? : string;
     estado?: string;
     obsEstado?: string;
-    fechaInicio? : Date;
-    fechaDetenido? : Date;
-    fechaFin?: Date;
+    fechaInicial? : string;
+    fechaDetenido? : string;
+    fechaFinal?: string;
     _id ?: string;
 
     constructor(
@@ -51,9 +51,9 @@ export class MantenimientoModel{
       obsDificultad ? : string,
       estado?: string,
       obsEstado ? : string,
-      fechaInicio ?: Date,
-      fechaDetenido ?: Date,
-      fechaFin ?: Date,
+      fechaInicial ?: string,
+      fechaDetenido ?: string,
+      fechaFinal ?: string,
       _id ?: string,
     ){
       this.solicitud = solicitud;
@@ -73,9 +73,9 @@ export class MantenimientoModel{
       this.tareas = tareas;
       this.estado =estado;
       this.obsEstado = obsEstado;
-      this.fechaInicio =fechaInicio;
+      this.fechaInicial =fechaInicial;
       this.fechaDetenido =fechaDetenido;
-      this.fechaFin =fechaFin;
+      this.fechaFinal =fechaFinal;
     }
 }
 

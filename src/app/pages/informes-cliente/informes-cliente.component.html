@@ -3,27 +3,29 @@
     <div class="col-12">
         <div class="card" style="text-align:center">
           <div class="card-body">
-            <div class="row">
-              <div class="col-lg-4">
-                  <div class="form-group">
-                      <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Inicial</font></font></label>
-                      <input type="date" name="fechaInicial" [(ngModel)]="fechaInicial" class="form-control" placeholder="dd/mm/yyyy">
-                  </div>
+            <form>
+              <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Inicial</font></font></label>
+                        <input type="date" name="fechaInicialForm" [(ngModel)]="fechaInicialForm" class="form-control" placeholder="dd/mm/yyyy">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Final</font></font></label>
+                        <input type="date"  name="fechaFinalForm" [(ngModel)]="fechaFinalForm"  class="form-control" placeholder="dd/mm/yyyy">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cliente</font></font></label>
+                        <input type="text" class="form-control" >
+                    </div>
+                </div>
               </div>
-              <div class="col-lg-4">
-                  <div class="form-group">
-                      <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Final</font></font></label>
-                      <input type="date"  name="fechaFinal" [(ngModel)]="fechaFinal"  class="form-control" placeholder="dd/mm/yyyy">
-                  </div>
-              </div>
-              <div class="col-lg-4">
-                  <div class="form-group">
-                      <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cliente</font></font></label>
-                      <input type="text" class="form-control" >
-                  </div>
-              </div>
-            </div>
-            <button class="btn btn-primary" (click)="fechas()" type="button">Filtrar</button>
+              <button class="btn btn-primary" (click)="fechas()" (click)="generaGraficoDona()" type="button">Filtrar</button>
+          </form>
           </div>
         </div>
     </div>
@@ -33,23 +35,26 @@
         <div class="card-body">
         <h5>Estado de Solicitudes</h5>
         <div style="display: block">
-            <canvas baseChart
+            <canvas width="400" height="200" baseChart
                     [data]="doughnutChartData"
                     [labels]="doughnutChartLabels"
                     [chartType]="doughnutChartType"> <!--pilas que el simbolo > va aqui y si falta te da error-->
             </canvas>
           </div>
+          Cantidad Analizadas : {{cantidad}}
         </div>
       </div>
     </div>
     <div class="col-6">
         <div class="card">
           <div class="card-body">
-            <h5>Tiempo</h5>
-            <canvas id="elchart" width="400" height="400"></canvas>
+            <h5>Estado de los Mantenimientos</h5>
+            <canvas id="elchart" width="400" height="200"></canvas>
+             Cantidad Analizados : {{mancantidad}}
           </div>
         </div>
       </div>
+
 </div>
 
 

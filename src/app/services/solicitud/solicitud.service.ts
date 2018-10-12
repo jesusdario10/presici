@@ -134,7 +134,7 @@ export class SolicitudService {
     // =====================Actualizar Solicitudes ==================================//
 
       actualizarSolicitud(id, solicitud:SolicitudModel):Observable<any>{
-      let url = URL_SERVICIOS+'/solicitud/'+id
+      let url = URL_SERVICIOS+'/solicitud/'+id;
       url +='?token='+this._usuarioService.token
       console.log("paso1");
       return this._http.put(url, solicitud).pipe(
@@ -158,6 +158,16 @@ export class SolicitudService {
     let url = URL_SERVICIOS+'/solicitud/'+id;
     url +='?token='+this._usuarioService.token
     return this._http.delete(url);
+  }
+  // ===========BUSCAR SOLICITUDES POR FECHA PARA EL ADMINISTRADOR==================== //
+  buscarSolicitudesporfecha(solicitud:SolicitudModel):Observable<any>{
+    let url = URL_SERVICIOS+'/solicitud/'+'solicitudesfecha'
+    return this._http.post(url, solicitud).pipe(
+      map((resp:any)=>{
+        
+        return resp;
+      })
+    )
   }
 
     

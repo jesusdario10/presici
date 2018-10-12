@@ -135,7 +135,7 @@
                   <div class="col-md-2">
                     
                     <label for="">Fecha</label>  
-                    <input type="date" class="form-control" name="fechareq" [(ngModel)]="fechareq" formControlName="fechareq" placeholder="dd/mm/yyyy">
+                    <input type="date" class="form-control" name="fechareq"  formControlName="fechareq" placeholder="dd/mm/yyyy">
                   
                     
                   </div>                   
@@ -181,8 +181,8 @@
             <th  style="text-align: center">Cantidad</th>
             <th  style="text-align: center">Valor</th>
             <th  style="text-align: center">Total</th>
-            
-            <td  style="text-align: center">Eliminar</td>
+            <th  style="text-align: center">Eliminar</th>
+            <th  style="text-align: center">Actividades</th>
           </tr>
         </thead>
         <tbody>
@@ -199,8 +199,8 @@
               <td>
                 <button *ngIf="cerrada =='CERRADA' || cerrada =='ACEPTADA'" type="button" data-toggle="tooltip" data-placement="top" title="Solicitud Cerrada o Aceptada" class="btn btn-dark"><i class=" ti-trash"></i></button>
                 <button *ngIf="solicitudDatosCompletos.estado=='CREADA'" (click)="borraritem(i)" type="button" class="btn btn-danger"><i class=" ti-trash"></i></button>
-
-              </td>  
+              </td>
+              <td><button (click)="actividadesr(item)" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" ><i class="mdi mdi-format-list-numbers"></i></button></td>  
             </tr>
         <tbody>     
       </table>
@@ -307,9 +307,33 @@
           </div>
         </div>
       </div> 
-
-    
-     
 <!--fin del modal-->
     </div>
+<!--inicio modal de activdiades ---->
+    <div class="col-md-12">
+        <!-- sample modal content -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actividades que se Realizaran a la Valvula</font></font></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></button>
+                    </div>
+                    <div class="modal-body">
+                      <ul *ngFor="let act of actividades; let i = index">
+                        <li>{{act.nombre}}</li>
+                      </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cerrar</font></font></button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+       
+    
+    </div>    
 </div>
