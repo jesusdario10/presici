@@ -69,15 +69,15 @@ export class OrdenesGestionComponent implements OnInit {
     let lasolicitud:SolicitudModel={
       estado : 'EJECUCION'
     }
-   
     this._ordenesServices.enviandosolicitud(this.solicitud, this.idSolicitud)
       .subscribe((datos:any)=>{
         this.obtenerMantenimientos(); 
     });
     this._solicitudServices.actualizarSolicitud(this.idSolicitud, lasolicitud)
-    .subscribe((datos:any)=>{
-      
+      .subscribe((datos:any)=>{
+        this.obtenerMantenimientos()
     });
+    this.obtenerMantenimientos()
 
   }
   //=====================obtener el index de la valvula elegida para actualizar el serial====================//
@@ -106,6 +106,11 @@ export class OrdenesGestionComponent implements OnInit {
         this.obtenerMantenimientos(); 
       })
       formData.reset();
+  }
+  //=======================Si no se le agrega el Serial a la valvula no permite continuar======================//
+  noSerie(){
+    swal('Error', 'Agregue el Serial', 'error');
+    return false;
   }
 
 

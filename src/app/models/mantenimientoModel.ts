@@ -26,6 +26,7 @@ export class MantenimientoModel{
     fechaInicial? : string;
     fechaDetenido? : string;
     fechaFinal?: string;
+    estadoactividades? : boolean;
     _id ?: string;
 
     constructor(
@@ -54,6 +55,7 @@ export class MantenimientoModel{
       fechaInicial ?: string,
       fechaDetenido ?: string,
       fechaFinal ?: string,
+      estadoactividades ?: boolean,
       _id ?: string,
     ){
       this.solicitud = solicitud;
@@ -76,6 +78,7 @@ export class MantenimientoModel{
       this.fechaInicial =fechaInicial;
       this.fechaDetenido =fechaDetenido;
       this.fechaFinal =fechaFinal;
+      this.estadoactividades = estadoactividades;
     }
 }
 

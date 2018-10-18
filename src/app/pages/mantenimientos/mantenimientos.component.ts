@@ -119,7 +119,8 @@ export class MantenimientosComponent implements OnInit {
       obsDificultad :   formModel.obsDificultad as string,
     }
     this._mantenimientoService.actualizarObsMtto(saveObsMtto, this.idMtto)
-      .subscribe((datos:any)=>{  
+      .subscribe((datos:any)=>{ 
+        this.listarUnMantenimiento(); 
       })
   }
   //==============================COMPLETAR ACTIVIDAD / TAREA =============================================//
@@ -127,7 +128,13 @@ export class MantenimientosComponent implements OnInit {
     this._mantenimientoService.actualizarEstadodeTareasdeValvulas(tarea, this.idMtto, index)
       .subscribe((datos:any)=>{
         console.log(datos);
+        this.listarUnMantenimiento();
     })
+    this._mantenimientoService.actualizarEstadoActividades(this.mantenimiento, this.idMtto)
+      .subscribe((datos:any)=>{
+        console.log(datos);
+        this.listarUnMantenimiento();
+      })
 
   }
   //======ACTUALIZAR EL ESTADO DEL MANTENIMIENTO Y SI ESTA CERRADA ACTUALIZAR EL ESTADO DE LA SOLICITUD=====//
@@ -137,21 +144,20 @@ export class MantenimientosComponent implements OnInit {
     this.mantenimiento.estado = elestadosi;
 
     this.mantenimiento.obsEstado = this.obsEstado;
-    
-
-    this._mantenimientoService.actualizarEstadoMtto(this.mantenimiento, this.idMtto)
+    //=====================SI TODAS LAS ACTIVIDADES SE COMPLETAN SE PUEDE COMPLETAR EL MANTENIMIENTO=======//
+    if(this.mantenimiento.estadoactividades == true){
+      this._mantenimientoService.actualizarEstadoMtto(this.mantenimiento, this.idMtto)
       .subscribe((datos:any)=>{
         console.log(datos);
         var idSolicitud = datos.mttoActualizado.solicitud;
-        //=======SI EL MTTO SE COMPLETA CONSULTO SI OTROS MTTOS ESTAN EN ESTADO COMPLETADO==============//
+        //=======SI EL MTTO SE COMPLETA CONSULTO SI OTROS MTTOS DE LA SOLICITUD ESTAN EN ESTADO COMPLETADO==============//
         if(datos.mttoActualizado.estado == "COMPLETADO"){
-          
           this._mantenimientoService.mttosCompletos(datos.mttoActualizado.solicitud)
             .subscribe((datos:any)=>{
               console.log(datos);
+              this.listarUnMantenimiento();
               //si todos estan completos
               if(datos.completo==true){
-                console.log("dddddddddddddddddddddddddddd");
                 this._mantenimientoService.traelaSolicituddelMantenimiento(idSolicitud)
                   .subscribe((datos:any)=>{
                     datos.solicitud.estado = 'COMPLETADA'
@@ -159,13 +165,26 @@ export class MantenimientosComponent implements OnInit {
                     this._solicitudService.actualizarSolicitud(datos.solicitud._id, datos.solicitud)
                       .subscribe((datos:any)=>{
                         console.log(datos);
+                        this.listarUnMantenimiento();
                       })
                   })
               }
             });
-
         }
-    });
+      });
+    }else{
+      swal('Error', 'Faltan Actividades por Realizar', 'error');
+    }
+
+    if(this.mantenimiento.estadoactividades == false && this.mantenimiento.estado !='COMPLETADO' ){
+      this._mantenimientoService.actualizarEstadoMtto(this.mantenimiento, this.idMtto)
+      .subscribe((datos:any)=>{
+        console.log(datos);
+        this.listarUnMantenimiento();
+      });
+    }else{
+      swal('Error', 'Faltan Actividades por Realizar', 'error');
+    }
   }
 
 }

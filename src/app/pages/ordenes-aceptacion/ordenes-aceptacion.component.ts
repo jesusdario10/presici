@@ -42,11 +42,17 @@ export class OrdenesAceptacionComponent implements OnInit {
   }
   //========================CAMBIAR DE ESTADO=======================//
   CambiarEstado(id, solicitud: SolicitudModel){ 
-    
-    this._solicitudServices.actualizarSolicitud(id, solicitud)
+    if(solicitud.estado == 'COMPLETADA'){
+      swal('Error', 'Operacion no permitida', 'error');
+      return false;
+    }else{
+      this._solicitudServices.actualizarSolicitud(id, solicitud)
         .subscribe((datos:any)=>{
           this.cargarSolicitudes();
-    });
+      });
+    }
+    
+    
     
   }
   //=====================CAPTURAR ID DE LA SOLICITUD================//

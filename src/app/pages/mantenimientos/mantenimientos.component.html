@@ -106,7 +106,7 @@
                     <td>{{i}}</td>
                     <td>{{tarea.nombre}}</td>
                     <td>
-                      <input type="number"  *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' || estadomtto == 'INICIAL'  "class="form-control" [(ngModel)]="tarea.tiempo">
+                      <input ngNativeValidate min=1 type="number"  *ngIf="estadomtto == 'DETENIDO' || estadomtto == 'EJECUCION' || estadomtto == 'INICIAL'  "class="form-control" [(ngModel)]="tarea.tiempo">
                       <input type="number"  *ngIf="estadomtto == 'COMPLETADO'" disabled class="form-control" [(ngModel)]="tarea.tiempo">  
                     </td>
                     <td>

@@ -99,6 +99,16 @@ export class MantenimientoService {
       })
     )
   }
+  //======ACTUALIZANDO ESTADO ACTIVIDADES SI SE COMPLETARON TODAS LAS ACTIVIDADES============//
+  actualizarEstadoActividades(mantenimiento: MantenimientoModel, id){
+    let url = URL_SERVICIOS+'/mantenimientos/manten/actividadesrealizadas/'+id;
+    return this._http.post(url, mantenimiento).pipe(
+      map((resp:any)=>{
+        console.log(resp);
+        return resp;
+      })
+    )
+  }
   
   
 

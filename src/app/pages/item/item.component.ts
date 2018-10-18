@@ -252,11 +252,19 @@ export class ItemComponent implements OnInit {
   cerrarSolicitud(){
     this.solicitudDatosCompletos.estado = 'CERRADA'
     this.cerrada = this.solicitudDatosCompletos.estado
+    console.log(this.solicitudDatosCompletos.item[0]==undefined);
+    if(this.solicitudDatosCompletos.item[0]==undefined){
+      this.solicitudDatosCompletos.estado = 'CREADA'
+      this.cerrada = this.solicitudDatosCompletos.estado
+      swal('Error', 'no contiene items', 'error')
+      return false;
+    }else{
+      this._solicitudServices.actualizarSolicitud(this.solicitudDatosCompletos._id, this.solicitudDatosCompletos)
+      .subscribe((datos:any)=>{
+      });
+    }
   
-    this._solicitudServices.actualizarSolicitud(this.solicitudDatosCompletos._id, this.solicitudDatosCompletos)
-    .subscribe((datos:any)=>{
-      
-    });
+
   }
   //===========================MOSTRAR LAS ACTIVDIADES==================//
   actividadesr(valor){

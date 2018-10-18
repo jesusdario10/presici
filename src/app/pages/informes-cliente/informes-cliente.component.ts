@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SolicitudService, MantenimientoService } from '../../services/service.index';
+import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { SolicitudModel } from '../../models/solicitudModel';
 import { MantenimientoModel } from '../../models/mantenimientoModel';
 import Chart from 'chart.js';
@@ -14,6 +15,7 @@ declare var $:any;
   styleUrls: ['./informes-cliente.component.css']
 })
 export class InformesClienteComponent implements OnInit {
+  mantenimientos : MantenimientoModel[]=[];
   solicitudes : SolicitudModel[]=[];
   cantidad : number;
   mancantidad : number;
@@ -28,6 +30,8 @@ export class InformesClienteComponent implements OnInit {
   manEjecucion : any[]=[];
   manDetenido: any[]=[];
   manCompletados: any[]=[];
+  form: FormGroup;
+  formSubmit: boolean;
 
 
   //CAPTURANDO LAS FECHAS PARA EL FILTRADO//
@@ -35,7 +39,7 @@ export class InformesClienteComponent implements OnInit {
   fechaFinalForm : string;
 
    /*GRAFICO DE DONAS*/
-  public doughnutChartLabels:string[] = ['Abiertas', 'Cerradas',  'Aceptadas', 'Espera', 'Ejecucion', 'Completas'];
+  public doughnutChartLabels:string[] = ['Abiertas', 'Cerradas', 'Ejecucion', 'Aceptadas',  'Completas'];
   public doughnutChartData:number[];
   //public doughnutChartType:string = 'polarArea';
   public doughnutChartType:string = 'doughnut';
@@ -43,28 +47,32 @@ export class InformesClienteComponent implements OnInit {
  
   constructor(
     private _solicitudService : SolicitudService,
-    private _mantenimientoService : MantenimientoService
+    private _mantenimientoService : MantenimientoService,
+    private fb: FormBuilder
   ) { 
-    this.doughnutChartData =  [this.abiertas, this.cerradas, this.aceptadas, this.espera, this.ejecucion, this.completas ]
+    this.doughnutChartData =  [this.abiertas, this.cerradas, this.ejecucion, this.aceptadas, this.completas ]
   }
 
   ngOnInit() {
-   
+   this.form = this.fb.group({
+    fechaInicialForm :['', Validators.required],
+    fechaFinalForm :['', Validators.required],
+   });
   }
-  /*CAPTURAR LAS FECHAS*/
-  fechas(){
-    console.log(this.fechaInicialForm);
-    console.log(this.fechaFinalForm);
-  }
+ 
   /*FUNCION DINAMICA GRAFICO DONAS*/
-  generaGraficoDona(){
+  generarGraficos(formData: any, formDirective: FormGroupDirective){
+    var formModel  = this.form.value;
+    console.log(this.form.invalid);
+
     let fechas : SolicitudModel = {
-      fechaInicial : this.fechaInicialForm,
-      fechaFinal : this.fechaFinalForm
+      fechaInicial : formModel.fechaInicialForm as string,
+      fechaFinal : formModel.fechaFinalForm as string
     }
     this._solicitudService.buscarSolicitudesporfecha(fechas)
     .subscribe((datos:any)=>{
-      console.log(datos.solicitudes.length);
+      console.log(datos);
+      this.solicitudes = datos.solicitudes;
       //inicializamos los contadores de los graficos
       this.abiertas=0;
       this.cerradas=0;
@@ -84,9 +92,6 @@ export class InformesClienteComponent implements OnInit {
         if(datos.solicitudes[i].estado == 'ACEPTADA'){
           this.aceptadas = this.aceptadas +1
         }
-        if(datos.solicitudes[i].estado == 'ESPERA'){
-          this.espera = this.espera +1
-        }
         if(datos.solicitudes[i].estado == 'EJECUCION'){
           this.ejecucion = this.ejecucion +1
         }
@@ -100,12 +105,13 @@ export class InformesClienteComponent implements OnInit {
       console.log("espera: "+ this.espera);
       console.log("ejecucion: "+ this.ejecucion);
       console.log("completas: "+ this.completas);
-      this.doughnutChartData =  [this.abiertas, this.cerradas, this.aceptadas, this.espera, this.ejecucion, this.completas ]
+      this.doughnutChartData =  [this.abiertas, this.cerradas, this.ejecucion, this.aceptadas, this.completas ]
       
     })
     this._mantenimientoService.mttosEntreFechas(fechas)
       .subscribe((datos:any)=>{
         console.log(datos);
+        this.mantenimientos = datos.mantenimientos;
         this.fechaslinea = datos.fechas;
         this.manEjecucion = datos.ejecucion;
         this.manDetenido = datos.detenidos;
@@ -121,7 +127,7 @@ export class InformesClienteComponent implements OnInit {
             data: {
                 labels: this.fechaslinea,
                 datasets: [{
-                    label:['EJECUCION'],
+                    label:['Ejecucion'],
                     data: this.manEjecucion,
                     borderColor: [
                         'rgba(255,99,132,1)',      
@@ -131,7 +137,7 @@ export class InformesClienteComponent implements OnInit {
                     borderWidth: 1
                 },
                 {
-                  label: ['DETENIDOS'],
+                  label: ['Detenidos'],
                   data: this.manDetenido,
                   borderColor: [
                     'rgba( 215, 44, 255, 0.9 )',  
@@ -141,7 +147,7 @@ export class InformesClienteComponent implements OnInit {
                   pointBackgroundColor: 'rgba( 215, 44, 255, 0.9 )', 
                 },
                 {
-                  label: ['COMPLETOS'],
+                  label: ['Completos'],
                   data: this.manCompletados,
                   borderColor: [
                     'rgba(0, 0, 255, 0.6)',  
@@ -151,29 +157,14 @@ export class InformesClienteComponent implements OnInit {
                   pointBackgroundColor: 'rgba(0, 0, 255, 0.6)', 
                 },
               ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                     
-                        }
-                    }],
- 
-                }
             }
+
         });
       })
   }
 
-  //==================GRAFICO DE BARRAS======================== //
-
-
-  generarGrafico(){
-
-   
+  noSerie(){
+    swal('Error', 'Mantenimiento Sin Serial', 'error');
   }
-
 
 }

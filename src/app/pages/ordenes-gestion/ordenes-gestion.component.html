@@ -18,7 +18,7 @@
             <th  style="text-align: center">Serie</th>
             <th  style="text-align: center">Resumen</th>
             <th  style="text-align: center">Valor U</th>   
-            <th  style="text-align: center">Guardar</th>
+            <th  style="text-align: center">Mtto</th>
           </tr>
         </thead>
         <tbody>
@@ -35,7 +35,10 @@
                   <td class="tamano" style="text-align: left">Valvula de {{mtto.tipovalvula.nombre}}-{{mtto.tiposello}}-({{mtto.diametro}})
                     -{{mtto.material}}- Mto: {{mtto.tipomtto}}-Prioridad:{{mtto.prioridad}}-Deficult:({{mtto.dificultad}})</td>
                   <td class="tamano centrado2">{{mtto.valor/1000 | currency:'':true:'1.3-3'}}</td>
-                  <td class="centrado3"><button [routerLink]="['/mantenimientos', mtto._id]"  type="button" class="btn btn-primary"><i class="fa fa-save"></i></button></td>  
+                  <td class="centrado3">
+                    <button *ngIf="mtto.serie.length > 1 " [routerLink]="['/mantenimientos', mtto._id]"  type="button" class="btn btn-primary"><i class=" fa-spin fa fa-cog "></i></button>
+                    <button *ngIf="mtto.serie.length < 1 "  type="button" (click)="noSerie()" class="btn btn-primary"><i class="fa fa-cog "></i></button>
+                  </td>  
                 </tr>
             </table>
     </div>
@@ -54,6 +57,7 @@
                   <label for="exampleInputEmail1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ingresar Serial del equipo</font></font></label>
                   <input type="text" name="serieValvula" formControlName="serieValvula" class="form-control" >
               </div>
+              <br>
               <button type="submit" class="btn btn-primary">Guardar</button>
           </form>
         </div>
