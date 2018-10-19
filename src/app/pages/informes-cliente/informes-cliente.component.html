@@ -60,7 +60,7 @@
         <div class="card">
             <div class="card-body">
                 <h5>Solicitudes Analizadas</h5>
-                <div class="table-responsive">
+                <div class="table-responsive" style="height: 40vh !important;"> 
                     <table class="table" style="width:70vw; height: 40vh;">
                         <thead>
                             <th>Cliente</th>
@@ -93,7 +93,7 @@
         <div class="card">
             <div class="card-body">
                 <h5>Mantenimientos Analizados</h5>
-                <div class="table-responsive">
+                <div class="table-responsive"  style="height: 40vh !important;">
                     <table class="table"  style="width:70vw; height: 40vh;">
                         <thead>
                             <th>Serie</th>
@@ -107,7 +107,7 @@
                             <td>{{mtto.serie}}</td>
                             <td>{{mtto.fechaInicio | date}}</td>
                             <td>{{mtto.tipovalvula}} - Sello {{mtto.tiposello}} | Diametro ({{mtto.diametro}})" - Rating {{mtto.rating}} | Material {{mtto.material}} Otros {{mtto.otrosDatos}}</td>
-                            <td>{{mtto.valor  | currency:'USD':true:'1.0-3'}}}}</td>
+                            <td>{{mtto.valor  | currency:'USD':true:'1.0-3'}}</td>
                             <td>{{mtto.estado}}</td>
                             <td>
                                 <button *ngIf="mtto.serie.length > 1 " [routerLink]="['/mantenimientos', mtto._id]"  type="button" class="btn btn-primary"><i class=" fa-spin fa fa-cog "></i></button>

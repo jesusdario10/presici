@@ -69,6 +69,7 @@ export class OrdenesGestionComponent implements OnInit {
     let lasolicitud:SolicitudModel={
       estado : 'EJECUCION'
     }
+    console.log("SE GENERARON NUEVOS MANTENIMIENTOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     this._ordenesServices.enviandosolicitud(this.solicitud, this.idSolicitud)
       .subscribe((datos:any)=>{
         this.obtenerMantenimientos(); 

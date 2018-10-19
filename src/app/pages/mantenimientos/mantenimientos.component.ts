@@ -128,14 +128,13 @@ export class MantenimientosComponent implements OnInit {
     this._mantenimientoService.actualizarEstadodeTareasdeValvulas(tarea, this.idMtto, index)
       .subscribe((datos:any)=>{
         console.log(datos);
-        this.listarUnMantenimiento();
-    })
-    this._mantenimientoService.actualizarEstadoActividades(this.mantenimiento, this.idMtto)
-      .subscribe((datos:any)=>{
-        console.log(datos);
-        this.listarUnMantenimiento();
-      })
 
+        this._mantenimientoService.actualizarEstadoActividades(this.mantenimiento, this.idMtto)
+        .subscribe((datos:any)=>{
+          console.log(datos);
+          this.listarUnMantenimiento();
+        })   
+    })
   }
   //======ACTUALIZAR EL ESTADO DEL MANTENIMIENTO Y SI ESTA CERRADA ACTUALIZAR EL ESTADO DE LA SOLICITUD=====//
   ActualizarEstadoMtto(){
