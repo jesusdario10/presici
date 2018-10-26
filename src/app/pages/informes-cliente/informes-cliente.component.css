@@ -1,0 +1,15 @@
+.centrado{
+    text-align: center !important;
+}
+.menu{
+    margin: 10px !important;
+
+}
+canvas:hover{
+    height: 230px !important;
+    cursor: pointer;
+}
+.ambos{
+    font-family: 'Righteous', cursive;
+    font-size: 5em;
+}

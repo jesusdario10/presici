@@ -27,6 +27,7 @@ export class MantenimientoModel{
     fechaDetenido? : string;
     fechaFinal?: string;
     estadoactividades? : boolean;
+    cliente? : string;
     _id ?: string;
 
     constructor(
@@ -56,6 +57,7 @@ export class MantenimientoModel{
       fechaDetenido ?: string,
       fechaFinal ?: string,
       estadoactividades ?: boolean,
+      cliente? : string,
       _id ?: string,
     ){
       this.solicitud = solicitud;
@@ -72,6 +74,11 @@ export class MantenimientoModel{
       this.sitio = sitio;
       this.cantidad = cantidad;
       this.valor = valor;
+      this.obsTipovalvula = obsTipovalvula;
+      this.obsCuerpo = obsCuerpo;
+      this.obsComponentes = obsComponentes;
+      this.obsTmttoPrioUbi = obsTmttoPrioUbi;
+      this.obsDificultad = obsDificultad
       this.tareas = tareas;
       this.estado =estado;
       this.obsEstado = obsEstado;
@@ -79,6 +86,7 @@ export class MantenimientoModel{
       this.fechaDetenido =fechaDetenido;
       this.fechaFinal =fechaFinal;
       this.estadoactividades = estadoactividades;
+      this.cliente = cliente;
     }
 }
 

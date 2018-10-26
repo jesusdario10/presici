@@ -22,7 +22,12 @@ import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptac
 import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
+import { InformesAdminComponent } from './informes-admin/informes-admin.component';
 import { InformesClienteComponent } from './informes-cliente/informes-cliente.component';
+import { InformesDonaComponent } from './informes-dona/informes-dona.component';
+import { InformesLineaComponent } from './informes-linea/informes-linea.component';
+import { InformesLineaDonaComponent } from './informes-linea-dona/informes-linea-dona.component';
+
 
 
 
@@ -124,7 +129,11 @@ const pageRoutes : Routes = [
             {path: '', redirectTo: '/dashboard', pathMatch:'full'},
 
           /*=========================Informes==============================*/
-            {path: 'informes', component: InformesClienteComponent, data:{titulo:'Informes'}},
+            {path: 'informes', component: InformesAdminComponent, data:{titulo:'Informes Admin'}},
+            {path: 'informescli', component: InformesClienteComponent, data:{titulo:'Informes Cliente'}},
+            {path: 'clientedona/:id', component: InformesDonaComponent, data:{titulo:'Informes Dona'}},
+            {path: 'clientelinea/:id', component: InformesLineaComponent, data:{titulo:'Informes Linea'}},
+            {path: 'clientelineadona/:id', component: InformesLineaComponent, data:{titulo:'Informes de Linea y Dona'}}
             
         ]
     }

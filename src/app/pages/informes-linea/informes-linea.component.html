@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card" style="text-align:center">
+          <div class="card-body">
+            <form ngNativeValidate [formGroup]="form" #consultafecha="ngForm"  text-align="center"  (ngSubmit)="graficoLinea(form, consultafecha)">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Inicial</font></font></label>
+                        <input type="date" name="fechaInicialForm" [(ngModel)]="fechaInicialForm" formControlName='fechaInicialForm' class="form-control" placeholder="dd/mm/yyyy" required>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label class="control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Fecha de Final</font></font></label>
+                        <input type="date"  name="fechaFinalForm" [(ngModel)]="fechaFinalForm" formControlName='fechaFinalForm'  class="form-control" placeholder="dd/mm/yyyy" required>
+                    </div>
+                </div>
+              </div>
+              <button class="btn btn-primary"  type="submit">Filtrar</button>
+          </form>
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="card-body">
+            <h5>Estado de los Mantenimientos</h5>
+            <div style="display: block">
+                <canvas id="elchart" width="400" height="200"></canvas>
+            </div>
+             <p><strong>Cantidad Analizados : {{mancantidad}}</strong></p>
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-body">
+                <h5>Mantenimientos Analizados</h5>
+                <div class="table-responsive"  style="height: 40vh !important;">
+                    <table class="table"  style="width:70vw; height: 40vh;">
+                        <thead>
+                            <th>Serie</th>
+                            <th>Fecha</th>
+                            <th>Valvula</th>
+                            <th>Valor</th>
+                            <th>Estado</th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let mtto of mantenimientos"> 
+                            <td>{{mtto.serie}}</td>
+                            <td>{{mtto.fechaInicio | date}}</td>
+                            <td>{{mtto.tipovalvula.nombre}} - Sello {{mtto.tiposello}} | Diametro ({{mtto.diametro}})" - Rating {{mtto.rating}} | Material {{mtto.material}} Otros {{mtto.otrosDatos}}</td>
+                            <td>{{mtto.valor  | currency:'USD':true:'1.0-3'}}</td>
+                            <td>{{mtto.estado}}</td>
+                            <td>
+                                <button *ngIf="mtto.serie.length > 1 "  type="button" class="btn btn-primary"><i class=" fa-spin fa fa-cog "></i></button>
+                                <button *ngIf="mtto.serie.length < 1 "  type="button"  class="btn btn-primary"><i class="fa fa-cog "></i></button>
+                            </td>
+    
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

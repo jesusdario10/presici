@@ -14,6 +14,7 @@ export { CargosService } from './cargos/cargos.service';
 export { ValvulasService } from './valvulas/valvulas.service';
 export { ActividadesService } from './actividades/actividades.service';
 export { MantenimientoService } from './mantenimiento/mantenimiento.service';
+export { InformesClienteService } from './informesCliente/informes-cliente.service';
 
 
 

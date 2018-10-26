@@ -28,6 +28,7 @@ export class ItemComponent implements OnInit {
   actividades : any[]=[];
   solicitudDatosCompletos : SolicitudModel;
   cerrada : string ;
+  usuarioROLE : string;
  
   cantidad : number;
   datosTotalValor : number;
@@ -71,6 +72,8 @@ export class ItemComponent implements OnInit {
 
 
   ngOnInit() {
+    //carga el role del usuario desde el storage
+    this.cargarRoleStorage();
     //obtiene el id de la solicitud desde el servicio
     this._itemService.obtenerSolicitud();
     //me lista la solicitud completa
@@ -272,7 +275,15 @@ export class ItemComponent implements OnInit {
     this.actividades = valor.tareas;
     console.log(this.actividades);
   }
-
+  //=========CARGAR SI ES ADMIN PARA MOSTRAR LOS VALORES ==============//
+  cargarRoleStorage(){
+    if(localStorage.getItem('token')){
+      let usuario = JSON.parse(localStorage.getItem('usuario'));
+      this.usuarioROLE = usuario.role;
+      console.log(this.usuarioROLE);
+      
+    }
+  }
  
   
 

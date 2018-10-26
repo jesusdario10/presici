@@ -30,7 +30,11 @@ import { OrdenesAceptacionComponent } from './ordenes-aceptacion/ordenes-aceptac
 import { OrdenesGestionComponent } from './ordenes-gestion/ordenes-gestion.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { MantenimientosComponent } from './mantenimientos/mantenimientos.component';
+import { InformesAdminComponent } from './informes-admin/informes-admin.component';
 import { InformesClienteComponent } from './informes-cliente/informes-cliente.component';
+import { InformesDonaComponent } from './informes-dona/informes-dona.component';
+import { InformesLineaComponent } from './informes-linea/informes-linea.component';
+import { InformesLineaDonaComponent } from './informes-linea-dona/informes-linea-dona.component';
 
 
 
@@ -63,7 +67,11 @@ import { InformesClienteComponent } from './informes-cliente/informes-cliente.co
         OrdenesGestionComponent,
         CotizacionComponent,
         MantenimientosComponent,
+        InformesAdminComponent,
         InformesClienteComponent,
+        InformesDonaComponent,
+        InformesLineaComponent,
+        InformesLineaDonaComponent,
      
         
         
