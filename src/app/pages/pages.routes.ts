@@ -27,6 +27,9 @@ import { InformesClienteComponent } from './informes-cliente/informes-cliente.co
 import { InformesDonaComponent } from './informes-dona/informes-dona.component';
 import { InformesLineaComponent } from './informes-linea/informes-linea.component';
 import { InformesLineaDonaComponent } from './informes-linea-dona/informes-linea-dona.component';
+import { OrdenesAceptacionMenuComponent } from './ordenes-aceptacion-menu/ordenes-aceptacion-menu.component';
+import { MenuConfiguracionesComponent } from './menu-configuraciones/menu-configuraciones.component';
+import { MenuInformeAdminComponent } from './menu-informe-admin/menu-informe-admin.component';
 
 
 
@@ -61,6 +64,12 @@ const pageRoutes : Routes = [
 
             /* =================Gestion de Ordenes===========================*/
             {
+                path: 'aceptacionmenu',
+                component: OrdenesAceptacionMenuComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Menu Aceptacion o Rechazo'},
+            },
+            {
                 path: 'aceptacion',
                 component: OrdenesAceptacionComponent,
                 canActivate:[AdminGuard],
@@ -89,6 +98,13 @@ const pageRoutes : Routes = [
             
             
              /* =================Configuraciones y Admin=====================*/
+             {
+                path: 'menuconfig',
+                component: MenuConfiguracionesComponent,
+                canActivate:[AdminGuard],
+                data:{titulo:'Menu de Configuraciones'}
+                
+            },
             {
                 path: 'usuarios',
                 component: UsuariosComponent,
@@ -129,6 +145,7 @@ const pageRoutes : Routes = [
             {path: '', redirectTo: '/dashboard', pathMatch:'full'},
 
           /*=========================Informes==============================*/
+            {path: 'informesadminMenu', component: MenuInformeAdminComponent, data:{titulo:'Menu Informes Admin'}},
             {path: 'informes', component: InformesAdminComponent, data:{titulo:'Informes Admin'}},
             {path: 'informescli', component: InformesClienteComponent, data:{titulo:'Informes Cliente'}},
             {path: 'clientedona/:id', component: InformesDonaComponent, data:{titulo:'Informes Dona'}},

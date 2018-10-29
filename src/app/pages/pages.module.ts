@@ -35,6 +35,9 @@ import { InformesClienteComponent } from './informes-cliente/informes-cliente.co
 import { InformesDonaComponent } from './informes-dona/informes-dona.component';
 import { InformesLineaComponent } from './informes-linea/informes-linea.component';
 import { InformesLineaDonaComponent } from './informes-linea-dona/informes-linea-dona.component';
+import { OrdenesAceptacionMenuComponent } from './ordenes-aceptacion-menu/ordenes-aceptacion-menu.component';
+import { MenuConfiguracionesComponent } from './menu-configuraciones/menu-configuraciones.component';
+import { MenuInformeAdminComponent } from './menu-informe-admin/menu-informe-admin.component';
 
 
 
@@ -72,6 +75,9 @@ import { InformesLineaDonaComponent } from './informes-linea-dona/informes-linea
         InformesDonaComponent,
         InformesLineaComponent,
         InformesLineaDonaComponent,
+        OrdenesAceptacionMenuComponent,
+        MenuConfiguracionesComponent,
+        MenuInformeAdminComponent,
      
         
         

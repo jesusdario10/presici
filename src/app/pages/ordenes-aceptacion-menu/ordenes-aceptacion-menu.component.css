@@ -25,10 +25,13 @@
 }
 .blanco:hover{
     background: white !important;
-    color: black;
+    color: black!important;
 }
 .borde:hover{
     border : 3px solid #3a7999;
+}
+.icono:hover{
+    color: black!important;
 }
 
 /*
